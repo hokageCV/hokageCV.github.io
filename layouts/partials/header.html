@@ -4,6 +4,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="referrer" content="origin" />
 
-    <!-- <link rel="icon" type="image/svg+xml" href="{{"./icons/icon.svg"}}" />  -->
-    <link rel="stylesheet" type="text/css" href="{{ "./style.css" }}" />
+    <!-- get the css files  -->
+    {{ $variablesCSS := resources.Get "./css/variables.css" }} {{ $styleCSS := resources.Get
+    "./css/style.css" }} {{ $navbarCSS := resources.Get "./css/navbar.css" }}
+
+    <!-- combine them  -->
+    {{ $bundledCSS := slice $variablesCSS $styleCSS $navbarCSS | resources.Concat "css/bundle.css"
+    }}
+
+    <!-- minify & rename  -->
+    {{ $minifiedCSS := ( $bundledCSS | minify).Content | resources.FromString "bundle.css" }}
+
+    <!-- link combined file  -->
+    <link rel="stylesheet" href=".{{ $minifiedCSS.Permalink }}" />
 </head>

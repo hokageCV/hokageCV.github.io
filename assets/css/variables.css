@@ -1,0 +1,12 @@
+:root {
+    --gradient-1: #ecc9fd;
+    --gradient-2: #ecf2de;
+    --baseText: #2e3440;
+    --highlightText: #3295a9;
+
+    --navBG: #c95f4a;
+    --navText: #f3d3ff;
+    --iconsBG: #eceff4;
+    --cardBG: #c95f4a;
+    --box-shadow-color: #893b2b;
+}
