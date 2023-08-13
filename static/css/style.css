@@ -1,0 +1,82 @@
+:root {
+    --gradient-1: #ecc9fd;
+    --gradient-2: #ecf2de;
+    --baseText: #2e3440;
+    --highlightText: #3295a9;
+
+    --navBG: #c95f4a;
+    --navBGHover: #d96f5a;
+    --navText: #f3d3ff;
+    --iconsBG: #eceff4;
+    --cardBG: #c95f4a;
+    --box-shadow-color: #893b2b;
+}
+
+/* ============================================ */
+
+html {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    box-sizing: border-box;
+
+    padding: 0;
+    margin: 0;
+
+    /* https://cssgradient.io  */
+    background: var(--gradient-1);
+    background: linear-gradient(175deg, var(--gradient-1) 36%, var(--gradient-2) 84%);
+
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    color: var(--baseText);
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+
+    height: 100%;
+    width: 100%;
+}
+
+/* ============================================ */
+
+nav {
+    background-color: var(--navBG);
+    color: var(--navText);
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+
+    margin: 0;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+
+    & .nav-header {
+        margin-right: auto;
+        font-size: 32px;
+    }
+
+    & a {
+        text-decoration: none;
+        color: var(--navText);
+        margin: 2px;
+        padding: 15px 8px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: border-bottom ease;
+    }
+    & .nav-menu a:hover {
+        background-color: var(--navBGHover);
+    }
+}
+
+/* ============================================ */
+/* ============================================ */
