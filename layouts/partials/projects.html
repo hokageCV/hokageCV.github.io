@@ -1,0 +1,14 @@
+<div id="projects">
+    <h2>Projects</h2>
+    <div class="project-list">
+        {{ range .Site.Data.projects }}
+        <div class="project-card">
+            <strong>{{ .title }}</strong>
+            <img src="{{ .imgLink }}" alt="{{ .title }}" />
+            <div class="card-actions">
+                <a href="{{ .repoLink }}"><button>Repo Link</button></a>
+            </div>
+        </div>
+        {{ end}}
+    </div>
+</div>

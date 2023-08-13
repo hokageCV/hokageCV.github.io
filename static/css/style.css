@@ -10,6 +10,8 @@
     --socialsBG: #c95f4a;
     --box-shadow-color: #893b2b;
 
+    --cardBG: #f1bbb0;
+
     --navText: #f3d3ff;
     --iconsBG: #eceff4;
     --cardBG: #c95f4a;
@@ -136,6 +138,42 @@ nav {
         & .skills-card img {
             width: 80px;
             height: 80px;
+        }
+    }
+}
+
+/* ============================================ */
+
+#projects {
+    & .project-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    & .project-card {
+        background-color: var(--cardBG);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+
+        margin: 20px;
+        padding: 20px;
+        border-radius: 10px;
+
+        & img {
+            width: 500px;
+            height: 300px;
+        }
+
+        & button {
+            margin: 10px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
         }
     }
 }
