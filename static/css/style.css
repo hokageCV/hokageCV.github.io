@@ -6,21 +6,28 @@
 
     --navBG: #c95f4a;
     --navBGHover: #d96f5a;
+
+    --socialsBG: #c95f4a;
+    --box-shadow-color: #893b2b;
+
     --navText: #f3d3ff;
     --iconsBG: #eceff4;
     --cardBG: #c95f4a;
-    --box-shadow-color: #893b2b;
 }
 
+html,
+body,
+p,
+h1 {
+    margin: 0;
+    padding: 0;
+}
 /* ============================================ */
 
 html {
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     box-sizing: border-box;
-
-    padding: 0;
-    margin: 0;
 
     /* https://cssgradient.io  */
     background: var(--gradient-1);
@@ -37,8 +44,6 @@ body {
 
     color: var(--baseText);
     text-align: center;
-    margin: 0px;
-    padding: 0px;
 
     height: 100%;
     width: 100%;
@@ -75,6 +80,44 @@ nav {
     }
     & .nav-menu a:hover {
         background-color: var(--navBGHover);
+    }
+}
+
+/* ============================================ */
+
+.about {
+    margin: 10px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & .socials {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+
+        background-color: var(--socialsBG);
+        margin: 30px;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: min-content;
+
+        /* https://cssgenerator.org/box-shadow-css-generator.html  */
+        box-shadow: 5px 8px 16px 5px rgba(0, 0, 0, 0.64);
+        -webkit-box-shadow: 5px 8px 16px 5px rgba(0, 0, 0, 0.64);
+        -moz-box-shadow: 5px 8px 16px 5px rgba(0, 0, 0, 0.64);
+        box-shadow: 5px 8px 16px 5px var(--box-shadow-color);
+
+        color: var(--iconsBG);
+        & img {
+            width: 50px;
+            height: 50px;
+        }
     }
 }
 

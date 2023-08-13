@@ -1,0 +1,10 @@
+<div class="about">
+    <h1>Hi, I am Chaitanya Varu</h1>
+    <p>I Help Companies Deliver Seamless Digital Solutions</p>
+
+    <div class="socials">
+        {{ range .Site.Data.socials }}
+        <img src="{{ .imgLink }}" alt="{{ .title }}" />
+        {{ end}}
+    </div>
+</div>

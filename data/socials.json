@@ -1,0 +1,17 @@
+[
+    {
+        "title": "Github",
+        "link": "https://github.com/hokageCV",
+        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691916757/logo/github.svg"
+    },
+    {
+        "title": "LinkedIn",
+        "link": "https://www.linkedin.com/in/chaitanya-varu/",
+        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691916757/logo/linkedin.svg"
+    },
+    {
+        "title": "Twitter",
+        "link": "https://twitter.com/ChaitanyaVaru",
+        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691916757/logo/x.svg"
+    }
+]
