@@ -1,0 +1,11 @@
+<div class="skills">
+    <h1>Skills</h1>
+    <div class="skills-cardList">
+        {{ range .Site.Data.skills }}
+        <div class="skills-card">
+            <img src="{{ .imgLink }}" alt="{{ .title }}" />
+            <p>{{ .title }}</p>
+        </div>
+        {{ end}}
+    </div>
+</div>

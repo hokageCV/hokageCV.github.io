@@ -122,4 +122,23 @@ nav {
 }
 
 /* ============================================ */
+
+.skills {
+    & h1 {
+        text-align: center;
+    }
+
+    & .skills-cardList {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+
+        & .skills-card img {
+            width: 80px;
+            height: 80px;
+        }
+    }
+}
+
+/* ============================================ */
 /* ============================================ */

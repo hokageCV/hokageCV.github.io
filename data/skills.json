@@ -1,0 +1,22 @@
+[
+    {
+        "title": "HTML",
+        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691940377/logo/html-5-svgrepo-com.svg"
+    },
+    {
+        "title": "CSS",
+        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691940377/logo/css3-svgrepo-com.svg"
+    },
+    {
+        "title": "JavaScript",
+        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691940377/logo/js-svgrepo-com.svg"
+    },
+    {
+        "title": "NodeJS",
+        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691940377/logo/nodejs-icon-svgrepo-com.svg"
+    },
+    {
+        "title": "React",
+        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691940377/logo/react-svgrepo-com.svg"
+    }
+]
