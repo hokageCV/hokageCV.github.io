@@ -16,7 +16,12 @@
     --cardBG: #c95f4a;
     --cardText: var(--baseTextLight);
 
+    --btnBG: #893b2b;
+    --btnBorder: #733529;
+
+    --maxWidth: 580px;
     --navHeight: 80px;
+    --borderRadius: 15px;
 }
 
 html,
@@ -86,7 +91,7 @@ nav {
         color: var(--navText);
         margin: 2px;
         padding: 15px 8px;
-        border-radius: 10px;
+        border-radius: var(--borderRadius);
         cursor: pointer;
         transition: border-bottom ease;
     }
@@ -100,7 +105,12 @@ nav {
 #about {
     margin: 10px;
     padding: 10px;
-    padding-top: var(--navHeight);
+    padding-top: calc(2 * var(--navHeight));
+    width: var(--maxWidth);
+
+    & h1 {
+        font-size: 40px;
+    }
 
     display: flex;
     flex-direction: column;
@@ -117,7 +127,7 @@ nav {
         background-color: var(--socialsBG);
         margin: 30px;
         padding: 20px;
-        border-radius: 10px;
+        border-radius: var(--borderRadius);
         max-width: min-content;
 
         /* https://cssgenerator.org/box-shadow-css-generator.html  */
@@ -137,15 +147,29 @@ nav {
 
 #skills {
     padding-top: var(--navHeight);
+    width: var(--maxWidth);
 
     & .skills-cardList {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 20px;
 
-        & .skills-card img {
-            width: 80px;
-            height: 80px;
+        & .skills-card {
+            transition: transform 0.3s ease;
+
+            & img {
+                width: 80px;
+                height: 80px;
+                margin: 0;
+            }
+            & p {
+                margin: 0;
+            }
+
+            &:hover {
+                transform: scale(1.2);
+                z-index: 2;
+            }
         }
     }
 }
@@ -154,6 +178,7 @@ nav {
 
 #projects {
     padding-top: var(--navHeight);
+    width: var(--maxWidth);
 
     & .project-list {
         display: flex;
@@ -171,20 +196,32 @@ nav {
         justify-content: center;
         align-items: start;
 
-        margin: 20px;
+        margin: 20px 0px;
         padding: 20px;
-        border-radius: 10px;
+        border-radius: var(--borderRadius);
+
+        & .project-title {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
 
         & img {
             width: 500px;
             height: 300px;
+            border-radius: 5px;
         }
 
-        & button {
-            margin: 10px;
-            padding: 10px 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
+        & .card-actions {
+            align-self: center;
+
+            & button {
+                margin: 10px;
+                padding: 10px 20px;
+                border: 1px solid var(--btnBorder);
+                border-radius: 10px;
+                background-color: var(--btnBG);
+                color: var(--baseTextLight);
+            }
         }
     }
 }
@@ -193,7 +230,7 @@ nav {
 
 #contact {
     padding: var(--navHeight) 10px;
-
+    width: var(--maxWidth);
     margin: 30px;
 
     & .form-data {
@@ -213,7 +250,7 @@ nav {
     textarea {
         padding: 10px;
         border: 1px solid var(--highlightText);
-        border-radius: 10px;
+        border-radius: var(--borderRadius);
     }
 
     & button {

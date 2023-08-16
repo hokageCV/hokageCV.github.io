@@ -3,7 +3,7 @@
     <div class="project-list">
         {{ range .Site.Data.projects }}
         <div class="project-card">
-            <strong>{{ .title }}</strong>
+            <p class="project-title">{{ .title }}</p>
             <img src="{{ .imgLink }}" alt="{{ .title }}" />
             <div class="card-actions">
                 <a href="{{ .repoLink }}"><button>Repo Link</button></a>
