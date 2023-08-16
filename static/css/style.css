@@ -97,7 +97,13 @@ nav {
         border-radius: var(--borderRadius);
         cursor: pointer;
         transition: border-bottom ease;
+
+        & img {
+            width: 14px;
+            height: 14px;
+        }
     }
+
     & .nav-menu a:hover {
         background-color: var(--navBGHover);
     }
