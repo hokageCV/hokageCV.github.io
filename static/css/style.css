@@ -21,7 +21,7 @@
 
     --maxWidth: 580px;
     --navHeight: 80px;
-    --footerHeight: 30px;
+    --footerHeight: 35px;
     --borderRadius: 15px;
 }
 
@@ -81,6 +81,8 @@ nav {
     width: 100%;
     height: var(--navHeight);
     box-sizing: border-box;
+
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 
     & .nav-header {
         margin-right: auto;
@@ -270,13 +272,15 @@ nav {
 footer {
     background-color: var(--navBG);
     color: var(--navText);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
     height: var(--footerHeight);
-    position: fixed;
     bottom: 0;
     width: 100%;
+    padding: 5px 0;
+
+    & p {
+        text-align: center;
+    }
 }
 
 /* ============================================ */
