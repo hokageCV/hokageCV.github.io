@@ -21,6 +21,7 @@
 
     --maxWidth: 580px;
     --navHeight: 80px;
+    --footerHeight: 30px;
     --borderRadius: 15px;
 }
 
@@ -185,6 +186,8 @@ nav {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        margin-bottom: calc(2 * var(--footerHeight));
     }
 
     & .project-card {
@@ -217,10 +220,11 @@ nav {
             & button {
                 margin: 10px;
                 padding: 10px 20px;
-                border: 1px solid var(--btnBorder);
+                border: 2px solid var(--btnBorder);
                 border-radius: 10px;
                 background-color: var(--btnBG);
                 color: var(--baseTextLight);
+                cursor: pointer;
             }
         }
     }
@@ -228,7 +232,7 @@ nav {
 
 /* ============================================ */
 
-#contact {
+/* #contact {
     padding: var(--navHeight) 10px;
     width: var(--maxWidth);
     margin: 30px;
@@ -250,7 +254,9 @@ nav {
     textarea {
         padding: 10px;
         border: 1px solid var(--highlightText);
-        border-radius: var(--borderRadius);
+        border-radius: 10px;
+
+        width: 250px;
     }
 
     & button {
@@ -258,5 +264,19 @@ nav {
         border-radius: 10px;
         margin-bottom: 30px;
     }
+} */
+/* ============================================ */
+
+footer {
+    background-color: var(--navBG);
+    color: var(--navText);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--footerHeight);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
+
 /* ============================================ */
