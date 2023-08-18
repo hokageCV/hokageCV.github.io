@@ -19,10 +19,11 @@
     --btnBG: #893b2b;
     --btnBorder: #733529;
 
-    --maxWidth: 580px;
+    --containerWidth: 580px;
     --navHeight: 80px;
     --footerHeight: 35px;
     --borderRadius: 15px;
+    --skillColumns: 4;
 }
 
 html,
@@ -107,6 +108,20 @@ nav {
     & .nav-menu a:hover {
         background-color: var(--navBGHover);
     }
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        & .nav-header {
+            margin: 10px;
+        }
+
+        & a {
+            padding: 10px 4px;
+        }
+    }
 }
 
 /* ============================================ */
@@ -115,7 +130,7 @@ nav {
     margin: 10px;
     padding: 10px;
     padding-top: calc(2 * var(--navHeight));
-    width: var(--maxWidth);
+    width: var(--containerWidth);
 
     & h1 {
         font-size: 40px;
@@ -156,15 +171,16 @@ nav {
 
 #skills {
     padding-top: var(--navHeight);
-    width: var(--maxWidth);
+    width: var(--containerWidth);
 
     & .skills-cardList {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(var(--skillColumns), 1fr);
         gap: 20px;
 
         & .skills-card {
             transition: transform 0.3s ease;
+            margin: 0 10px;
 
             & img {
                 width: 80px;
@@ -180,6 +196,15 @@ nav {
                 z-index: 2;
             }
         }
+
+        @media (min-width: 450px) and (max-width: 768px) {
+            --skillColumns: 3;
+            gap: 10px;
+        }
+        @media (max-width: 399px) {
+            --skillColumns: 2;
+            gap: 10px;
+        }
     }
 }
 
@@ -187,7 +212,7 @@ nav {
 
 #projects {
     padding-top: var(--navHeight);
-    width: var(--maxWidth);
+    width: var(--containerWidth);
 
     & .project-list {
         display: flex;
@@ -209,6 +234,7 @@ nav {
 
         margin: 20px 0px;
         padding: 20px;
+        width: 95%;
         border-radius: var(--borderRadius);
 
         & .project-title {
@@ -217,8 +243,8 @@ nav {
         }
 
         & img {
-            width: 500px;
-            height: 300px;
+            width: 100%;
+            height: auto;
             border-radius: 5px;
         }
 
@@ -233,6 +259,12 @@ nav {
                 background-color: var(--btnBG);
                 color: var(--baseTextLight);
                 cursor: pointer;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-card {
+                width: 100%;
             }
         }
     }
@@ -290,3 +322,15 @@ footer {
 }
 
 /* ============================================ */
+
+@media (max-width: 768px) {
+    :root {
+        --navHeight: 100px;
+    }
+}
+
+@media (max-width: 600px) {
+    :root {
+        --containerWidth: 90%;
+    }
+}
