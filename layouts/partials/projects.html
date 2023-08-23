@@ -5,6 +5,9 @@
         <div class="project-card">
             <p class="project-title">{{ .title }}</p>
             <img src="{{ .imgLink }}" alt="{{ .title }}" />
+            <div class="card-body">
+                <p class="project-description">{{ .description }}</p>
+            </div>
             <div class="card-actions">
                 <a href="{{ .repoLink }}"><button>Repo Link</button></a>
             </div>

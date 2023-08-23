@@ -248,6 +248,14 @@ nav {
             border-radius: 5px;
         }
 
+        & .card-body {
+            & .project-description {
+                margin: 15px 0px 10px;
+                font-size: 18px;
+                text-align: left;
+            }
+        }
+
         & .card-actions {
             align-self: center;
 
