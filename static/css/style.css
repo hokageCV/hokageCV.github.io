@@ -242,10 +242,23 @@ nav {
             margin-bottom: 5px;
         }
 
-        & img {
+        & .card-media {
             width: 100%;
-            height: auto;
-            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & img {
+                width: 100%;
+                height: auto;
+                border-radius: 5px;
+            }
+
+            & video {
+                width: 100%;
+                height: auto;
+                border-radius: 5px;
+            }
         }
 
         & .card-body {

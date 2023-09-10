@@ -4,7 +4,13 @@
         {{ range .Site.Data.projects }}
         <div class="project-card">
             <p class="project-title">{{ .title }}</p>
-            <img src="{{ .imgLink }}" alt="{{ .title }}" />
+            <div class="card-media">
+                {{ if .isVid }}
+                <video src="{{ .mediaLink }}" autoplay loop muted playsinline></video>
+                {{ else }}
+                <img src="{{ .mediaLink }}" alt="{{ .title }}" />
+                {{ end }}
+            </div>
             <div class="card-body">
                 <p class="project-description">{{ .description }}</p>
             </div>
