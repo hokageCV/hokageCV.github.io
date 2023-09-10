@@ -56,6 +56,14 @@
         "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1692344244/logo/azure-svgrepo-com.svg"
     },
     {
+        "title": "Ruby on Rails",
+        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1694335696/logo/rails-svgrepo-com.svg"
+    },
+    {
+        "title": "Docker",
+        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1694335696/logo/docker-icon-svgrepo-com.svg"
+    },
+    {
         "title": "Git",
         "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1692344245/logo/git-svgrepo-com.svg"
     }
