@@ -2,7 +2,7 @@
     {
         "title": "Share Naam",
         "isVid": false,
-        "mediaLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691952884/github/share_naam.png",
+        "mediaLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1694337835/github/share_naam.webp",
         "repoLink": "https://github.com/hokageCV/share-naam",
         "liveLink": "https://github.com/hokageCV/share-naam",
         "description": "A social platform uniting food enthusiasts to share their favorite food places with one another"
@@ -18,7 +18,7 @@
     {
         "title": "Clip Database Manager",
         "isVid": false,
-        "mediaLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691219867/github/clip_manager_konark.png",
+        "mediaLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1694337834/github/clip_manager_konark.webp",
         "repoLink": "https://github.com/hokageCV/konark-automobiles",
         "liveLink": "https://konark-automobiles.vercel.app",
         "description": "Efficiently browse and search clips leveraging a Google Sheet database, ensuring real-time retrieval and seamless information management"
@@ -26,7 +26,7 @@
     {
         "title": "Lakshya",
         "isVid": false,
-        "mediaLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691218913/github/lakshya.png",
+        "mediaLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1694337835/github/lakshya.webp",
         "repoLink": "https://github.com/hokageCV/Lakshya",
         "liveLink": "https://github.com/hokageCV/Lakshya",
         "description": "Stay on top of your tasks and time with a new tab that counts the days elapsed in the year, promoting organization and mindfulness"
