@@ -6,4 +6,12 @@
 
     <link rel="shortcut icon" href="{{ "/code.svg" }}" type="image/x-icon"> <link rel="stylesheet"
     href="{{ "/css/style.css" }}" />
+
+    <!-- preconneting to cloudinary -->
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+
+    <!-- preloading images  -->
+    {{ range .Site.Data.socials }}
+    <link rel="preload" href="{{ .imgLink }}" as="image" />
+    {{ end }}
 </head>
