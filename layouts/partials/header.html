@@ -4,8 +4,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="referrer" content="origin" />
 
-    <link rel="shortcut icon" href="{{ "/code.svg" }}" type="image/x-icon"> <link rel="stylesheet"
-    href="{{ "/css/style.css" }}" />
+    <link rel="shortcut icon" href="{{ "/code.svg" }}" type="image/x-icon">
+
+    <!-- static CSS file for dev -->
+    <!-- <link rel="stylesheet" href="{{ "/css/style.css" }}" /> -->
+
+    <!-- assets CSS for prod -->
+    {{ $minifiedCSS := resources.Get "./css/style.css" | minify }}
+    <link rel="stylesheet" href="{{ $minifiedCSS.Permalink }}" />
 
     <!-- preconneting to cloudinary -->
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
