@@ -14,4 +14,15 @@
     {{ range .Site.Data.socials }}
     <link rel="preload" href="{{ .imgLink }}" as="image" />
     {{ end }}
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ5KEBZ8QW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-QZ5KEBZ8QW');
+    </script>
 </head>
