@@ -10,8 +10,8 @@
     <!-- <link rel="stylesheet" href="{{ "/css/style.css" }}" /> -->
 
     <!-- assets CSS for prod -->
-    {{ $minifiedCSS := resources.Get "./css/style.css" | minify }}
-    <link rel="stylesheet" href="{{ $minifiedCSS.Permalink }}" />
+    {{ $minifiedCSS := resources.Get "./css/style.css" | minify | fingerprint }}
+    <link rel="stylesheet" href=".{{ $minifiedCSS.Permalink }}" />
 
     <!-- preconneting to cloudinary -->
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
