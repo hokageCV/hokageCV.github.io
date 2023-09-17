@@ -5,7 +5,8 @@
         "mediaLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1694337835/github/share_naam.webp",
         "repoLink": "https://github.com/hokageCV/share-naam",
         "liveLink": "https://github.com/hokageCV/share-naam",
-        "description": "A social platform uniting food enthusiasts to share their favorite food places with one another"
+        "description": "A social platform uniting food enthusiasts to share their favorite food places with one another",
+        "id": "project-link-share-naam"
     },
     {
         "title": "URL Manager",
@@ -13,7 +14,8 @@
         "mediaLink": "https://res.cloudinary.com/dmtacem5p/video/upload/v1694330935/github/ruby-url-manager.webm",
         "repoLink": "https://github.com/hokageCV/ruby-url-manager",
         "liveLink": "https://github.com/hokageCV/ruby-url-manager",
-        "description": "Streamline your link sharing with URL Manager, a user-friendly Ruby on Rails application. Create custom short links effortlessly for seamless online sharing"
+        "description": "Streamline your link sharing with URL Manager, a user-friendly Ruby on Rails application. Create custom short links effortlessly for seamless online sharing",
+        "id": "project-link-url-manager"
     },
     {
         "title": "Clip Database Manager",
@@ -21,7 +23,8 @@
         "mediaLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1694337834/github/clip_manager_konark.webp",
         "repoLink": "https://github.com/hokageCV/konark-automobiles",
         "liveLink": "https://konark-automobiles.vercel.app",
-        "description": "Efficiently browse and search clips leveraging a Google Sheet database, ensuring real-time retrieval and seamless information management"
+        "description": "Efficiently browse and search clips leveraging a Google Sheet database, ensuring real-time retrieval and seamless information management",
+        "id": "project-link-database-manager"
     },
     {
         "title": "Lakshya",
@@ -29,6 +32,7 @@
         "mediaLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1694337835/github/lakshya.webp",
         "repoLink": "https://github.com/hokageCV/Lakshya",
         "liveLink": "https://github.com/hokageCV/Lakshya",
-        "description": "Stay on top of your tasks and time with a new tab that counts the days elapsed in the year, promoting organization and mindfulness"
+        "description": "Stay on top of your tasks and time with a new tab that counts the days elapsed in the year, promoting organization and mindfulness",
+        "id": "project-link-lakshya"
     }
 ]

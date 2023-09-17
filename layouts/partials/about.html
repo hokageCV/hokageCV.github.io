@@ -4,7 +4,9 @@
 
     <div class="socials">
         {{ range .Site.Data.socials }}
-        <a href="{{ .link }}" target="_blank"><img src="{{ .imgLink }}" alt="{{ .title }}" /></a>
+        <a href="{{ .link }}" target="_blank" id="{{ .id }}">
+            <img src="{{ .imgLink }}" alt="{{ .title }}" />
+        </a>
         {{ end}}
     </div>
 </div>

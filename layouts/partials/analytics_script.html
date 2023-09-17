@@ -1,0 +1,14 @@
+<script>
+    {{ range .Site.Data.ids.linkIds }}
+        const link = document.getElementById('{{ . }}');
+        
+        if (link) {
+            link.addEventListener('click', () => {
+                gtag('event', 'link_click', {
+                    event_category: 'Link Click',
+                    event_label: '{{ . }}',
+                });
+            });
+        }
+    {{ end }}
+</script>
