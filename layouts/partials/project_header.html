@@ -1,0 +1,70 @@
+<head>
+    <title>{{ .Site.Title }}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="origin" />
+    <meta name="theme-color" content="#c95f4a" />
+
+    <link rel="shortcut icon" href="{{ "/code.svg" }}" type="image/x-icon">
+
+    <!-- open grapn tags  -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Chaitanya Varu" />
+    <meta
+        property="og:image"
+        content="https://res.cloudinary.com/dmtacem5p/image/upload/v1694933643/github/portfolio_open_graph_img.png"
+    />
+    <meta property="og:url" content="https://chaitanyavaru.me" />
+    <!-- <meta property="og:description" content="Backend Developer | Portfolio website" /> -->
+
+    <style>
+        :root {
+            --gradient-1: #ecc9fd;
+            --gradient-2: #ecf2de;
+            --baseTextDark: #2e3440;
+            --baseTextLight: #f3d3ff;
+            --highlightText: #3295a9;
+            --subHeadingMarginTop: 40px;
+        }
+        html, body, p, h1, h2 {
+            margin: 0;
+            padding: 0;
+        }
+        /* ============================================ */
+        html {
+            font-family: 'Roboto', sans-serif;
+            font-size: 20px;
+            background: var(--gradient-1);
+            color: var(--baseTextDark);
+            scroll-behavior: smooth;
+        }
+        body {
+            box-sizing: border-box;
+            padding: 30px;
+        }
+        /* ============================================ */
+        #go-back {
+            font-size: 16px;
+            & a{
+                text-decoration: none;
+                color: var(--highlightText);
+            }
+        }
+        .header{
+            & h1{
+            margin-top: 30px;
+            }
+            & img{
+                width: 95%;
+                margin: 20px 0;
+            }
+            & video{
+                width: 95%;
+                margin: 20px 0;
+            }
+        }
+        h2{
+        margin-top: var(--subHeadingMarginTop);}
+        
+    </style>
+</head>

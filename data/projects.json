@@ -6,7 +6,8 @@
         "repoLink": "https://github.com/hokageCV/share-naam",
         "liveLink": "https://github.com/hokageCV/share-naam",
         "description": "A social platform uniting food enthusiasts to share their favorite food places with one another",
-        "id": "project-link-share-naam"
+        "id": "project-link-share-naam",
+        "pageLink": "share-naam"
     },
     {
         "title": "URL Manager",
@@ -15,7 +16,8 @@
         "repoLink": "https://github.com/hokageCV/ruby-url-manager",
         "liveLink": "https://github.com/hokageCV/ruby-url-manager",
         "description": "Streamline your link sharing with URL Manager, a user-friendly Ruby on Rails application. Create custom short links effortlessly for seamless online sharing",
-        "id": "project-link-url-manager"
+        "id": "project-link-url-manager",
+        "pageLink": "url-manager"
     },
     {
         "title": "Clip Database Manager",
@@ -24,7 +26,8 @@
         "repoLink": "https://github.com/hokageCV/konark-automobiles",
         "liveLink": "https://konark-automobiles.vercel.app",
         "description": "Efficiently browse and search clips leveraging a Google Sheet database, ensuring real-time retrieval and seamless information management",
-        "id": "project-link-database-manager"
+        "id": "project-link-clip-database-manager",
+        "pageLink": "clip-database-manager"
     },
     {
         "title": "Lakshya",
@@ -33,6 +36,7 @@
         "repoLink": "https://github.com/hokageCV/Lakshya",
         "liveLink": "https://github.com/hokageCV/Lakshya",
         "description": "Stay on top of your tasks and time with a new tab that counts the days elapsed in the year, promoting organization and mindfulness",
-        "id": "project-link-lakshya"
+        "id": "project-link-lakshya",
+        "pageLink": "lakshya"
     }
 ]

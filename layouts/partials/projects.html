@@ -3,20 +3,27 @@
     <div class="project-list">
         {{ range .Site.Data.projects }}
         <div class="project-card">
-            <p class="project-title">{{ .title }}</p>
-            <div class="card-media">
-                {{ if .isVid }}
-                <video src="{{ .mediaLink }}" autoplay loop muted playsinline></video>
-                {{ else }}
-                <img src="{{ .mediaLink }}" alt="{{ .title }}" />
-                {{ end }}
-            </div>
-            <div class="card-body">
-                <p class="project-description">{{ .description }}</p>
-            </div>
-            <div class="card-actions">
-                <a href="{{ .repoLink }}" id="{{ .id }}"><button>Repo Link</button></a>
-            </div>
+            <a class='project-page-link' href="/project/{{ .pageLink }}">
+                <div class="card-header">
+                    <div class="details-link-container">
+                        <img class='project-details-link' src="{{ "/svg/external-link-svgrepo-com.svg" }}" alt="project details">
+                    </div>
+                    <p class="project-title">{{ .title }}</p>
+                </div>
+                <div class="card-media">
+                    {{ if .isVid }}
+                    <video src="{{ .mediaLink }}" autoplay loop muted playsinline></video>
+                    {{ else }}
+                    <img src="{{ .mediaLink }}" alt="{{ .title }}" />
+                    {{ end }}
+                </div>
+                <div class="card-body">
+                    <p class="project-description">{{ .description }}</p>
+                </div>
+                <div class="card-actions">
+                    <a href="{{ .repoLink }}" id="{{ .id }}"><button>Repo Link</button></a>
+                </div>
+            </a>
         </div>
         {{ end}}
     </div>
