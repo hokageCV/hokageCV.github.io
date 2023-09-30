@@ -1,19 +1,7 @@
 [
     {
-        "title": "HTML",
-        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691940377/logo/html-5-svgrepo-com.svg"
-    },
-    {
-        "title": "CSS",
-        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691940377/logo/css3-svgrepo-com.svg"
-    },
-    {
         "title": "JavaScript",
         "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691940377/logo/js-svgrepo-com.svg"
-    },
-    {
-        "title": "Hugo",
-        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1692344246/logo/hugo-svgrepo-com.svg"
     },
     {
         "title": "NodeJS",
@@ -24,6 +12,10 @@
         "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1692344245/logo/express-svgrepo-com.svg"
     },
     {
+        "title": "TypeScript",
+        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1692344244/logo/typescript-official-svgrepo-com.svg"
+    },
+    {
         "title": "PostgreSQL",
         "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1692344245/logo/postgresql-svgrepo-com.svg"
     },
@@ -32,12 +24,12 @@
         "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1692344245/logo/mongo-svgrepo-com.svg"
     },
     {
-        "title": "TypeScript",
-        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1692344244/logo/typescript-official-svgrepo-com.svg"
-    },
-    {
         "title": "React",
         "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691940377/logo/react-svgrepo-com.svg"
+    },
+    {
+        "title": "Hugo",
+        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1692344246/logo/hugo-svgrepo-com.svg"
     },
     {
         "title": "NextJS",
@@ -62,9 +54,5 @@
     {
         "title": "Docker",
         "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1694335696/logo/docker-icon-svgrepo-com.svg"
-    },
-    {
-        "title": "Git",
-        "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1692344245/logo/git-svgrepo-com.svg"
     }
 ]
