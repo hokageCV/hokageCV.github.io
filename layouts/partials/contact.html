@@ -29,7 +29,7 @@
             e.preventDefault();
             const formData = new FormData(e.target);
 
-            const workerEndpoint = 'https://cloudflare-contact-form.chaitanyavaru.workers.dev';
+            const workerEndpoint = 'https://contact-form-nextjs-chi.vercel.app/api/contact-form';
 
             try {
                 const response = await fetch(workerEndpoint, {
