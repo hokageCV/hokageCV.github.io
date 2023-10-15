@@ -22,7 +22,7 @@
         e.preventDefault();
         const formData = new FormData(e.target);
 
-        const workerEndpoint = 'cloudflare-contact-form.chaitanyavaru.workers.dev';
+        const workerEndpoint = 'https://cloudflare-contact-form.chaitanyavaru.workers.dev';
 
         try {
             const response = await fetch(workerEndpoint, {
