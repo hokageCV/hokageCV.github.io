@@ -18,28 +18,30 @@
 </div>
 
 <script>
-    document.getElementById('contact-form').addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const formData = new FormData(e.target);
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('contact-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
 
-        const workerEndpoint = 'https://cloudflare-contact-form.chaitanyavaru.workers.dev';
+            const workerEndpoint = 'https://cloudflare-contact-form.chaitanyavaru.workers.dev';
 
-        try {
-            const response = await fetch(workerEndpoint, {
-                method: 'POST',
-                body: JSON.stringify(Object.fromEntries(formData)),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+            try {
+                const response = await fetch(workerEndpoint, {
+                    method: 'POST',
+                    body: JSON.stringify(Object.fromEntries(formData)),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
 
-            if (response.ok) {
-                alert('Message sent successfully!');
-            } else {
+                if (response.ok) {
+                    alert('Message sent successfully!');
+                } else {
+                    alert('Message sending failed.');
+                }
+            } catch (error) {
                 alert('Message sending failed.');
             }
-        } catch (error) {
-            alert('Message sending failed.');
-        }
+        });
     });
 </script>
