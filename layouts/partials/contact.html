@@ -44,15 +44,16 @@
 
                 if (response.ok) {
                     const data = await response.json();
-                    responseMessage.innerText = `&check; ${data.message}`;
-                    contactForm.style.display = 'none';
+                    responseMessage.innerText = `${data.message}`;
+                    contactForm.reset();
                     responseMessage.style.display = 'block';
                 } else {
-                    responseMessage.innerText = `&#x2715; Message sending failed.`;
+                    responseMessage.innerText = `${data.message}`;
+                    contactForm.reset();
                     responseMessage.style.display = 'block';
                 }
             } catch (error) {
-                responseMessage.innerText = `&#x2715; error: ${error}`;
+                responseMessage.innerText = `error: ${error}`;
             }
         });
     });
