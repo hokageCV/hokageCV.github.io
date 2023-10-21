@@ -15,6 +15,7 @@
         </div>
         <button type="submit">Submit</button>
     </form>
+    <div id="response-message" style="display: none"></div>
 </div>
 
 <script>
@@ -24,6 +25,7 @@
             document.getElementById('contact').hidden = true;
             return;
         }
+        const responseMessage = document.getElementById('response-message');
 
         contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -41,12 +43,16 @@
                 });
 
                 if (response.ok) {
-                    alert('Message sent successfully!');
+                    const data = await response.json();
+                    responseMessage.innerText = `&check; ${data.message}`;
+                    contactForm.style.display = 'none';
+                    responseMessage.style.display = 'block';
                 } else {
-                    alert('Message sending failed.');
+                    responseMessage.innerText = `&#x2715; Message sending failed.`;
+                    responseMessage.style.display = 'block';
                 }
             } catch (error) {
-                alert('Message sending failed.');
+                responseMessage.innerText = `&#x2715; error: ${error}`;
             }
         });
     });

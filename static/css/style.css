@@ -28,8 +28,7 @@
 
     /* https://www.joshwcomeau.com/shadow-palette/ */
     --shadow-color: 14deg 30% 30%;
-    --project-card-shadow:
-        0.5px 0.5px 0.8px hsl(var(--shadow-color) / 0.09),
+    --project-card-shadow: 0.5px 0.5px 0.8px hsl(var(--shadow-color) / 0.09),
         1.9px 1.8px 3.1px -0.7px hsl(var(--shadow-color) / 0.1),
         4.5px 4.3px 7.4px -1.4px hsl(var(--shadow-color) / 0.11),
         10.5px 10.1px 17.4px -2px hsl(var(--shadow-color) / 0.12);
@@ -250,8 +249,7 @@ nav {
         /* border: 1px solid var(--btnBG); */
         box-shadow: var(--project-card-shadow);
 
-        
-        & .card-header { 
+        & .card-header {
             position: relative;
 
             & .details-link-container {
@@ -320,7 +318,7 @@ nav {
 }
 
 /* ============================================ */
-/* #contact {
+#contact {
     padding: var(--navHeight) 10px;
     width: var(--maxWidth);
     margin: 30px;
@@ -340,6 +338,7 @@ nav {
 
     & input,
     textarea {
+        font-size: 16px;
         padding: 10px;
         border: 1px solid var(--highlightText);
         border-radius: 10px;
@@ -352,7 +351,7 @@ nav {
         border-radius: 10px;
         margin-bottom: 30px;
     }
-} */
+}
 /* ============================================ */
 footer {
     background-color: var(--navBG);
