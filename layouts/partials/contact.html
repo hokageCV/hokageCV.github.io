@@ -31,10 +31,13 @@
             e.preventDefault();
             const formData = new FormData(e.target);
 
-            const workerEndpoint = 'https://contact-form-nextjs-chi.vercel.app/api/contact-form';
+            const endpoint = 'https://contact-form-nextjs-chi.vercel.app/api/contact-form';
+
+            contactForm.reset();
+            responseMessage.style.display = 'block';
 
             try {
-                const response = await fetch(workerEndpoint, {
+                const response = await fetch(endpoint, {
                     method: 'POST',
                     body: JSON.stringify(Object.fromEntries(formData)),
                     headers: {
@@ -43,14 +46,9 @@
                 });
 
                 if (response.ok) {
-                    const data = await response.json();
-                    responseMessage.innerText = `${data.message}`;
-                    contactForm.reset();
-                    responseMessage.style.display = 'block';
+                    responseMessage.innerText = 'Message Sent';
                 } else {
-                    responseMessage.innerText = `${data.message}`;
-                    contactForm.reset();
-                    responseMessage.style.display = 'block';
+                    responseMessage.innerText = 'Error on sending message';
                 }
             } catch (error) {
                 responseMessage.innerText = `error: ${error}`;
