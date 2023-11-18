@@ -22,7 +22,6 @@
 
     --containerWidth: 580px;
     --navHeight: 80px;
-    --footerHeight: 35px;
     --borderRadius: 15px;
     --skillColumns: 4;
 
@@ -229,8 +228,6 @@ nav {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
-        margin-bottom: calc(2 * var(--footerHeight));
     }
 
     & .project-card {
@@ -319,7 +316,7 @@ nav {
 
 /* ============================================ */
 #contact {
-    padding: var(--navHeight) 10px;
+    padding: var(--navHeight) 10px 30px;
     width: var(--maxWidth);
     margin: 30px;
 
@@ -365,17 +362,33 @@ nav {
     }
 }
 /* ============================================ */
-footer {
+#footer {
     background-color: var(--navBG);
     color: var(--navText);
 
-    height: var(--footerHeight);
     bottom: 0;
     width: 100%;
     padding: 5px 0;
 
-    & p {
-        text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & #resume-link {
+        color: inherit;
+        text-decoration: none;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+
+        & img {
+            width: 12px;
+            height: 12px;
+        }
     }
 }
 
