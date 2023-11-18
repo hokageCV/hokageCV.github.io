@@ -389,6 +389,14 @@ nav {
             width: 12px;
             height: 12px;
         }
+
+        position: relative;
+    }
+
+    & #resume-link::before {
+        content: '';
+        position: absolute;
+        inset: -20px;
     }
 }
 
