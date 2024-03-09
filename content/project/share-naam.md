@@ -1,9 +1,10 @@
 ---
 title: "Share Naam"
-layout: single-project
+repoLink: "https://github.com/hokageCV/share-naam"
+liveLink: "https://github.com/hokageCV/share-naam"
 cover:
     image: https://res.cloudinary.com/dmtacem5p/image/upload/v1694337835/github/share_naam.webp
-    alt: 'Share Naam' 
+    alt: 'Share Naam'
 ---
 
 Social media platform is designed to bring food lovers together and allow them to share their favourite food places with each other. Whether you're a foodie or just love trying new restaurants, Share Naam is the perfect place for you to share your experiences and connect with others.

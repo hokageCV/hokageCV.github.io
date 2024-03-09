@@ -1,0 +1,13 @@
+---
+layout: layouts/home.njk
+eleventyNavigation:
+  key: Home
+  order: 1
+numberOfLatestPostsToShow: 4
+---
+
+{% include "partials/about.njk" %}
+{% include "partials/skills.njk" %}
+
+{% set projectlist = collections.projects | head(-1 * numberOfLatestPostsToShow) %}
+{% include "projectlist.njk" %}

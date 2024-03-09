@@ -1,0 +1,33 @@
+<div id="projects">
+  <h2 class="section-header">Projects</h2>
+  <div class="project-list">
+    {% for post in projectlist | reverse %}
+      <div class="project-card">
+        <a class='project-page-link' href="{{ post.url }}">
+          <div
+            class="card-header">
+            {# <div class="details-link-container">
+                                      <img class='project-details-link' src="{{ "/svg/external-link-svgrepo-com.svg" }}" alt="project details">
+                                    </div> #}
+            <p class="project-title">{{ post.data.title }}</p>
+          </div>
+          <div class="card-media">
+            {% if post.data.cover.video %}
+              <video src="{{ post.data.cover.video }}" autoplay loop muted playsinline></video>
+            {% else %}
+              <img src="{{ post.data.cover.image }}" alt="{{ post.data.title }}"/>
+            {% endif %}
+          </div>
+          <div class="card-body">
+            <p class="project-description">{{ post.data.description }}</p>
+          </div>
+          <div class="card-actions">
+            <a href="{{ post.data.repoLink }}" id="{{ post.data.id }}">
+              <button>Repo Link</button>
+            </a>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>

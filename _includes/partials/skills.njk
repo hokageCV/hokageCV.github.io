@@ -1,0 +1,11 @@
+<div id="skills">
+  <h2 class="section-header">Skills</h2>
+  <div class="skills-cardList">
+    {% for skill in skills %}
+      <div class="skills-card">
+        <img src="{{ skill.imgLink }}" alt="{{ skill.title }}"/>
+        <p>{{ skill.title }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>

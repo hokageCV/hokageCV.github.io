@@ -1,0 +1,11 @@
+<div id="about">
+  <h1>Hi, I am Chaitanya Varu</h1>
+  <p>I Help Companies Deliver Seamless Digital Solutions</p>
+  <div class="socials">
+    {% for social in socials %}
+      <a href="{{ social.link }}" target="_blank" id="{{ social.id }}">
+        <img src="{{ social.imgLink }}" alt="{{ social.title }}"/>
+      </a>
+    {% endfor %}
+  </div>
+</div>

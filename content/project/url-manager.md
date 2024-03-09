@@ -1,6 +1,7 @@
 ---
 title: "URL Manager"
-layout: single-project
+repoLink: "https://github.com/hokageCV/share-naam"
+liveLink: "https://github.com/hokageCV/share-naam"
 cover:
     video: https://res.cloudinary.com/dmtacem5p/video/upload/v1694330935/github/ruby-url-manager.webm
 ---

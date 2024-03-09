@@ -1,4 +1,4 @@
-[
+module.exports = [
     {
         "title": "Github",
         "link": "https://github.com/hokageCV",

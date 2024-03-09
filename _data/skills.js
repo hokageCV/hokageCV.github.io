@@ -1,4 +1,4 @@
-[
+module.exports = [
     {
         "title": "JavaScript",
         "imgLink": "https://res.cloudinary.com/dmtacem5p/image/upload/v1691940377/logo/js-svgrepo-com.svg"
