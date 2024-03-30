@@ -1,14 +1,10 @@
 <div id="projects">
-  <h2 class="section-header">Projects</h2>
   <div class="project-list">
-    {% for post in projectlist | reverse %}
+    {% for post in projectslist | reverse %}
       <div class="project-card">
         <a class='project-page-link' href="{{ post.url }}">
           <div
             class="card-header">
-            {# <div class="details-link-container">
-                                      <img class='project-details-link' src="{{ "/svg/external-link-svgrepo-com.svg" }}" alt="project details">
-                                    </div> #}
             <p class="project-title">{{ post.data.title }}</p>
           </div>
           <div class="card-media">

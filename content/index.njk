@@ -3,11 +3,10 @@ layout: layouts/home.njk
 eleventyNavigation:
   key: Home
   order: 1
-numberOfLatestPostsToShow: 4
+numberOfLatestPostsToShow: 5
 ---
 
-{% include "partials/about.njk" %}
-{% include "partials/skills.njk" %}
+<h2 class="page-header">Recent Posts</h2>
 
-{% set projectlist = collections.projects | head(-1 * numberOfLatestPostsToShow) %}
-{% include "projectlist.njk" %}
+{% set postslist = collections.blogs | head(-1 * numberOfLatestPostsToShow) %}
+{% include "postslist.njk" %}
