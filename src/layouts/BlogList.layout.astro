@@ -1,0 +1,20 @@
+---
+import { getBlogList } from 'src/utils/collection.utils'
+import { readableDate } from 'src/utils/date.utils'
+
+const blogList = await getBlogList()
+---
+
+<div>
+  {
+    blogList.map((blog) => {
+      return (
+        <div style='margin: 15px 0;'>
+          <h6 style='color: macacypurple; margin: 0;'>{blog.data.title}</h6>
+          <p style='margin: 0;'>{blog.data.description}</p>
+          <p style='margin: 0;'>{readableDate(blog.data.publishedDate)}</p>
+        </div>
+      )
+    })
+  }
+</div>

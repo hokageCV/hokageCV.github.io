@@ -10,6 +10,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.5.12"
+    "astro": "^4.5.12",
+    "luxon": "^3.4.4"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.4.2"
   }
 }
