@@ -1,0 +1,17 @@
+---
+import { getProjectList } from 'src/utils/collection.utils'
+
+const projectList = await getProjectList()
+---
+
+<div>
+  {
+    projectList.map((project) => {
+      return (
+        <div style='margin: 15px 0;'>
+          <h5 style='color: macacypurple; margin: 0;'>{project.data.title}</h5>
+        </div>
+      )
+    })
+  }
+</div>
