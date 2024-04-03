@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "isolatedModules": true,
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/assets/*": ["src/assets/*"]
+    },
+    "strict": true,
+    "importsNotUsedAsValues": "preserve",
+    "ignoreDeprecations": "5.0",
+    "strictNullChecks": true
+  }
+}

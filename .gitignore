@@ -1,2 +1,3 @@
-public
-resources
+dist/
+.astro/
+node_modules/
