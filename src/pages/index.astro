@@ -1,19 +1,11 @@
 ---
-import BlogList from 'src/layouts/BlogList.layout.astro'
-import ProjectList from 'src/layouts/ProjectList.layout.astro'
+import Base from '@/layouts/Base.astro'
+import BlogList from '@/layouts/BlogList.astro'
+import ProjectList from '@/layouts/ProjectList.astro'
 ---
 
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
-    <meta name='viewport' content='width=device-width' />
-    <meta name='generator' content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
-    <BlogList />
-    <ProjectList />
-  </body>
-</html>
+<Base>
+  <h1>Astro</h1>
+  <BlogList />
+  <ProjectList />
+</Base>

@@ -1,11 +1,11 @@
 ---
-import { getBlogList } from 'src/utils/collection.utils'
-import { readableDate } from 'src/utils/date.utils'
+import { getBlogList } from '@/utils/collection'
+import { readableDate } from '@/utils/date'
 
 const blogList = await getBlogList()
 ---
 
-<div>
+<section>
   {
     blogList.map((blog) => {
       return (
@@ -17,4 +17,4 @@ const blogList = await getBlogList()
       )
     })
   }
-</div>
+</section>

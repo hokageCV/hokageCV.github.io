@@ -1,10 +1,10 @@
 ---
-import { getProjectList } from 'src/utils/collection.utils'
+import { getProjectList } from '@/utils/collection'
 
 const projectList = await getProjectList()
 ---
 
-<div>
+<section>
   {
     projectList.map((project) => {
       return (
@@ -14,4 +14,4 @@ const projectList = await getProjectList()
       )
     })
   }
-</div>
+</section>

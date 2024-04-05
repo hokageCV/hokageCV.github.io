@@ -12,9 +12,10 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
+    "baseUrl": ".", // start at root of directory
     "paths": {
-      "~/assets/*": ["src/assets/*"]
+      "~/assets/*": ["src/assets/*"],
+      "@/*": ["src/*"]
     },
     "strict": true,
     "importsNotUsedAsValues": "preserve",
