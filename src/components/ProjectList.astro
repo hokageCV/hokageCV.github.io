@@ -1,21 +1,10 @@
 ---
 import { getProjectList } from '@/utils/collection'
+import ProjectCard from './ProjectCard.astro'
 
 const projectList = await getProjectList()
 ---
 
 <section>
-  {
-    projectList.map((project) => {
-      const url = `/projects/${project.slug}`
-
-      return (
-        <div style='margin: 15px 0;'>
-          <a href={url}>
-            <h5 style='color: macacypurple; margin: 0;'>{project.data.title}</h5>
-          </a>
-        </div>
-      )
-    })
-  }
+  {projectList.map((project) => <ProjectCard {project} />)}
 </section>

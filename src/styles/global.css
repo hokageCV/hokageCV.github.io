@@ -59,6 +59,13 @@
 
   /* Font  */
   --mono-font: "Cascadia Code", "Courier New", Courier, monospace;
+
+  /* Breakpoints */
+  --screen-xs: 0;
+  --screen-sm: 576px;
+  --screen-md: 768px;
+  --screen-lg: 992px;
+  --screen-xl: 1200px;
 }
 
 html,
@@ -234,7 +241,7 @@ div:has(> article) {
     margin-bottom: var(--space-l);
   }
 
-  p{
+  p {
     margin-block-end: 1em;
   }
 

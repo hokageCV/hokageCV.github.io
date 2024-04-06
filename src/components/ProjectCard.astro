@@ -1,0 +1,48 @@
+---
+const { project } = Astro.props
+const url = `/projects/${project.slug}`
+---
+
+<div class='card'>
+  <a href={url}>
+    <div class='card-header'>
+      <p>{project.data.title}</p>
+    </div>
+    <div class='card-media'>
+      {
+        project.data.cover.image ? (
+          <img src={project.data.cover.image} alt={project.data.cover.alt} />
+        ) : (
+          <video src={project.data.cover.video} autoplay loop muted playsinline />
+        )
+      }
+    </div>
+  </a>
+</div>
+
+<style>
+  .card {
+    margin: 10px auto 50px;
+    padding: 10px 20px;
+    width: 50%;
+    border-radius: 20px;
+    overflow: hidden;
+    text-align: center;
+
+    background-color: var(--cardBG);
+    color: var(--cardText);
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card-header {
+      font-size: var(--step-1);
+    }
+
+    @media (max-width: 768px) {
+      width: 95%;
+    }
+  }
+</style>
