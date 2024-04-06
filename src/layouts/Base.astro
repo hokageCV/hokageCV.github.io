@@ -1,4 +1,5 @@
 ---
+import Navbar from '@/components/Navbar.astro';
 import BaseHeaderlayout from "./BaseHeader.astro";
 const { title = 'Chaitanya Varu', description='Chaitanya Varu\'s Blog site' } = Astro.props;
 ---
@@ -6,6 +7,7 @@ const { title = 'Chaitanya Varu', description='Chaitanya Varu\'s Blog site' } = 
 <html lang="en">
   <BaseHeaderlayout title={title} description={description} />
   <body>
+    <Navbar />
     <main>
       <slot />
     </main>

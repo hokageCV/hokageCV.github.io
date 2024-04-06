@@ -1,0 +1,12 @@
+---
+import navigation from '@/data/navigation'
+---
+
+<header>
+  <div class='nav-header'>
+    <a href='/'>Chaitanya Varu</a>
+  </div>
+  <nav>
+    {navigation.header.map((item) => <a href={item.url}>{item.label}</a>)}
+  </nav>
+</header>
