@@ -1,0 +1,15 @@
+---
+import { readableDate } from '@/utils/date'
+
+const { data, render } = Astro.props
+const { Content } = await render()
+---
+
+<div>
+  <small> <a href='/blogs'>Go Back </a></small>
+  <h1>{data.title}</h1>
+  <small>{readableDate(data.publishedDate)}</small>
+  <article>
+    <Content />
+  </article>
+</div>

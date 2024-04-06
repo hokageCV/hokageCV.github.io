@@ -1,0 +1,20 @@
+---
+import Base from '@/layouts/Base.astro'
+import BlogPost from '@/components/BlogPost.astro'
+import { getBlogList } from '@/utils/collection'
+
+export async function getStaticPaths() {
+  const blogList = await getBlogList()
+  return blogList.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }))
+}
+
+const { post } = Astro.props
+const { data } = post
+---
+
+<Base title={data.title} description={data.description}>
+  <BlogPost {...post} />
+</Base>
