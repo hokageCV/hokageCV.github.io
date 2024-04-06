@@ -7,10 +7,10 @@ const LINKS = {
     label: 'Projects',
     url: '/projects',
   },
-  about: {
-    label: 'About',
-    url: '/about',
-  },
+  // about: {
+  //   label: 'About',
+  //   url: '/about',
+  // },
   contact: {
     label: 'Contact',
     url: '/contact',
@@ -21,7 +21,7 @@ export default {
   header: [
     LINKS.blog,
     LINKS.projects,
-    LINKS.about,
+    // LINKS.about,
     LINKS.contact,
   ]
 }

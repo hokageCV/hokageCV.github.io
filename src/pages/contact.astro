@@ -1,0 +1,18 @@
+---
+import socials from '@/data/socials'
+import Base from '@/layouts/Base.astro'
+---
+
+<Base>
+  <ul>
+    {
+      socials.map((social) => (
+        <li>
+          <a href={social.url} target='_blank'>
+            {social.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Base>
