@@ -1,0 +1,25 @@
+---
+import metadata from '@/data/metadata'
+import '@/styles/reset.css'
+
+const pageTitle = Astro.props.title ?? metadata.title
+const pageDescription = Astro.props.description ?? metadata.description
+---
+
+<head>
+  <meta charset='utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <meta name='description' content={pageDescription} />
+  <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+
+  <!-- preconnect to cloudinary -->
+  <link rel='preconnect' href='https://res.cloudinary.com' crossorigin />
+
+  <meta property='og:type' content='website' />
+  <meta property='og:title' content={pageTitle} />
+  <meta property='og:image' content={metadata['og-image']} />
+  <meta property='og:url' content={metadata.url} />
+  <meta property='og:description' content={pageDescription} />
+
+  <title>{pageTitle}</title>
+</head>

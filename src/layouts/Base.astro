@@ -1,11 +1,10 @@
 ---
-import Navbar from '@/components/Navbar.astro';
-import BaseHeaderlayout from "./BaseHeader.astro";
-const { title = 'Chaitanya Varu', description='Chaitanya Varu\'s Blog site' } = Astro.props;
+import BaseHeader from '@/components/BaseHeader.astro'
+import Navbar from '@/components/Navbar.astro'
 ---
 
-<html lang="en">
-  <BaseHeaderlayout title={title} description={description} />
+<html lang='en'>
+  <BaseHeader />
   <body>
     <Navbar />
     <main>
