@@ -1,23 +1,19 @@
 ---
 import { getBlogList } from '@/utils/collection'
-import { readableDate } from '@/utils/date'
+import BlogListCard from './BlogListCard.astro'
+
+type Props = {
+  count?: number
+}
 
 const blogList = await getBlogList()
+
+const { count } = Astro.props
+if (count) blogList.splice(count)
 ---
 
 <section>
-  {
-    blogList.map((post) => {
-      const url = `/blogs/${post.slug}`
-
-      return (
-        <div style='margin: 15px 0;'>
-          <a href={url}>
-            <h6 style='color: macacypurple; margin: 0;'>{post.data.title}</h6>
-          </a>
-          <p style='margin: 0;'>{readableDate(post.data.publishedDate, 'dd-LL-yyyy')}</p>
-        </div>
-      )
-    })
-  }
+  <ul>
+    {blogList.map((post) => <BlogListCard {post} />)}
+  </ul>
 </section>
