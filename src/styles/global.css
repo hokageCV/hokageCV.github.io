@@ -2,6 +2,7 @@
   --gradient-1: #ecc9fd;
   --gradient-2: #f3dcfe;
   --gradient-3: #f9effe;
+  --accent: #d96f5a;
 
   --baseTextDark: #2e3440;
   --baseTextLight: #f3d3ff;
@@ -19,6 +20,10 @@
 
   --btnBG: var(--social-box-shadow-color);
   --btnBorder: #733529;
+
+  --dark-hs: 211, 21%;
+  --inline-code-background: hsl(var(--dark-hs), 90%);
+  --inline-code-color: hsl(var(--dark-hs), 30%);
 
   /* https://www.joshwcomeau.com/shadow-palette/ */
   --shadow-color: 14deg 30% 30%;
@@ -49,6 +54,11 @@
   --space-xl: clamp(3.375rem, 3.2446rem + 0.6522vi, 3.75rem);
   --space-2xl: clamp(4.5rem, 4.3261rem + 0.8696vi, 5rem);
   --space-3xl: clamp(6.75rem, 6.4891rem + 1.3043vi, 7.5rem);
+
+  --stroke-thickness: 0.125em;
+
+  /* Font  */
+  --mono-font: "Cascadia Code", "Courier New", Courier, monospace;
 }
 
 html,
@@ -62,9 +72,184 @@ body {
   background: linear-gradient(var(--gradient-1), var(--gradient-2), var(--gradient-3));
   background-attachment: fixed;
   scroll-behavior: smooth;
-  margin: 0;
 
-  font-family: var(--body-font);
   font-size: var(--step-0);
   color: var(--baseTextDark);
+
+  font-family: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+  font-weight: normal;
+}
+
+/* ============================= */
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0 auto;
+}
+
+/* ============================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 0.9;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-4);
+}
+
+h2 {
+  font-size: var(--step-3);
+}
+
+h3 {
+  font-size: var(--step-2);
+}
+
+h4 {
+  font-size: var(--step-1);
+}
+
+hr {
+  background: var(--baseTextDark);
+  border: none;
+  height: var(--stroke-thickness);
+  margin-block: var(--space-l) !important;
+}
+
+a {
+  color: var(--highlightText);
+  text-decoration-color: var(--baseTextDark);
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: var(--stroke-thickness);
+  text-underline-offset: var(--stroke-thickness);
+  transition: all 100ms ease-in-out;
+}
+
+a[aria-current="page"],
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+:where(.focusable\(\)):focus-within,
+:where(:focus) {
+  outline: var(--stroke-thickness) solid var(--accent);
+  outline-offset: var(--stroke-thickness);
+}
+
+code,
+.astro-code {
+  font-family: var(--mono-font);
+  font-size: 1rem;
+}
+
+.astro-code {
+  padding: 1rem;
+}
+
+a code {
+  color: inherit !important;
+}
+
+pre,
+code,
+kbd {
+  font-family: var(--mono-font);
+  font-size: 0.875em;
+}
+
+pre:not([class]),
+:not(pre)>code:not([class]) {
+  background: var(--inline-code-background);
+  color: var(--inline-code-color);
+  padding: 0.25ch 0.5ch;
+}
+
+pre:not([class]) {
+  overflow-x: auto;
+}
+
+kbd {
+  border: 1px solid var(--accent);
+  border-bottom-width: calc(--stroke-thickness);
+  border-radius: calc(var(--stroke-thickness) * 2);
+  color: var(--baseTextLight);
+  padding: 0.25ch 0.5ch;
+}
+
+blockquote {
+  border-left: var(--stroke-thickness) solid currentColor;
+  color: var(--baseTextLight);
+  margin-left: 0;
+  margin-right: 0;
+  padding: var(--space-xs) var(--space-m);
+}
+
+blockquote p {
+  font-style: italic;
+  line-height: 1.25;
+  margin: 0;
+}
+
+/* Necessary because blockquote content is already italic  */
+blockquote :is(i, em) {
+  font-style: normal;
+  text-decoration: underline;
+}
+
+li ol,
+li ul {
+  margin-bottom: var(--space-2xs);
+  margin-top: var(--space-2xs);
+}
+
+mark {
+  background-color: var(--navBG);
+  color: var(--baseTextDark)
+}
+
+/* ============================= */
+
+/* divs with article as direct child, for the markdown generated pages */
+div:has(> article) {
+  max-width: 60%;
+  line-height: 1.25;
+
+  small {
+    font-size: var(--step--1)
+  }
+
+  h1 {
+    font-size: var(--step-5);
+    margin-bottom: var(--space-l);
+  }
+
+  p{
+    margin-block-end: 1em;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 95%;
+  }
+}
+
+article {
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 25px 0 5px;
+  }
 }

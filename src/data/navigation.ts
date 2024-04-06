@@ -1,6 +1,6 @@
 const LINKS = {
   blog: {
-    label: 'Blog',
+    label: 'Blogs',
     url: '/blogs',
   },
   projects: {
