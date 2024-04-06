@@ -1,0 +1,70 @@
+:root {
+  --gradient-1: #ecc9fd;
+  --gradient-2: #f3dcfe;
+  --gradient-3: #f9effe;
+
+  --baseTextDark: #2e3440;
+  --baseTextLight: #f3d3ff;
+  --highlightText: #3295a9;
+
+  --navBG: #c95f4a;
+  --navBGHover: #d96f5a;
+  --navText: var(--baseTextLight);
+
+  --socialsBG: var(--navBG);
+  --social-box-shadow-color: #893b2b;
+
+  --cardBG: var(--navBG);
+  --cardText: var(--baseTextLight);
+
+  --btnBG: var(--social-box-shadow-color);
+  --btnBorder: #733529;
+
+  /* https://www.joshwcomeau.com/shadow-palette/ */
+  --shadow-color: 14deg 30% 30%;
+  --project-card-shadow: 0.5px 0.5px 0.8px hsl(var(--shadow-color) / 0.09),
+    1.9px 1.8px 3.1px -0.7px hsl(var(--shadow-color) / 0.1),
+    4.5px 4.3px 7.4px -1.4px hsl(var(--shadow-color) / 0.11),
+    10.5px 10.1px 17.4px -2px hsl(var(--shadow-color) / 0.12);
+
+
+  /* Font Size */
+  /* @link https://utopia.fyi/type/calculator?c=320,18,1.2,1240,20,1.2,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+  --step--2: clamp(0.7813rem, 0.7511rem + 0.151vi, 0.8681rem);
+  --step--1: clamp(0.9375rem, 0.9013rem + 0.1812vi, 1.0417rem);
+  --step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);
+  --step-1: clamp(1.35rem, 1.2978rem + 0.2609vi, 1.5rem);
+  --step-2: clamp(1.62rem, 1.5574rem + 0.313vi, 1.8rem);
+  --step-3: clamp(1.944rem, 1.8689rem + 0.3757vi, 2.16rem);
+  --step-4: clamp(2.3328rem, 2.2426rem + 0.4508vi, 2.592rem);
+  --step-5: clamp(2.7994rem, 2.6912rem + 0.5409vi, 3.1104rem);
+
+  /* Spacing */
+  /* @link https://utopia.fyi/space/calculator?c=320,18,1.2,1240,20,1.25,5,2,&s=0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,NaN */
+  --space-2xs: clamp(0.3125rem, 0.3125rem + 0vi, 0.3125rem);
+  --space-xs: clamp(0.5625rem, 0.5408rem + 0.1087vi, 0.625rem);
+  --space-s: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);
+  --space-m: clamp(1.6875rem, 1.6223rem + 0.3261vi, 1.875rem);
+  --space-l: clamp(2.25rem, 2.163rem + 0.4348vi, 2.5rem);
+  --space-xl: clamp(3.375rem, 3.2446rem + 0.6522vi, 3.75rem);
+  --space-2xl: clamp(4.5rem, 4.3261rem + 0.8696vi, 5rem);
+  --space-3xl: clamp(6.75rem, 6.4891rem + 1.3043vi, 7.5rem);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: linear-gradient(var(--gradient-1), var(--gradient-2), var(--gradient-3));
+  background-attachment: fixed;
+  scroll-behavior: smooth;
+  margin: 0;
+
+  font-family: var(--body-font);
+  font-size: var(--step-0);
+  color: var(--baseTextDark);
+}

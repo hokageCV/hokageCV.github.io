@@ -10,3 +10,36 @@ import navigation from '@/data/navigation'
     {navigation.header.map((item) => <a href={item.url}>{item.label}</a>)}
   </nav>
 </header>
+
+<style>
+  header {
+    padding: 10px;
+    color: var(--navText);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .nav-header {
+      font-size: var(--step-2);
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>
