@@ -1,14 +1,16 @@
 ---
 import { getBlogList } from '@/utils/collection'
 import BlogListCard from './BlogListCard.astro'
+import { CollectionEntry } from 'astro:content'
 
 type Props = {
   count?: number
+  blogPostList?: CollectionEntry<'blogs'>[]
 }
 
-const blogList = await getBlogList()
+const { count, blogPostList } = Astro.props
+const blogList = blogPostList ||  await getBlogList()
 
-const { count } = Astro.props
 if (count) blogList.splice(count)
 ---
 

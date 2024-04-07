@@ -1,0 +1,30 @@
+---
+import BlogList from '@/components/BlogList.astro'
+import Base from '@/layouts/Base.astro'
+import { getBlogList, getTags, slugify } from '@/utils/collection'
+
+export async function getStaticPaths() {
+  const blogPostList = await getBlogList()
+  const tags = getTags(blogPostList)
+
+  return Object.keys(tags).map((tag) => {
+    return {
+      params: {
+        tag: slugify(tag),
+      },
+      props: {
+        tag,
+        blogPostList: blogPostList.filter((post) => post.data.tags?.includes(tag)),
+      },
+    }
+  })
+}
+
+const { tag, blogPostList } = Astro.props
+const title = `Tagged "${tag}"`
+---
+
+<Base title={title}>
+  <h1>{title}</h1>
+  <BlogList {blogPostList} />
+</Base>

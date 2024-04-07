@@ -1,5 +1,6 @@
 ---
 import { readableDate } from '@/utils/date'
+import BlogPostTags from './BlogPostTags.astro'
 
 const { data, render } = Astro.props
 const { Content } = await render()
@@ -11,4 +12,16 @@ const { Content } = await render()
   <article>
     <Content />
   </article>
+  <hr />
+  {data.tags && <BlogPostTags tags={data.tags} />}
 </div>
+
+<style>
+  small {
+    opacity: 0.6;
+  }
+  hr {
+    margin-bottom: var(--space-xs);
+    opacity: 0.5;
+  }
+</style>

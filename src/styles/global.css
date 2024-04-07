@@ -65,6 +65,7 @@
   --space-3xl: clamp(6.75rem, 6.4891rem + 1.3043vi, 7.5rem);
 
   --stroke-thickness: 0.125em;
+  --stroke-thin: 0.125px;
 
   /* Font  */
   --mono-font: "Cascadia Code", "Courier New", Courier, monospace;
@@ -137,10 +138,10 @@ h4 {
 }
 
 hr {
-  background: var(--baseTextDark);
+  background: var(--accent);
   border: none;
-  height: var(--stroke-thickness);
-  margin-block: var(--space-l) !important;
+  height: var(--stroke-thin);
+  margin-block: var(--space-l);
 }
 
 a {

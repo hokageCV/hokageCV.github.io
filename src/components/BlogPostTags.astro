@@ -1,0 +1,29 @@
+---
+type Props = {
+  tags: string[]
+}
+
+const { tags } = Astro.props
+---
+
+<section>
+  {
+    tags.sort().map((tag) => (
+      <small>
+        <a href={`/tags/${tag}`}>#{tag}</a>
+      </small>
+    ))
+  }
+</section>
+
+<style>
+  section {
+    margin-bottom: var(--space-s);
+    small {
+      a {
+        text-decoration-skip-ink: none;
+        text-decoration-color: inherit;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,19 @@
+---
+import TagList from '@/components/TagList.astro'
+import Base from '@/layouts/Base.astro'
+import { getBlogList, getTags } from '@/utils/collection'
+
+const blogPostList = await getBlogList()
+const tags = getTags(blogPostList)
+---
+
+<Base>
+  <h1>Tags</h1>
+  <TagList tags={tags} />
+</Base>
+
+<style>
+  h1{
+    margin-block-end: var(--space-xs);
+  }
+</style>
