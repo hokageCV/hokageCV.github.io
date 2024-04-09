@@ -1,53 +1,27 @@
 :root {
-  --gradient-1: #ecc9fd;
-  --gradient-2: #f3dcfe;
-  --gradient-3: #f9effe;
-  --accent: #d96f5a;
-
-  --baseTextDark: #2e3440;
-  --baseTextLight: #f3d3ff;
-  --highlightText: #3295a9;
-
-  --navBG: #c95f4a;
-  --navBGHover: #d96f5a;
-  --navText: var(--baseTextLight);
-
-  --socialsBG: var(--navBG);
-  --social-box-shadow-color: #893b2b;
-
-  --cardBG: var(--navBG);
-  --cardText: var(--baseTextLight);
-
-  --btnBG: var(--social-box-shadow-color);
-  --btnBorder: #733529;
-
-  --dark-hs: 211, 21%;
-  --inline-code-background: hsl(var(--dark-hs), 90%);
-  --inline-code-color: hsl(var(--dark-hs), 30%);
-
-  /* https://www.joshwcomeau.com/shadow-palette/ */
-  --shadow-color: 14deg 30% 30%;
-  --project-card-shadow: 0.5px 0.5px 0.8px hsl(var(--shadow-color) / 0.09),
-    1.9px 1.8px 3.1px -0.7px hsl(var(--shadow-color) / 0.1),
-    4.5px 4.3px 7.4px -1.4px hsl(var(--shadow-color) / 0.11),
-    10.5px 10.1px 17.4px -2px hsl(var(--shadow-color) / 0.12);
-
-
   /* Font Size */
   /* @link https://utopia.fyi/type/calculator?c=320,18,1.2,1240,20,1.2,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+    /* Step -2: 12.5px → 13.8889px */
   --step--2: clamp(0.7813rem, 0.7511rem + 0.151vi, 0.8681rem);
+  /* Step -1: 15px → 16.6667px */
   --step--1: clamp(0.9375rem, 0.9013rem + 0.1812vi, 1.0417rem);
+  /* Step 0: 18px → 20px */
   --step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);
+  /* Step 1: 21.6px → 24px */
   --step-1: clamp(1.35rem, 1.2978rem + 0.2609vi, 1.5rem);
+  /* Step 2: 25.92px → 28.8px */
   --step-2: clamp(1.62rem, 1.5574rem + 0.313vi, 1.8rem);
+  /* Step 3: 31.104px → 34.56px */
   --step-3: clamp(1.944rem, 1.8689rem + 0.3757vi, 2.16rem);
+  /* Step 4: 37.3248px → 41.472px */
   --step-4: clamp(2.3328rem, 2.2426rem + 0.4508vi, 2.592rem);
+  /* Step 5: 44.7898px → 49.7664px */
   --step-5: clamp(2.7994rem, 2.6912rem + 0.5409vi, 3.1104rem);
 
   /* Spacing */
   /* @link https://utopia.fyi/space/calculator?c=320,18,1.2,1240,20,1.25,5,2,&s=0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,NaN */
 
-    /* Space 2xs: 5px → 5px */
+  /* Space 2xs: 5px → 5px */
   --space-2xs: clamp(0.3125rem, 0.3125rem + 0vi, 0.3125rem);
   /* Space xs: 9px → 10px */
   --space-xs: clamp(0.5625rem, 0.5408rem + 0.1087vi, 0.625rem);
@@ -69,6 +43,8 @@
 
   /* Font  */
   --mono-font: "Cascadia Code", "Courier New", Courier, monospace;
+  --handwriting-font: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+  --base-font: var(--handwriting-font);
 
   /* Breakpoints */
   --screen-xs: 0;
@@ -76,7 +52,53 @@
   --screen-md: 768px;
   --screen-lg: 992px;
   --screen-xl: 1200px;
+
+  /* Colors */
+
+  --dark-hs: 211, 21%;
+  --inline-code-background: hsl(var(--dark-hs), 90%);
+  --inline-code-color: hsl(var(--dark-hs), 30%);
+
+  /* https://www.joshwcomeau.com/shadow-palette/ */
+  --shadow-color: 14deg 30% 30%;
+  --project-card-shadow: 0.5px 0.5px 0.8px hsl(var(--shadow-color) / 0.09),
+    1.9px 1.8px 3.1px -0.7px hsl(var(--shadow-color) / 0.1),
+    4.5px 4.3px 7.4px -1.4px hsl(var(--shadow-color) / 0.11),
+    10.5px 10.1px 17.4px -2px hsl(var(--shadow-color) / 0.12);
 }
+
+html[data-theme='dark'] {
+  --background-gradient-1:#18202a;
+  --background-gradient-2: #1f2937;
+  --background-gradient-3: #2d3c50;
+
+  --base-text: #c5d0de;
+  --accent:#2b7fec;
+  --secondary-color: #3a4758;
+
+  --card-text:#c5d0de;
+  --card-background: var(--secondary-color);
+
+  --inline-code-background: hsl(var(--dark-hs), 90%);
+  --inline-code-color: hsl(var(--dark-hs), 30%);
+}
+
+html[data-theme='light'] {
+  --background-gradient-1: #ecc9fd;
+  --background-gradient-2: #f3dcfe;
+  --background-gradient-3: #f9effe;
+
+  --base-Text: #2e3440;
+  --accent: #d96f5a;
+
+  --card-background: #10313e;
+  --card-text: #469280;
+
+  --inline-code-background: hsl(var(--dark-hs), 90%);
+  --inline-code-color: hsl(var(--dark-hs), 30%);
+}
+
+/* ===================================== */
 
 html,
 body {
@@ -86,14 +108,14 @@ body {
 }
 
 body {
-  background: linear-gradient(var(--gradient-1), var(--gradient-2), var(--gradient-3));
+  background: linear-gradient(var(--background-gradient-1), var(--background-gradient-2), var(--background-gradient-3));
   background-attachment: fixed;
   scroll-behavior: smooth;
 
   font-size: var(--step-0);
-  color: var(--baseTextDark);
+  color: var(--base-text);
 
-  font-family: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+  font-family: var(--base-font);
   font-weight: normal;
 }
 
@@ -145,8 +167,8 @@ hr {
 }
 
 a {
-  color: var(--highlightText);
-  text-decoration-color: var(--baseTextDark);
+  color: var(--base-text);
+  text-decoration-color: var(--accent);
   text-decoration-skip-ink: auto;
   text-decoration-thickness: var(--stroke-thickness);
   text-underline-offset: var(--stroke-thickness);
@@ -174,28 +196,22 @@ kbd {
   font-size: 0.875em;
 }
 
-pre:not([class]),
-:not(pre)>code:not([class]) {
-  background: var(--inline-code-background);
-  color: var(--inline-code-color);
+:not(pre)>code{
+  background: var(--secondary-color);
   padding: 0.25ch 0.5ch;
-}
-
-pre:not([class]) {
-  overflow-x: auto;
 }
 
 kbd {
   border: 1px solid var(--accent);
   border-bottom-width: calc(--stroke-thickness);
   border-radius: calc(var(--stroke-thickness) * 2);
-  color: var(--baseTextLight);
+  color: var(--base-text);
   padding: 0.25ch 0.5ch;
 }
 
 blockquote {
   border-left: var(--stroke-thickness) solid currentColor;
-  color: var(--baseTextLight);
+  color: var(--base-text);
   margin-left: 0;
   margin-right: 0;
   padding: var(--space-xs) var(--space-m);
@@ -217,11 +233,6 @@ li ol,
 li ul {
   margin-bottom: var(--space-2xs);
   margin-top: var(--space-2xs);
-}
-
-mark {
-  background-color: var(--navBG);
-  color: var(--baseTextDark)
 }
 
 /* ============================= */
@@ -250,12 +261,11 @@ div:has(> article) {
 }
 
 article {
-
   h2,
   h3,
   h4,
   h5,
   h6 {
-    margin: 25px 0 5px;
+    margin: 25px 0 10px;
   }
 }
