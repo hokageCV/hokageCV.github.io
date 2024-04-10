@@ -4,10 +4,10 @@ slug: deploy-in-railway
 publishedDate: 2023-04-25
 description: steps to follow to deploy in railway.app
 draft: false
-tags: ["deploy", "backend"]
+tags: ['deploy', 'backend']
 ---
 
-To share our app with others, we need to deploy it. There are many ways to deploy our app, but one of the easiest services I hasdfsdve found is [Railway](https://railway.app/).
+To share our app with others, we need to deploy it. There are many ways to deploy our app, but one of the easiest services I have found is [Railway](https://railway.app/).
 
 ### Here is a quick guide to deploy your app in Railway.
 - Go to dashboard

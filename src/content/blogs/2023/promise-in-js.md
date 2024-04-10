@@ -4,7 +4,7 @@ slug: promise-in-js
 publishedDate: 2023-03-02
 description: explanation of promise in javascript in simple easy to understand words
 draft: false
-tags: ["promise", "javascript"]
+tags: ['promise', 'javascript']
 ---
 
 ## What is promise?
@@ -32,11 +32,11 @@ console.log("hum first, hum first \n"); // this will appear first in console
 
 ## **Async/Await**
 
-`Async`
+### Async
 
 It tells javascript that this is an asynchronous function. An async function always returns a promise.
 
-`Await`
+### Await
 
 It tells javascript to wait for an asynchronous action to finish before continuing the function. With this we can write asynchronous code in a synchronous manner. It is used instead of `.then()`. It works only inside async function.
 
@@ -46,7 +46,7 @@ eg
 const getCurrentTabData = async () => {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
     const requiredData = { title: tabs[0].title, url: tabs[0].url };
-    
+
     return requiredData;
 };
 
@@ -56,10 +56,10 @@ async function someFunction(){
 }
 ```
 
-## Summarizing this with an analogy. 
-Suppose we go to a self-service restaurant and order Cheese Kulcha [*we invoked an asynchronous function*]. 
-- Then the receptionist will give us a token [*we got a promise in return*]. 
+## Summarizing this with an analogy.
+Suppose we go to a self-service restaurant and order Cheese Kulcha [*we invoked an asynchronous function*].
+- Then the receptionist will give us a token [*we got a promise in return*].
 - Now either we do some other work until our turn arrives [*callback*] or wait [*async/await*].
 - When our turn comes and we go to take the order, these two possibilities may occur
-  - We get our order [*promise is fulfilled / resolved, we get the value which we expected*] 
+  - We get our order [*promise is fulfilled / resolved, we get the value which we expected*]
   - The receptionist may say that due to some reasons order could not be prepared (gas khatm ho gaya hoga) [*promise is rejected, and we got a reason of error*]
