@@ -3,9 +3,6 @@ import navigation from '@/data/navigation'
 ---
 
 <header>
-  <div class='nav-header'>
-    <a href='/'>Chaitanya Varu</a>
-  </div>
   <nav>
     {navigation.header.map((item) => <a href={item.url}>{item.label}</a>)}
   </nav>
@@ -38,11 +35,13 @@ import navigation from '@/data/navigation'
       display: flex;
       justify-content: center;
       gap: 15px;
+      margin-left: auto;
       margin-right: 15px;
+      flex-wrap: wrap;
 
       a:hover {
-        text-decoration-color: var(--accent);
         text-decoration: underline;
+        text-decoration-color: var(--accent);
       }
     }
   }

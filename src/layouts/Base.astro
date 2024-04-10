@@ -1,10 +1,12 @@
 ---
 import BaseHeader from '@/components/BaseHeader.astro'
 import Navbar from '@/components/Navbar.astro'
+
+const {title, description} = Astro.props
 ---
 
 <html lang='en' data-theme='dark'>
-  <BaseHeader />
+  <BaseHeader {title} {description}/>
   <body>
     <Navbar />
     <main>

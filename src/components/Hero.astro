@@ -1,0 +1,33 @@
+---
+import BlogList from './BlogList.astro'
+---
+
+<div>
+  <section>
+    <h2>Chaitanya Varu</h2>
+    <p>Backend Developer from India</p>
+  </section>
+  <section>
+    <h3>Recent Posts</h3>
+    <BlogList count={5} />
+  </section>
+</div>
+
+<style>
+  div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      h3 {
+        margin-block-start: var(--space-l);
+        text-align: center;
+      }
+    }
+  }
+</style>
