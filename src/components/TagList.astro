@@ -9,7 +9,7 @@ const { tags } = Astro.props
 const sortedKeys = Object.keys(tags).sort()
 ---
 
-<nav>
+<div>
   {
     sortedKeys.map((tag) => (
       <a href={`/tags/${tag}`}>
@@ -17,21 +17,17 @@ const sortedKeys = Object.keys(tags).sort()
       </a>
     ))
   }
-</nav>
+</div>
 
 <style>
-  nav {
+  div {
     display: inline-flex;
     flex-wrap: wrap;
     gap: var(--space-xs);
 
-    a {
-      text-decoration: underline;
-
-      span {
-        font-size: var(--step--1);
-        text-decoration-skip-ink: none;
-      }
+    span {
+      font-size: var(--step--1);
+      text-decoration-skip-ink: none;
     }
 
     max-width: 60%;

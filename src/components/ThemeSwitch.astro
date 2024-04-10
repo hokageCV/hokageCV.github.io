@@ -1,0 +1,16 @@
+<select>
+  <option value='dark'>Dark</option>
+  <option value='light'>Light</option>
+</select>
+
+<script>
+  const select = document.querySelector('select')
+  const htmlElement = document.documentElement
+
+  if (select && htmlElement) {
+    select.addEventListener('change', function () {
+      const selectedTheme = select.value
+      htmlElement.setAttribute('data-theme', selectedTheme)
+    })
+  }
+</script>

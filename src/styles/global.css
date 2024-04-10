@@ -1,7 +1,7 @@
 :root {
   /* Font Size */
   /* @link https://utopia.fyi/type/calculator?c=320,18,1.2,1240,20,1.2,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
-    /* Step -2: 12.5px → 13.8889px */
+  /* Step -2: 12.5px → 13.8889px */
   --step--2: clamp(0.7813rem, 0.7511rem + 0.151vi, 0.8681rem);
   /* Step -1: 15px → 16.6667px */
   --step--1: clamp(0.9375rem, 0.9013rem + 0.1812vi, 1.0417rem);
@@ -68,15 +68,15 @@
 }
 
 html[data-theme='dark'] {
-  --background-gradient-1:#18202a;
+  --background-gradient-1: #18202a;
   --background-gradient-2: #1f2937;
   --background-gradient-3: #2d3c50;
 
   --base-text: #c5d0de;
-  --accent:#2b7fec;
+  --accent: #2b7fec;
   --secondary-color: #3a4758;
 
-  --card-text:#c5d0de;
+  --card-text: #c5d0de;
   --card-background: var(--secondary-color);
 
   --inline-code-background: hsl(var(--dark-hs), 90%);
@@ -88,11 +88,11 @@ html[data-theme='light'] {
   --background-gradient-2: #f3dcfe;
   --background-gradient-3: #f9effe;
 
-  --base-Text: #2e3440;
+  --base-Text: #161019;
   --accent: #d96f5a;
 
-  --card-background: #10313e;
-  --card-text: #469280;
+  --card-background: #c95f4a;
+  --card-text: #f3d3ff;
 
   --inline-code-background: hsl(var(--dark-hs), 90%);
   --inline-code-color: hsl(var(--dark-hs), 30%);
@@ -197,7 +197,7 @@ kbd {
   font-size: 0.875em;
 }
 
-:not(pre)>code{
+:not(pre)>code {
   background: var(--secondary-color);
   padding: 0.25ch 0.5ch;
 }
@@ -262,6 +262,7 @@ div:has(> article) {
 }
 
 article {
+
   h2,
   h3,
   h4,
