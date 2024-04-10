@@ -5,6 +5,8 @@ import _slugify from 'slugify'
 export async function getBlogList() {
   const blogList = await getCollection('blogs')
   return blogList
+    .filter(post => post.data.draft !== true)
+    .sort((a, b) => new Date(b.data.publishedDate).valueOf() - new Date(a.data.publishedDate).valueOf())
 }
 
 export async function getProjectList() {
