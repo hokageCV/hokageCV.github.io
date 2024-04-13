@@ -1,0 +1,99 @@
+<section>
+  <form id='contact-form'>
+    <div class='form-data'>
+      <label for='name'>Name</label>
+      <input type='text' id='name' name='name' required />
+    </div>
+    <div class='form-data'>
+      <label for='email'>Email</label>
+      <input type='email' id='email' name='email' required />
+    </div>
+    <div class='form-data'>
+      <label for='message'>Message</label>
+      <textarea id='message' name='message' required rows='5' cols='23'></textarea>
+    </div>
+    <button type='submit'>Submit</button>
+  </form>
+  <div id='response-message' style='display: none'></div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const contactForm = document.getElementById('contact-form') as HTMLFormElement
+    const responseMessage = document.getElementById('response-message') as HTMLDivElement
+
+    contactForm.addEventListener('submit', async function (e: SubmitEvent) {
+      e.preventDefault()
+      const formData = new FormData(contactForm)
+      const endpoint = 'https://contact-form-nextjs-chi.vercel.app/api/contact-form';
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: JSON.stringify(Object.fromEntries(formData)),
+          headers: { 'Content-Type': 'application/json' },
+        })
+
+        if (response.ok) responseMessage.innerHTML = '&#x2714; Message Sent'
+        else responseMessage.innerHTML = '&#x2716; Error on sending message'
+      } catch (error) {
+        responseMessage.innerHTML = `&#x2716; ${error}`
+      }
+
+      contactForm.reset()
+      responseMessage.style.display = 'block'
+
+      setTimeout(() => (responseMessage.style.display = 'none'), 5000)
+    })
+  })
+</script>
+
+<style>
+  section {
+    padding: var(--space-s);
+    margin: var(--space-m);
+
+    #contact-form {
+      .form-data {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        margin: var(--space-xs) 0;
+      }
+
+      label {
+        font-size: var(--step-1);
+      }
+
+      input,
+      textarea {
+        font-family: var(--handwriting-font);
+        font-size: var(--step--1);
+        padding: var(--space-xs);
+        border: 1px solid var(--accent);
+        border-radius: var(--space-xs);
+      }
+      textarea{
+        max-width: var(--space-6xl);
+      }
+
+      button {
+        font-size: var(--step--0);
+        padding:var(--space-xs) var(--space-s);
+        border-radius: var(--space-xs);
+        margin-bottom: var(--space-m);
+        cursor: pointer;
+        background-color: var(--accent);
+      }
+      button:hover {
+        background-color: var(--secondary-color);
+        color: var(--card-text);
+      }
+    }
+
+    #response-message {
+      font-size: var(--step--1);
+    }
+  }
+</style>

@@ -37,6 +37,16 @@
   --space-2xl: clamp(4.5rem, 4.3261rem + 0.8696vi, 5rem);
   /* Space 3xl: 108px → 120px */
   --space-3xl: clamp(6.75rem, 6.4891rem + 1.3043vi, 7.5rem);
+  /* Space 4xl: 144px → 160px */
+  --space-4xl: clamp(9rem, 8.6523rem + 1.7391vi, 10rem);
+  /* Space 5xl: 216px → 240px */
+  --space-5xl: clamp(13.5rem, 12.9784rem + 2.6087vi, 15rem);
+  /* Space 6xl: 324px → 360px */
+  --space-6xl: clamp(20.25rem, 19.4677rem + 3.9131vi, 22.5rem);
+  /* Space 7xl: 432px → 480px */
+  --space-7xl: clamp(27rem, 25.9568rem + 5.2174vi, 30rem);
+  /* Space 8xl: 648px → 720px */
+  --space-8xl: clamp(40.5rem, 38.9355rem + 7.8261vi, 45rem);
 
   --stroke-thickness: 0.125em;
   --stroke-thin: 0.125px;
@@ -70,7 +80,8 @@
 html[data-theme='dark'] {
   --background-gradient-1: #18202a;
   --background-gradient-2: #1f2937;
-  --background-gradient-3: #2d3c50;
+  --background-gradient-3: #263244;
+  --base-background: linear-gradient(var(--background-gradient-1), var(--background-gradient-2), var(--background-gradient-3));
 
   --base-text: #c5d0de;
   --accent: #2b7fec;
@@ -87,6 +98,7 @@ html[data-theme='light'] {
   --background-gradient-1: #ecc9fd;
   --background-gradient-2: #f3dcfe;
   --background-gradient-3: #f9effe;
+  --base-background: linear-gradient(var(--background-gradient-1), var(--background-gradient-2), var(--background-gradient-3));
 
   --base-Text: #161019;
   --accent: #d96f5a;
@@ -109,7 +121,7 @@ body {
 }
 
 body {
-  background: linear-gradient(var(--background-gradient-1), var(--background-gradient-2), var(--background-gradient-3));
+  background: var(--base-background);
   background-attachment: fixed;
   scroll-behavior: smooth;
 
