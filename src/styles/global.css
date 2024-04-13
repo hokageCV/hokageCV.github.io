@@ -54,7 +54,8 @@
   /* Font  */
   --mono-font: "Cascadia Code", "Courier New", Courier, monospace;
   --handwriting-font: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
-  --base-font: var(--handwriting-font);
+  --transitional-font: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+  --base-font: var(--transitional-font);
 
   /* Breakpoints */
   --screen-xs: 0;
@@ -274,12 +275,15 @@ div:has(> article) {
 }
 
 article {
-
   h2,
   h3,
   h4,
   h5,
   h6 {
-    margin: 25px 0 10px;
+    margin: var(--space-m) 0 var(--space-xs);
+  }
+
+  a:hover {
+    color: var(--accent);
   }
 }
