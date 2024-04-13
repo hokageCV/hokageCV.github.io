@@ -2,7 +2,7 @@
 title: My journey of learning Vim Motions
 slug: my-journey-of-learning-vim-motions
 publishedDate: 2023-12-10
-updatedDate: 2024-01-05
+updatedDate: 2024-04-13
 description: My journey of learning vim motions
 draft: false
 tags: ['vim']
@@ -49,6 +49,9 @@ Now that I am using it for two weeks for full time, editing text has become simp
 Stil, more practice is required to develop the muscle memory. And I might also change the extension to 'Vim' instead of 'amVim' so that I could add my own key bindings.
 
 Update: I did moved to 'Vim' extension. And because of all the custom settings, I am finding it much better.
+
+### More readings
+- http://www.viemu.com/a-why-vi-vim.html (a very interesting read. I am using vim motions since past 6 months, but still found some new ones here or the logic behind why a key is mapped with a particular motion)
 
 [vim-in-vscode]: https://www.barbarianmeetscoding.com/boost-your-coding-fu-with-vscode-and-vim/table-of-contents
 [vim-adventures]: https://vim-adventures.com
