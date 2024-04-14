@@ -8,25 +8,28 @@ import BlogList from './BlogList.astro'
     <p>Backend Developer from India</p>
   </section>
   <section>
-    <h3>Recent Posts</h3>
+    <h2>Recent Posts</h2>
     <BlogList count={5} />
   </section>
 </div>
 
 <style>
-  div{
+  div {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    h2 {
+      color: var(--page-heading-color);
+    }
 
     section {
       display: flex;
       flex-direction: column;
       align-items: center;
 
-      h3 {
+      &:nth-child(2) > h2 {
         margin-block-start: var(--space-l);
-        text-align: center;
       }
     }
   }

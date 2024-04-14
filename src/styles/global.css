@@ -79,15 +79,12 @@
 }
 
 html[data-theme='dark'] {
-  --background-gradient-1: #18202a;
-  --background-gradient-2: #1f2937;
-  --background-gradient-3: #263244;
-  --base-background: linear-gradient(var(--background-gradient-1), var(--background-gradient-2), var(--background-gradient-3));
-
+  --base-background: #0d2134;
   --base-text: #c5d0de;
-  --accent: #2b7fec;
-  --secondary-color: #3a4758;
+  --accent: #39a3ed;
+  --secondary-color: #253d56;
 
+  --page-heading-color: #f4f8fc;
   --card-text: #c5d0de;
   --card-background: var(--secondary-color);
 
@@ -159,6 +156,7 @@ h6 {
 
 h1 {
   font-size: var(--step-4);
+  color: var(--page-heading-color);
 }
 
 h2 {
