@@ -1,0 +1,48 @@
+---
+import { processedSimilarPosts } from '@/utils/collection'
+
+const { tags, title } = Astro.props.data
+const otherPosts = await processedSimilarPosts(tags, title)
+---
+
+<div>
+  <h2>Other Posts you may like</h2>
+  {
+    otherPosts &&
+      otherPosts.map((post) => (
+        <div class='other-post-card'>
+          <a href={`/blogs/${post.data.slug}`} class='other-post-title'>{post.data.title}</a>
+          <div class='tags'>
+            {post.data.tags &&
+              post.data.tags.map((tag: string) => (
+                <small>
+                  <a href={`/tags/${tag}`}>#{tag}</a>
+                </small>
+              ))}
+          </div>
+        </div>
+      ))
+  }
+</div>
+
+<style>
+  h2 {
+    color: var(--page-heading-color);
+  }
+  .other-post-card {
+    margin: 20px 10px;
+
+    .other-post-title {
+      font-size: var(--step-1);
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .tags {
+      font-size: var(--step--3);
+      opacity: 0.6;
+    }
+  }
+</style>
