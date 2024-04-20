@@ -283,6 +283,7 @@ div:has(> article) {
 
 article {
   margin: var(--space-l) 0;
+  text-wrap: pretty;
 
   h2,
   h3,
