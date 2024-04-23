@@ -2,6 +2,7 @@
 import metadata from '@/data/metadata'
 import '@/styles/reset.css'
 import '@/styles/global.css'
+import GoogleAnalytics from './GoogleAnalytics.astro'
 
 const pageTitle = Astro.props.title ?? metadata.title
 const pageDescription = Astro.props.description ?? metadata.description
@@ -21,6 +22,8 @@ const pageDescription = Astro.props.description ?? metadata.description
   <meta property='og:image' content={metadata['og-image']} />
   <meta property='og:url' content={metadata.url} />
   <meta property='og:description' content={pageDescription} />
+
+  <GoogleAnalytics />
 
   <title>{pageTitle}</title>
 </head>
