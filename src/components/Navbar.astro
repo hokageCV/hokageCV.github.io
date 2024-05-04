@@ -1,10 +1,12 @@
 ---
 import navigation from '@/data/navigation'
+import ThemeSwitch from './ThemeSwitch.astro'
 ---
 
 <header>
   <nav>
     {navigation.header.map((item) => <a href={item.url}>{item.label}</a>)}
+    <ThemeSwitch />
   </nav>
 </header>
 

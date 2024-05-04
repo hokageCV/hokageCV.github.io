@@ -1,16 +1,82 @@
-<select>
-  <option value='dark'>Dark</option>
-  <option value='light'>Light</option>
-</select>
+<div id='theme-container'>
+  <button id='itachi'>Theme</button>
+  <fieldset id='theme-options'>
+    <label for='light'>
+      <input type='radio' id='light' name='theme' value='light' />
+      <span> Light </span>
+    </label>
+    <label for='dark'>
+      <input type='radio' id='dark' name='theme' value='dark' />
+      <span> Dark </span>
+    </label>
+  </fieldset>
+</div>
 
 <script>
-  const select = document.querySelector('select')
-  const htmlElement = document.documentElement
+  const htmlElement = document.documentElement as HTMLHtmlElement
+  const themeSwitchBtn = document.getElementById('itachi') as HTMLButtonElement
+  const themeOptions = document.getElementById('theme-options') as HTMLFieldSetElement
+  const radios = themeOptions.querySelectorAll(
+    'input[type="radio"]'
+  ) as NodeListOf<HTMLInputElement>
 
-  if (select && htmlElement) {
-    select.addEventListener('change', function () {
-      const selectedTheme = select.value
-      htmlElement.setAttribute('data-theme', selectedTheme)
+  document.addEventListener('DOMContentLoaded', function () {
+    themeOptions.style.display = 'none'
+    const savedTheme = localStorage.getItem('site-ki-theme') || 'dark'
+    radios.forEach((radio) => (radio.checked = radio.value === savedTheme))
+
+    themeOptions.addEventListener('change', function (e) {
+      const target = e.target as HTMLInputElement
+      htmlElement.setAttribute('data-theme', target.value)
+      localStorage.setItem('site-ki-theme', target.value)
     })
+
+    themeSwitchBtn.addEventListener('click', function () {
+      themeOptions.style.display = themeOptions.style.display === 'none' ? 'flex' : 'none'
+    })
+
+    document.addEventListener('click', hideThemes)
+  })
+
+  function hideThemes(e: Event) {
+    const isThemeOptionsVisible = themeOptions.style.display === 'flex'
+    const clickedOutsideThemeOptions = !themeOptions.contains(e.target as HTMLElement)
+    const didNotclickedOnThemeSwitchBtn = e.target !== themeSwitchBtn
+
+    if (isThemeOptionsVisible && clickedOutsideThemeOptions && didNotclickedOnThemeSwitchBtn) {
+      themeOptions.style.display = 'none'
+    }
   }
 </script>
+
+<style>
+  #theme-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    button {
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      position: relative;
+
+      border: 1px solid var(--accent);
+      border-radius: var(--space-2xs);
+    }
+
+    #theme-options {
+      display: none;
+
+      position: absolute;
+      background-color: var(--secondary-color);
+      color: var(--card-text);
+      min-width: 100px;
+      margin-top: 40px;
+      border-radius: var(--space-2xs);
+      border: 2px solid var(--accent);
+
+      flex-direction: column;
+    }
+  }
+</style>

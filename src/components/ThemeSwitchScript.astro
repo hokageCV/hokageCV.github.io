@@ -1,0 +1,10 @@
+<script>
+  function setThemeFromStorage() {
+    const htmlElement = document.documentElement
+    const savedTheme = localStorage.getItem('site-ki-theme') || 'dark'
+
+    htmlElement.setAttribute('data-theme', savedTheme)
+  }
+
+  setThemeFromStorage()
+</script>

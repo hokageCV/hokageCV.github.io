@@ -107,7 +107,9 @@ html[data-theme='light'] {
 
   --base-Text: #161019;
   --accent: #d96f5a;
+  --secondary-color: #253d56;
 
+  --page-heading-color: teal;
   --card-background: #c95f4a;
   --card-text: #f3d3ff;
 
@@ -260,7 +262,7 @@ li ul {
 
 /* divs with article as direct child, for the markdown generated pages */
 div:has(> article) {
-  max-width: 60%;
+  max-width: 728px;
   line-height: 1.25;
 
   small {
