@@ -3,7 +3,6 @@ import metadata from '@/data/metadata'
 import '@/styles/reset.css'
 import '@/styles/global.css'
 import GoogleAnalytics from './GoogleAnalytics.astro'
-import ThemeSwitchScript from './ThemeSwitchScript.astro'
 
 const pageTitle = Astro.props.title ?? metadata.title
 const pageDescription = Astro.props.description ?? metadata.description
@@ -25,7 +24,6 @@ const pageDescription = Astro.props.description ?? metadata.description
   <meta property='og:description' content={pageDescription} />
 
   <GoogleAnalytics />
-  <ThemeSwitchScript />
 
   <title>{pageTitle}</title>
 </head>
