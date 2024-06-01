@@ -1,7 +1,7 @@
 ---
 title: Git cherry-pick
 slug:  git-cherry-pick
-publishedDate: 2024-04-31
+publishedDate: 2024-05-31
 description: Git cherry-pick bascic usage
 draft: false
 tags: ['git']
