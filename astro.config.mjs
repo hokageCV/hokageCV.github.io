@@ -5,4 +5,13 @@ import partytown from '@astrojs/partytown';
 export default defineConfig({
   site: 'https://hokageCV.github.io',
   integrations: [partytown()],
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: 'solarized-dark',
+        dark: 'solarized-dark',
+      },
+      wrap: true,
+    },
+  },
 });
