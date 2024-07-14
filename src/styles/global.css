@@ -235,8 +235,8 @@ kbd {
 blockquote {
   border-left: var(--stroke-thickness) solid currentColor;
   color: var(--base-text);
-  margin-left: 0;
-  margin-right: 0;
+  margin: 0;
+  margin-block-end: var(--space-s);
   padding: var(--space-xs) var(--space-m);
 }
 
@@ -266,7 +266,7 @@ div:has(> article) {
   line-height: 1.25;
 
   small {
-    font-size: var(--step--1)
+    font-size: var(--step--2)
   }
 
   h1 {
@@ -274,7 +274,7 @@ div:has(> article) {
     margin-block-end: var(--space-xs);
   }
 
-  p {
+  p:not(blockquote p) {
     margin-block-end: 1em;
   }
 
