@@ -1,7 +1,7 @@
 ---
 title: "Share Naam"
 cover:
-    image: https://res.cloudinary.com/dmtacem5p/image/upload/v1694337835/github/share_naam.webp
+    image: '/projects/share-naam.webp'
     alt: 'Share Naam'
 ---
 

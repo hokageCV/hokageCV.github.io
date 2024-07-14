@@ -1,7 +1,7 @@
 ---
 title: "Lakshya"
 cover:
-    image: https://res.cloudinary.com/dmtacem5p/image/upload/v1694337835/github/lakshya.webp
+    image: '/projects/lakshya.webp'
     alt: 'Lakshya'
 ---
 

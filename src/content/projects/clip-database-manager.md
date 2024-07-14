@@ -1,7 +1,7 @@
 ---
 title: "Clip Database Manager"
 cover:
-    image: https://res.cloudinary.com/dmtacem5p/image/upload/v1694337834/github/clip_manager_konark.webp
+    image: '/projects/clip_database_manager.webp'
     alt: 'Clip Database Manager'
 ---
 Browse and search for clips available in the database. All information is stored in a Google Sheet which allows for easy management and updates and are retrieved in real-time.
