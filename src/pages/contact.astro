@@ -5,16 +5,38 @@ import Base from '@/layouts/Base.astro'
 ---
 
 <Base>
-  <ul>
-    {
-      socials.map((social) => (
-        <li>
-          <a href={social.url} target='_blank'>
-            {social.label}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-  <ContactForm />
+  <section>
+    <ul>
+      {
+        socials.map((social) => (
+          <li>
+            <a href={social.url} target='_blank'>
+              {social.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <ContactForm />
+  </section>
 </Base>
+
+<style>
+  section {
+    width: 100%;
+    padding: var(--space-s);
+    margin: var(--space-m);
+    margin-top: 0;
+    padding-top: 0;
+
+    ul {
+      display: flex;
+      list-style: none;
+      gap: var(--space-m);
+    }
+
+    @media (min-width: 768px) {
+      width: 50%;
+    }
+  }
+</style>

@@ -10,7 +10,7 @@
     </div>
     <div class='form-data'>
       <label for='message'>Message</label>
-      <textarea id='message' name='message' required rows='5' cols='23'></textarea>
+      <textarea id='message' name='message' required rows='8' cols='43'></textarea>
     </div>
     <button type='submit'>Submit</button>
   </form>
@@ -50,8 +50,7 @@
 
 <style>
   section {
-    padding: var(--space-s);
-    margin: var(--space-m);
+    margin-block-start: var(--space-l);
 
     #contact-form {
       .form-data {
@@ -84,9 +83,10 @@
         border: 1px solid var(--accent);
         border-radius: var(--space-xs);
         background-color: var(--base-text);
+        width: 70%;
       }
       textarea{
-        max-width: var(--space-6xl);
+        max-width: var(--space-8xl);
       }
 
       button {
