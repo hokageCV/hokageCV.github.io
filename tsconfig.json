@@ -18,7 +18,7 @@
       "@/*": ["src/*"]
     },
     "strict": true,
-    "importsNotUsedAsValues": "preserve",
+    "verbatimModuleSyntax": true,
     "ignoreDeprecations": "5.0",
     "strictNullChecks": true
   }
