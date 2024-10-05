@@ -11,6 +11,11 @@ tags: ['javascript']
 - using select2 a lot
 - a cheat sheet /quick view for it
 
+---
+- add via cdn
+---
+
+
 ## Normal dropdown with search
 
 ```html
@@ -89,3 +94,5 @@ end
 ```js
 $('#orochimaru').on('select2:select', functionToExecute )
 ```
+
+## Pre select an option
