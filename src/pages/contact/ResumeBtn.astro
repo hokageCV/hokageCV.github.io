@@ -1,0 +1,41 @@
+---
+import fileDownload from '@/assets/svg/file-download.svg'
+import { Image } from 'astro:assets'
+import resume from '/files/resume.pdf'
+---
+
+<li class='resume'>
+  <a href={resume} target='_blank' download='01_chaitanya_varu_resume'>
+    <span>Resume</span>
+    <Image class='file-download-icon' src={fileDownload} alt='file download icon' />
+  </a>
+</li>
+
+<style>
+  .resume {
+    position: relative;
+    display: inline-block;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+    }
+
+    span {
+      font-size: 16px;
+      display: inline-block;
+      padding-right: 18px;
+    }
+
+    .file-download-icon {
+      position: absolute;
+      top: -2px;
+      right: 0;
+      width: var(--step--2);
+      height: var(--step--2);
+      filter: invert(var(--icon-color-invert)) sepia(0%) saturate(0%) hue-rotate(0deg)
+        brightness(100%) contrast(100%);
+    }
+  }
+</style>

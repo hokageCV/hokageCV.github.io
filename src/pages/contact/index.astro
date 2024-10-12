@@ -2,6 +2,8 @@
 import ContactForm from '@/components/ContactForm.astro'
 import socials from '@/data/socials'
 import Base from '@/layouts/Base.astro'
+
+import ResumeBtn from './ResumeBtn.astro'
 ---
 
 <Base>
@@ -16,6 +18,7 @@ import Base from '@/layouts/Base.astro'
           </li>
         ))
       }
+      <ResumeBtn />
     </ul>
     <ContactForm />
   </section>

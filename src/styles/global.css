@@ -97,6 +97,8 @@ html[data-theme='dark'] {
 
   --inline-code-background: hsl(var(--dark-hs), 90%);
   --inline-code-color: hsl(var(--dark-hs), 30%);
+
+  --icon-color-invert: 100%;
 }
 
 html[data-theme='light'] {
@@ -115,6 +117,8 @@ html[data-theme='light'] {
 
   --inline-code-background: hsl(var(--dark-hs), 90%);
   --inline-code-color: hsl(var(--dark-hs), 30%);
+
+  --icon-color-invert: 0%;
 }
 
 /* ===================================== */
