@@ -4,7 +4,7 @@ slug: adding-devise-to-rails-app
 publishedDate: 2023-08-25
 description: Adding devise to rails app
 draft: false
-tags: ['ruby on rails']
+tags: ['ruby-on-rails']
 ---
 
 Devise is a very useful gem in the rails ecosystem. It provides powerful out-of-the-box solutions for authentication functionalities to add to your rails application.
