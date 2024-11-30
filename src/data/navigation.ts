@@ -19,6 +19,10 @@ const LINKS = {
     label: 'Projects',
     url: '/projects',
   },
+  rss: {
+    label: 'RSS',
+    url: `${import.meta.env.SITE}/rss.xml`
+  }
 }
 
 export default {
@@ -27,5 +31,6 @@ export default {
     LINKS.blog,
     LINKS.projects,
     LINKS.contact,
+    LINKS.rss,
   ]
 }

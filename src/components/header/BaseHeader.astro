@@ -27,4 +27,12 @@ const pageDescription = Astro.props.description ?? metadata.description
   <GoogleAnalytics />
 
   <title>{pageTitle}</title>
+
+  <!-- RSS -->
+  <link
+    rel='alternate'
+    type='application/rss+xml'
+    title= {metadata.title}
+    href={new URL('rss.xml', Astro.site)}
+  />
 </head>

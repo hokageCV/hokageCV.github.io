@@ -2,7 +2,7 @@
 title: Data structure before code
 slug: data-structure-before-code
 publishedDate: 2024-07-13
-description:
+description: Focus on the structure before code
 draft: false
 tags: ['learnings']
 ---
