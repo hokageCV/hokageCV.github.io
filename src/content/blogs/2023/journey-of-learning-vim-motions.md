@@ -1,6 +1,6 @@
 ---
 title: My journey of learning Vim Motions
-slug: my-journey-of-learning-vim-motions
+slug: journey-of-learning-vim-motions
 publishedDate: 2023-12-10
 updatedDate: 2024-04-13
 description: My journey of learning vim motions

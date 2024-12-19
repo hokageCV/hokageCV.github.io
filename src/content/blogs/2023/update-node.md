@@ -1,6 +1,6 @@
 ---
 title: Updating Node
-slug: updating-node
+slug: update-node
 publishedDate: 2023-08-15
 description: Updating node on your system
 draft: false

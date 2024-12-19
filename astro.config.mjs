@@ -1,10 +1,12 @@
 import partytown from '@astrojs/partytown'
 import { defineConfig } from 'astro/config'
+import og from './src/utils/open-graph'
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://hokageCV.github.io',
-  integrations: [partytown()],
+  integrations: [partytown(), og()],
+  trailingSlash: 'never',
   markdown: {
     shikiConfig: {
       themes: {
@@ -14,5 +16,4 @@ export default defineConfig({
       wrap: true,
     },
   },
-  trailingSlash: 'never',
 })

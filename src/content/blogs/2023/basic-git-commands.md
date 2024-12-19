@@ -1,6 +1,6 @@
 ---
 title: Git for beginners
-slug: git-for-beginners
+slug: basic-git-commands
 publishedDate: 2023-04-30
 description: List of common git commands useful in day to day operations
 draft: false

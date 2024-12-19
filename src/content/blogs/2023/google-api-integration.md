@@ -1,6 +1,6 @@
 ---
 title: How to integrate google APIs to your application
-slug: how-to-integrate-google-apis-to-your-application
+slug: google-api-integration
 publishedDate: 2023-06-07
 description: How to integrate Google API with your application
 draft: false

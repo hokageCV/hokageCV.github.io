@@ -1,8 +1,8 @@
 ---
-title: Adding devise to rails app
-slug: adding-devise-to-rails-app
+title: Add devise to rails app
+slug: add-devise-to-rails-app
 publishedDate: 2023-08-25
-description: Adding devise to rails app
+description: Add devise to rails app
 draft: false
 tags: ['ruby-on-rails']
 ---
