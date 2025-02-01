@@ -1,13 +1,12 @@
 import partytown from '@astrojs/partytown';
 import { defineConfig } from 'astro/config';
-import og from './src/utils/open-graph';
 
 import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://hokageCV.github.io',
-  integrations: [partytown(), og(), sitemap()],
+  integrations: [partytown(), sitemap()],
   trailingSlash: 'never',
   markdown: {
     shikiConfig: {

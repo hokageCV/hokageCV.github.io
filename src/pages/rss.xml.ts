@@ -14,7 +14,7 @@ type Item = {
 };
 
 const items = Object.values(
-  import.meta.glob<Item>('../content/blogs/*/*.{md,mdx}', { eager: true })
+  import.meta.glob<Item>('../content/blogs/**/*.{md,mdx}', { eager: true })
 ).filter((item) => item.frontmatter.draft == false)
 
 const formatDate = (item: Item): Date => {
