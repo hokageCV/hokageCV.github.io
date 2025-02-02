@@ -3,6 +3,7 @@ title: "Lakshya"
 cover:
     image: '/projects/lakshya.webp'
     alt: 'Lakshya'
+order: 2
 ---
 
 Stay organized and mindful about your work by tracking the number of days that have passed in the year every time you open a new tab

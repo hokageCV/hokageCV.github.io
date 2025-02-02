@@ -11,6 +11,13 @@ export async function getBlogList() {
 
 export async function getProjectList() {
   const projectList = await getCollection('projects')
+
+  projectList.sort((a, b) => {
+    if (a.data.order < b.data.order) return -1;
+    if (a.data.order > b.data.order) return 1;
+    return 0;
+  });
+
   return projectList
 }
 

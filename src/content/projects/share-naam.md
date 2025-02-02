@@ -3,6 +3,7 @@ title: "Share Naam"
 cover:
     image: '/projects/share-naam.webp'
     alt: 'Share Naam'
+order: 5
 ---
 
 Social media platform is designed to bring food lovers together and allow them to share their favourite food places with each other. Whether you're a foodie or just love trying new restaurants, Share Naam is the perfect place for you to share your experiences and connect with others.
