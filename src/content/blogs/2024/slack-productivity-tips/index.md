@@ -2,6 +2,7 @@
 title: Slack Productivity Tips I Use to Stay Focused
 slug: slack-productivity-tips
 publishedDate: 2024-12-15
+updatedDate: 2025-06-03
 description: Slack productivity tips to to reduce distraction and have deep work.
 draft: false
 tags: ['productivity']
@@ -58,6 +59,9 @@ In this post, I’ll share the tips I use to make Slack work better for me.
     - `_italic text_` for _italic text_
     - `-` for bullet points
     - ```  `text`  ```  for inline code highlights
+- Threads
+  - With threads, I can check recent messages across channels in same place
+  - This saves time of navigating to individual channels and then searching for particular chat.
 
 ## Conclusion
 

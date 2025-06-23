@@ -96,3 +96,14 @@ $('#orochimaru').on('select2:select', functionToExecute )
 ```
 
 ## Pre select an option
+
+```js
+success: function(resp){
+  let individualSelect = $('#individual_list')
+
+  resp.user_data.forEach(user => {
+    let option = new Option(user.name, user.id, true, true);
+    individualSelect.append(option).trigger('change');
+  });
+}
+```
