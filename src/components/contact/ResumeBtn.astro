@@ -1,13 +1,12 @@
 ---
-import fileDownload from '@/assets/svg/file-download.svg'
+import externalLink from '@/assets/svg/external-link.svg'
 import { Image } from 'astro:assets'
-import resume from '/files/resume.pdf'
 ---
 
 <li class='resume'>
-  <a href={resume} target='_blank' download='01_chaitanya_varu_resume'>
+  <a href='https://resume.chaitanyavaru.workers.dev' target='_blank'>
     <span>Resume</span>
-    <Image class='file-download-icon' src={fileDownload} alt='file download icon' />
+    <Image class='external-link-icon' src={externalLink} alt='external link icon' />
   </a>
 </li>
 
@@ -28,7 +27,7 @@ import resume from '/files/resume.pdf'
       padding-right: 18px;
     }
 
-    .file-download-icon {
+    .external-link-icon {
       position: absolute;
       top: -2px;
       right: 0;
