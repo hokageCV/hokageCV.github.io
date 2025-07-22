@@ -225,6 +225,7 @@ code,
 kbd {
   font-family: var(--mono-font);
   font-size: 0.875em;
+  border-radius: var(--space-2xs);
 }
 
 :not(pre)>code {
