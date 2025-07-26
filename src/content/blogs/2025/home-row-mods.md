@@ -1,7 +1,7 @@
 ---
 title: How Home Row Mods Changed the Way I Type
 slug: home-row-mods
-publishedDate: 2025-09-22
+publishedDate: 2025-07-22
 description: Experience with home row mods for the past six months.
 draft: false
 tags: ['productivity']

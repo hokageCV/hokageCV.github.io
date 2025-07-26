@@ -1,7 +1,7 @@
 ---
 title: Your Git Commits Are Talking — What Are They Saying?
 slug: communicating-with-git
-publishedDate: 2025-08-24
+publishedDate: 2025-06-24
 description: My thoughts on why to have better commits
 draft: false
 tags: ['git', 'notes-to-self']
