@@ -1,0 +1,50 @@
+---
+import { getSnippetList } from "@/utils/collection";
+
+const snippetList = await getSnippetList();
+---
+
+<section>
+  {await Promise.all(snippetList.map(async (snippet) => {
+    const { Content } = await snippet.render();
+
+    return (
+      <div class='snippet-card'>
+        <a href={`/snippets/${snippet.slug}`} class='snippet-title'>
+          {snippet.data.title}
+        </a>
+        <div class='snippet-body'>
+          <Content />
+        </div>
+      </div>
+    )
+  }))}
+</section>
+
+<style>
+  section{
+    max-width: 90%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    .snippet-card {
+      border: 2px solid;
+      border-radius: var(--space-2xs);
+
+      padding: var(--space-xs) ;
+      margin: var(--space-xs) ;
+
+      width: max-content;
+      max-width: 90%;
+
+      .snippet-title {
+        font-size: var(--step-2);
+      }
+
+      .snippet-body {
+        margin-top: var(--space-s);
+      }
+    }
+  }
+</style>

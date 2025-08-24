@@ -21,5 +21,13 @@ const project = defineCollection({
   })
 })
 
-export const collections = { blog, project };
+const snippet = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    publishedDate: z.string(),
+    tags: z.array(z.string()).optional(),
+  })
+})
+
+export const collections = { blog, project, snippet };
 

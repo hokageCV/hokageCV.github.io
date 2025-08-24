@@ -21,6 +21,13 @@ export async function getProjectList() {
   return projectList
 }
 
+export async function getSnippetList() {
+  const  snippetList = await getCollection('snippets')
+
+  return snippetList
+    .sort((a, b) => new Date(b.data.publishedDate).valueOf() - new Date(a.data.publishedDate).valueOf())
+}
+
 export function getTags(blogPostList: any[]): Record<string, number> {
   const tags: TagsType = {}
 

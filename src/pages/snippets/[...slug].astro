@@ -1,0 +1,20 @@
+---
+import Snippet from '@/components/snippets/Snippet.astro'
+import Base from '@/layouts/Base.astro'
+import { getSnippetList } from '@/utils/collection'
+
+export async function getStaticPaths() {
+  const snippetList = await getSnippetList()
+  return snippetList.map((snippet) => ({
+    params: { slug: snippet.slug },
+    props: { snippet },
+  }))
+}
+
+const { snippet } = Astro.props
+const { data } = snippet
+---
+
+<Base title={data.title}>
+  <Snippet {...snippet} />
+</Base>
