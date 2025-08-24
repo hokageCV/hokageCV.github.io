@@ -2,9 +2,7 @@
 title: "URL Manager"
 cover:
     video: '/projects/ruby-url-manager.webm'
-order: 3
 ---
-
 
 URL Manager is a user-friendly Ruby on Rails application that allows you to create and manage shortened URLs for effective sharing. It provides a seamless experience for users to register, authenticate, and generate unique short codes for their URLs.
 

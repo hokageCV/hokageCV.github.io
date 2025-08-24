@@ -1,6 +1,7 @@
 import type { TagsType } from '@/types'
 import { getCollection } from 'astro:content'
 import _slugify from 'slugify'
+import { projectOrder, archivedProjectOrder } from '@/data/projects'
 
 export async function getBlogList() {
   const blogList = await getCollection('blogs')
@@ -9,16 +10,22 @@ export async function getBlogList() {
     .sort((a, b) => new Date(b.data.publishedDate).valueOf() - new Date(a.data.publishedDate).valueOf())
 }
 
-export async function getProjectList() {
+export async function getProjectList({ archived = false, all = false }: {archived?: boolean, all?: boolean} = {}) {
   const projectList = await getCollection('projects')
 
-  projectList.sort((a, b) => {
-    if (a.data.order < b.data.order) return -1;
-    if (a.data.order > b.data.order) return 1;
-    return 0;
-  });
+  let orderList: string[];
+  if (all) {
+    orderList = [...projectOrder, ...archivedProjectOrder];
+  } else {
+    orderList = archived ? archivedProjectOrder : projectOrder;
+  }
+  const orderSet = new Set(orderList)
 
-  return projectList
+  const filteredProjects = projectList
+    .filter((proj) => orderSet.has(proj.slug))
+    .sort((a, b) => orderList.indexOf(a.slug) - orderList.indexOf(b.slug))
+
+  return filteredProjects
 }
 
 export async function getSnippetList() {

@@ -2,9 +2,37 @@
 import { getProjectList } from '@/utils/collection'
 import ProjectCard from './ProjectCard.astro'
 
-const projectList = await getProjectList()
+const projects = await getProjectList()
+const archivedProjects = await getProjectList({archived: true})
 ---
 
+<div class='projects-container'>
 <section>
-  {projectList.map((project) => <ProjectCard {project} />)}
+  {projects.map((project) => <ProjectCard {project} />)}
 </section>
+
+  <details>
+    <summary>
+      Archived Projects
+    </summary>
+    <div>
+      {archivedProjects.map((project) => <ProjectCard {project} />)}
+    </div>
+  </details>
+</div>
+
+<style>
+  .projects-container {
+    max-width: 90%;
+
+    details {
+      margin-bottom: var(--space-2xl);
+
+      summary {
+        text-align: center;
+        cursor: pointer;
+        font-size: var(--step-2);
+      }
+    }
+  }
+</style>

@@ -2,7 +2,6 @@
 title: "Simple RSS"
 cover:
     video: '/projects/simple-rss.webm'
-order: 1
 ---
 
 Simple-RSS is an RSS aggregator that allows users to subscribe to their favorite RSS feeds, view the latest updates, and read content directly within the app.

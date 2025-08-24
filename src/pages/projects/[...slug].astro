@@ -4,7 +4,7 @@ import Base from '@/layouts/Base.astro'
 import { getProjectList } from '@/utils/collection'
 
 export async function getStaticPaths() {
-  const projectList = await getProjectList()
+  const projectList = await getProjectList({all: true})
   return projectList.map((project) => ({
     params: { slug: project.slug },
     props: { project },
