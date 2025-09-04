@@ -1,11 +1,12 @@
 ---
 title: Mini NotebookLM
 cover:
-    image: '/projects/mini_notebook_lm.webp'
-    alt: 'mini noteboollm ui'
+    video: '/projects/mini_notebook_lm.webm'
+repoLink: 'https://github.com/hokageCV/mini-notebook-lm'
+liveLink: 'https://mini-notebook-lm.vercel.app'
 ---
 
-Chat about your own data with AI.
+Chat with your own data using AI.
 
 ## Features
 
