@@ -14,6 +14,8 @@ const blog = defineCollection({
 const project = defineCollection({
   schema: z.object({
     title: z.string(),
+    repoLink: z.string().url().optional(),
+    liveLink: z.string().url().optional(),
     cover: z.union([
       z.object({ image: z.string(), alt: z.string() }),
       z.object({ video: z.string() })

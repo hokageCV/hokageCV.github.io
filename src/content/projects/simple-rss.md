@@ -2,6 +2,8 @@
 title: "Simple RSS"
 cover:
     video: '/projects/simple-rss.webm'
+repoLink: 'https://github.com/hokageCV/simple-rss'
+liveLink: 'https://simple-rss.chaitanyavaru.com'
 ---
 
 Simple-RSS is an RSS aggregator that allows users to subscribe to their favorite RSS feeds, view the latest updates, and read content directly within the app.

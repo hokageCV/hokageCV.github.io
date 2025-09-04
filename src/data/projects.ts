@@ -9,6 +9,9 @@ export const projectOrder = [
 
 export const archivedProjectOrder = [
   'url-manager',
+  'shiv-tandav-strotram',
+  'train-seat-visualizer',
+  'link-leaf',
   'clip-database-manager',
   'share-naam',
 ]

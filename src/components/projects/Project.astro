@@ -1,4 +1,7 @@
 ---
+import externalLink from '@/assets/svg/external-link.svg'
+import { Image } from 'astro:assets'
+
 const { data, render } = Astro.props
 const { Content } = await render()
 ---
@@ -7,12 +10,69 @@ const { Content } = await render()
   <h1>{data.title}</h1>
   {
     data.cover.image ? (
-      <img src={data.cover.image} alt={data.cover.alt} />
+      <img src={data.cover.image} alt={data.cover.alt} class='media' />
     ) : (
-      <video src={data.cover.video} autoplay loop muted playsinline />
+      <video src={data.cover.video} autoplay loop muted playsinline class='media' />
     )
   }
+
+  <div class='project-links'>
+    {
+      data.repoLink && (
+        <a href={data.repoLink} target='_blank' rel='noopener noreferrer' class='link-button'>
+          <span>View Repository</span>
+          <Image class='external-link-icon' src={externalLink} alt='external link icon' />
+        </a>
+      )
+    }
+
+    {
+      data.liveLink && (
+        <a href={data.liveLink} target='_blank' rel='noopener noreferrer' class='link-button'>
+          <span>View Live</span>
+          <Image class='external-link-icon' src={externalLink} alt='external link icon' />
+        </a>
+      )
+    }
+  </div>
+
   <article>
     <Content />
   </article>
 </div>
+
+<style>
+  .media {
+    border-radius: var(--space-s);
+  }
+
+  .project-links {
+    display: flex;
+    gap: var(--step--1);
+    margin-top: var(--step-0);
+  }
+
+  .link-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .link-button:hover {
+    background: var(--accent);
+  }
+
+  .external-link-icon {
+    width: 1rem;
+    height: 1rem;
+    filter: invert(var(--icon-color-invert)) sepia(0%) saturate(0%) hue-rotate(0deg)
+      brightness(100%) contrast(100%);
+  }
+</style>

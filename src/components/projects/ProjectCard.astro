@@ -11,9 +11,9 @@ const url = `/projects/${project.slug}`
     <div class='card-media'>
       {
         project.data.cover.image ? (
-          <img src={project.data.cover.image} alt={project.data.cover.alt} />
+          <img src={project.data.cover.image} alt={project.data.cover.alt} class='media' />
         ) : (
-          <video src={project.data.cover.video} autoplay loop muted playsinline />
+          <video src={project.data.cover.video} autoplay loop muted playsinline class='media' />
         )
       }
     </div>
@@ -39,6 +39,10 @@ const url = `/projects/${project.slug}`
 
     .card-header {
       font-size: var(--step-1);
+    }
+
+    .media {
+      border-radius: var(--space-2xs);
     }
 
     @media (max-width: 768px) {
