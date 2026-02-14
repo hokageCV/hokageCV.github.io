@@ -1,20 +1,20 @@
 import partytown from '@astrojs/partytown';
+import sitemap from "@astrojs/sitemap";
+import expressiveCode from 'astro-expressive-code';
 import { defineConfig } from 'astro/config';
 
-import sitemap from "@astrojs/sitemap";
-
-// https://astro.build/config
 export default defineConfig({
   site: 'https://hokageCV.github.io',
-  integrations: [partytown(), sitemap()],
   trailingSlash: 'never',
-  markdown: {
-    shikiConfig: {
-      themes: {
-        light: 'solarized-dark',
-        dark: 'solarized-dark'
-      },
-      wrap: true
-    }
-  }
+  integrations: [
+    partytown(),
+    sitemap(),
+    expressiveCode({
+      themes: ['solarized-dark'],
+      defaultProps: {
+        showCopyButton: true,
+        wrap: true
+      }
+    })
+  ]
 });
