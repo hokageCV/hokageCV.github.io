@@ -1,9 +1,10 @@
 ---
+import ElasticTitle from '@/components/elastic-title.astro'
 import ProjectList from '@/components/projects/ProjectList.astro'
 import Base from '@/layouts/Base.astro'
 ---
 
 <Base>
-  <h1>Projects</h1>
+  <ElasticTitle text="Projects" as="h1" />
   <ProjectList />
 </Base>
