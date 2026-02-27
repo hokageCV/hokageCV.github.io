@@ -1,0 +1,16 @@
+---
+import { Image } from "astro:assets"
+
+interface Props {
+  src: any
+  alt: string
+  caption?: string
+}
+
+const { src, alt, caption } = Astro.props
+---
+
+<figure>
+  <Image src={src} alt={alt} title={alt} />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

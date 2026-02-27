@@ -7,6 +7,9 @@ draft: false
 tags: ['jira']
 ---
 
+import CaptionImage from "@/components/caption-image.astro";
+import createToken from "./create-token.webp";
+
 Recently I got a task for which I had to create 11 Jira issues.
 
 Using Jira even for one issue feels laggy & slow. Click a button, add description, update few dropdowns and wait for the form to submit. And then repeat the process ten more times. This would be super slow. I decided to automate it with Jira API.
@@ -22,11 +25,15 @@ Follow the steps to create a token:
 - Then to security tab
 - Select 'Manage API tokens'
 
-Or simply go to this link: <https://id.atlassian.com/manage-profile/security/api-tokens>.
+Or simply go to this link: [https://id.atlassian.com/manage-profile/security/api-tokens](https://id.atlassian.com/manage-profile/security/api-tokens).
 
 In the page, click on 'create API token' button. In the popup, add token name and set expiration date.
 
-![create-token](./create-token.webp)
+<CaptionImage
+  src={createToken}
+  alt="Create token page"
+  caption="Manager API Tokens page"
+/>
 
 Now we can use this token to make authenticated requests to the API.
 
