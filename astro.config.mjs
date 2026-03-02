@@ -7,6 +7,13 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://hokageCV.github.io',
   trailingSlash: 'never',
+  markdown: {
+    remarkRehype: {
+      footnoteLabelTagName: 'hr',
+      footnoteLabel: '',
+      footnoteLabelProperties: { className: ['footnotes'] }
+    }
+  },
   integrations: [
     partytown(),
     sitemap(),
@@ -17,6 +24,12 @@ export default defineConfig({
         wrap: true
       }
     }),
-    mdx(),
+    mdx({
+      remarkRehype: {
+        footnoteLabelTagName: 'hr',
+        footnoteLabel: '',
+        footnoteLabelProperties: { className: ['footnotes'] }
+      }
+    }),
   ]
 });

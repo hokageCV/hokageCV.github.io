@@ -333,4 +333,40 @@ article {
       opacity: 0.7;
     }
   }
+
+  sup {
+    vertical-align: super;
+    font-size: var(--step--1);
+
+    & a[data-footnote-ref] {
+      color: var(--accent);
+      padding: 1px 2px;
+      text-decoration-thickness: 1px;
+
+      &:hover {
+        color: var(--base-text);
+      }
+    }
+  }
+
+  .footnotes {
+    /* remove phantom space */
+    font-size: 0;
+
+    & hr {
+      margin-bottom: 0;
+      border: none;
+      border-top: 1px solid var(--accent);
+    }
+
+    & ol {
+      font-size: 1rem;
+      margin-top: 1.5rem;
+
+      & li::marker {
+        color: var(--base-Text);
+      }
+    }
+  }
+
 }
