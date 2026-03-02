@@ -1,12 +1,36 @@
 ---
-title: Benchmark
-slug: benchmark-ruby-code
-publishedDate: 2025-03-08
-description: benchmark
+title: How I Optimized newsfeed from 12s to 3s
+slug: newsfeed-optimization
+publishedDate: 2026-01-22
+description: newsfeed optimization
 draft: true
 tags: ['rails']
 ---
 
+<!-- =====================
+
+ - start by understandsing 'where the time is actually spent?'
+     - sql queries, loops, external apis, json building etc
+```rb
+def measure(label)
+  t0 = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+  result = yield
+  puts "#{label}: #{Process.clock_gettime(Process::CLOCK_MONOTONIC) - t0}s"
+  result
+end
+
+# usage
+measure("sql_load") { load_data_from_db }
+```
+ - scan for common slow patterns
+     - N+1, expensive db operations, large objects built inside loops, reformatting data mulitple times (json -> ruby -> json)
+ - break lengthy code into logical blocks without changing logic
+     - this helps to isolate and measure each block
+ - copy current output
+     - this way, you can compare with updated method's output
+ -
+
+=====================
 Docs to read
 
 - <https://ruby-doc.org/stdlib-2.5.0/libdoc/benchmark/rdoc/Benchmark.html>
@@ -60,3 +84,5 @@ def update_feeds
   redirect_to home_index_path
 end
 ```
+
+===================== -->

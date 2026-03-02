@@ -1,0 +1,102 @@
+---
+title: What is Thundering Herd Problem?
+slug: thundering-herd
+publishedDate: 2026-03-19
+description: Thundering Herd problem and its solutions.
+draft: false
+tags: ['system-design']
+---
+
+import CaptionImage from "@/components/caption-image.astro";
+import thundering_herd from "./thundering-herd.webp";
+
+Imagine you have planned a vacation to Varanasi during holidays for Holi.
+
+You woke up early to book the tickets from [IRCTC][irctc]. Because it is a famous place, others would also book in the same route. You have entered the details and pressed the pay button. The screen is loading, and taking a while. And now you are hoping that there's no thundering herd.
+
+Were the tickets booked successfully? Before looking into that, let's have a look at what Thundering Herd problem is.
+
+## Thundering Herd
+
+The definition of Thundering Herd is
+
+> Large number of processes or threads are simultaneously awakened, typically in response to a specific event or the availability of a resource. However, only one process is able to respond to the event or access the new resource, causing most other processes to fail and go back to sleep.
+
+<CaptionImage
+  src={thundering_herd}
+  alt="Demonstration of thundering herd"
+  caption="Thundering Herd: Lot of requests going to the same resource. Photo credit: Artificial Intelligence."
+/>
+
+Basically, a thundering herd is when multiple requests suddenly try to access the same resource.
+
+When a thundering herd occurs, the following are its impacts:
+- Database gets overloaded with queries
+- CPU is busy handing existing requests, and is unable to processes new requests
+- Since the CPU is busy, most requests get delayed, and as a result latency is increased
+
+In our ticket booking case, if majority people are booking for the same train, then it would be a thundering herd.[^herd-caveat]
+
+In this post, we will look at thundering herd caused by cache expiration.
+
+## How does cache create thundering herd?
+
+We use cache to reduce the load on database servers and send quick responses to the users.
+
+Over time, cached data might expire or change, so we use Time To Live (TTL) for cached records.
+
+When the cache is valid, that data is served to the user. When it expires, a request is sent to the database to get the latest data.
+
+Suppose there are multiple users whose cache expires at the same time. Then all their requests will be sent to the database simultaneously. This will cause a thundering herd.
+
+## How to minimize the Thundering Herd impact?
+
+Here are some strategies[^similar] we could use to minimize the impact of the herd.
+
+#### Jitter
+
+In this approach, instead of expiring the cache at the same timestamp, we add a random value to it. This way, not all requests will reach the database at the same time.
+
+For example, some cache will expire at x+2 seconds, and others at x+5 seconds.
+
+#### Request Coalescing
+
+Since most requests are for the same resource, we send only one request to the database. This avoids computing the same query multiple times.
+
+If another request for the same resource comes in while the first one is still in progress, it does not make a new database call. Instead, it attaches to the same ongoing request.
+
+When the result is returned, all attached requests receive the same result and are resolved together.
+
+The result is also stored in the cache so that future requests can use it directly.
+
+#### Mutex
+
+In this approach, requests for same resource compete for a lock. So only the one request with lock goes to the database.
+
+Remaining requests wait to acquire the lock. When the result is returned, cache is updated and lock is released. Now another request gets the lock, but before making to the database it checks the cache. And this time, updated result is found, so lock is released and request is resolved. Similarly, all other requests will be resolved.
+
+#### Exponential Backoff
+
+In this approach, when any request fails, instead of retrying immediately, we retry after some delay. And if the request fails again, we keep increasing the delay exponentially up to a fixed retry-count.
+
+Suppose a request fails, we first retry after 1 second. If the request fails again, we now retry after 2 seconds. Similarly, we increase the delay to 4, 8, 16 and so on until we hit the maximum retry-count.
+
+Although this alone may not be sufficient as all requests might retry at the same time and cause another thundering herd. So we usually use jitter along with this method.
+
+## Conclusion
+
+Thundering Herd is not only limited to cache. It can occur in any system where multiple clients request for the same resource. Next time you implement such system, try using some of the above techniques to reduce your servers from getting overloaded.
+
+And were the holiday tickets booked?
+
+Luckily IRCTC's servers handled the thundering herd properly and tickets were booked.
+
+
+
+[^herd-caveat]: All users logging in at same time can also be considered a thundering herd. In it, all users are requesting for IRCTC servers as resource.
+
+    But that is more of a general spike, as not all users would be booking for the same train.
+
+[^similar]: In most of the strategies, our target is to reduce the number of simultaneous requests hitting the database.
+
+[irctc]: <https://www.irctc.co.in>
