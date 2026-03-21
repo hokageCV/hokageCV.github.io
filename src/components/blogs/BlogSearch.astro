@@ -1,0 +1,296 @@
+---
+import searchIcon from '@/assets/svg/search.svg?raw'
+---
+
+<div class='search-wrapper'>
+  <button id='search-toggle' type='button'>
+    <Fragment set:html={searchIcon} />
+  </button>
+  <div id='search-input-container' class='hidden'>
+    <input type='text' id='search-input' placeholder='Search posts...' autocomplete='off' />
+    <button id='search-clear' class='hidden' type='button'>&times;</button>
+  </div>
+  <div id='search-results' class='search-popup hidden'></div>
+</div>
+
+<style>
+  .search-wrapper {
+    position: fixed;
+    top: var(--space-xl);
+    right: var(--space-m);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    z-index: 100;
+  }
+
+  #search-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: 1px solid var(--base-border);
+    border-radius: 4px;
+    color: var(--base-text);
+    cursor: pointer;
+    padding: 0;
+
+    &:hover {
+      background: var(--base-surface);
+    }
+  }
+
+  #search-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 250px;
+    animation: expand 0.2s ease-out;
+  }
+
+  @keyframes expand {
+    from {
+      width: 0;
+      opacity: 0;
+    }
+    to {
+      width: 250px;
+      opacity: 1;
+    }
+  }
+
+  #search-input {
+    width: 100%;
+    padding: var(--space-2xs) var(--space-s);
+    border: 1px solid var(--base-border);
+    border-radius: 4px;
+    background: var(--base-background);
+    color: var(--base-text);
+    font-size: var(--step-0);
+
+    &:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  }
+
+  #search-clear {
+    position: absolute;
+    right: var(--space-2xs);
+    background: transparent;
+    border: none;
+    color: var(--base-text);
+    font-size: var(--step-0);
+    cursor: pointer;
+    opacity: 0.5;
+    padding: 0 var(--space-2xs);
+    line-height: 1;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .search-popup {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: var(--space-2xs);
+    background: oklch(from var(--base-background) calc(l + 0.03) c h);
+    border: 1px solid var(--base-border);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.08) inset,
+      0 -1px 0 rgba(0, 0, 0, 0.15) inset,
+      0 4px 12px rgba(0, 0, 0, 0.15),
+      0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 100;
+    border-radius: 6px;
+
+    &:empty {
+      display: none;
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style-type: circle;
+      padding-left: var(--space-m);
+    }
+
+    .search-result-item {
+      padding: var(--space-2xs) var(--space-s) var(--space-2xs) var(--space-2xs);
+      border-bottom: 1px solid var(--base-border);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      a {
+        font-size: var(--step-0);
+        color: var(--base-link);
+        text-decoration: none;
+      }
+
+      small {
+        display: block;
+        color: grey;
+        font-size: var(--step--2);
+      }
+    }
+
+    .no-results {
+      padding: var(--space-s);
+      color: var(--base-text);
+      opacity: 0.7;
+    }
+  }
+
+  .hidden {
+    display: none !important;
+  }
+</style>
+
+<style is:global>
+  .search-popup::-webkit-scrollbar {
+    width: var(--space-2xs);
+  }
+
+  .search-popup::-webkit-scrollbar-track {
+    background: var(--secondary-color);
+    border-radius: 3px;
+  }
+
+  .search-popup::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 3px;
+  }
+</style>
+
+<script is:inline>
+  const searchToggle = document.getElementById('search-toggle')
+  const searchInputContainer = document.getElementById('search-input-container')
+  const searchInput = document.getElementById('search-input')
+  const searchClear = document.getElementById('search-clear')
+  const searchResults = document.getElementById('search-results')
+
+  let pagefind = null
+
+  async function loadPagefind() {
+    if (!pagefind) {
+      // @ts-ignore
+      pagefind = await import('/pagefind/pagefind.js')
+    }
+    return pagefind
+  }
+
+  function expandSearch() {
+    searchToggle.classList.add('hidden')
+    searchInputContainer.classList.remove('hidden')
+    searchInput.focus()
+  }
+
+  function collapseSearch() {
+    searchToggle.classList.remove('hidden')
+    searchInputContainer.classList.add('hidden')
+    hideResults()
+  }
+
+  function hideResults() {
+    searchResults.classList.add('hidden')
+    searchResults.innerHTML = ''
+    searchClear.classList.add('hidden')
+  }
+
+  function showClear() {
+    searchClear.classList.remove('hidden')
+  }
+
+  async function performSearch(query) {
+    if (!query.trim()) {
+      hideResults()
+      return
+    }
+
+    showClear()
+
+    const pf = await loadPagefind()
+    const search = await pf.search(query)
+
+    if (search.results.length === 0) {
+      searchResults.classList.remove('hidden')
+      searchResults.innerHTML = '<div class="no-results">No results found</div>'
+      return
+    }
+
+    const allResults = await Promise.all(search.results.map((r) => r.data()))
+    const blogResults = allResults.filter((r) => r.url?.includes('/blogs/'))
+
+    if (blogResults.length === 0) {
+      searchResults.classList.remove('hidden')
+      searchResults.innerHTML = '<div class="no-results">No results found</div>'
+      return
+    }
+
+    const url = new URL(window.location.href)
+    const basePath = url.origin
+
+    searchResults.classList.remove('hidden')
+    searchResults.innerHTML = `
+      <ul>
+        ${blogResults
+          .map((result) => {
+            const blogPath = result.url.replace(basePath, '').replace(/\/$/, '')
+            const date = result.meta?.date || ''
+
+            return `
+            <li class="search-result-item">
+              <a href="${blogPath}">${result.meta?.title || 'Untitled'}</a>
+              ${date ? `<small>${date}</small>` : ''}
+            </li>
+          `
+          })
+          .join('')}
+      </ul>
+    `
+  }
+
+  let debounceTimer
+  searchInput?.addEventListener('input', (e) => {
+    const query = e.target.value
+    clearTimeout(debounceTimer)
+    debounceTimer = setTimeout(() => performSearch(query), 200)
+  })
+
+  searchToggle?.addEventListener('click', expandSearch)
+
+  searchClear?.addEventListener('click', () => {
+    searchInput.value = ''
+    hideResults()
+    searchInput.focus()
+  })
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-wrapper')) {
+      if (searchInput && searchInput.value) {
+        searchInput.value = ''
+      }
+      hideResults()
+      collapseSearch()
+    }
+  })
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (searchInput && searchInput.value) {
+        searchInput.value = ''
+      }
+      hideResults()
+      collapseSearch()
+    }
+  })
+</script>

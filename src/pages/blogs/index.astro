@@ -1,9 +1,19 @@
 ---
 import Base from '@/layouts/Base.astro'
 import BlogList from '@/components/blogs/BlogList.astro'
+import BlogSearch from '@/components/blogs/BlogSearch.astro'
 ---
 
 <Base>
-  <h1>All Posts</h1>
+  <div class="page-header">
+    <h1>All Posts</h1>
+  </div>
+  <BlogSearch />
   <BlogList />
 </Base>
+
+<style>
+  .page-header {
+    margin-bottom: var(--space-m);
+  }
+</style>

@@ -2,6 +2,7 @@ import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 import sitemap from "@astrojs/sitemap";
 import expressiveCode from 'astro-expressive-code';
+import pagefind from "astro-pagefind";
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
@@ -31,5 +32,6 @@ export default defineConfig({
         footnoteLabelProperties: { className: ['footnotes'] }
       }
     }),
+    pagefind(),
   ]
 });

@@ -8,14 +8,16 @@ const { Content } = await render()
 ---
 
 <div>
-  <small>{readableDate(data.publishedDate)}</small>
+  <small data-pagefind-meta="date">{readableDate(data.publishedDate)}</small>
   <h1>{data.title}</h1>
   {data.tags && <BlogPostTags tags={data.tags} />}
-  <article>
+  <article data-pagefind-body>
     <Content />
   </article>
   <hr />
-  <OtherPosts {data}/>
+  <div data-pagefind-ignore>
+    <OtherPosts {data}/>
+  </div>
 </div>
 
 <style>
