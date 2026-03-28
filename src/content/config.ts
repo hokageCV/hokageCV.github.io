@@ -4,8 +4,8 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    publishedDate: z.string(),
-    updatedDate: z.string().optional(),
+    publishedDate: z.union([z.string(), z.date()]),
+    updatedDate: z.union([z.string(), z.date()]).optional(),
     draft: z.boolean().default(false),
     tags: z.array(z.string()),
   }),
@@ -26,10 +26,10 @@ const project = defineCollection({
 const snippet = defineCollection({
   schema: z.object({
     title: z.string(),
-    publishedDate: z.string(),
+    publishedDate: z.union([z.string(), z.date()]),
     tags: z.array(z.string()).optional(),
   })
 })
 
-export const collections = { blog, project, snippet };
+export const collections = { blogs: blog, projects: project, snippets: snippet };
 

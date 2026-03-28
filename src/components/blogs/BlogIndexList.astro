@@ -1,0 +1,97 @@
+---
+import { getBlogList } from '@/utils/collection'
+import { readableDate } from '@/utils/date'
+
+const blogList = await getBlogList()
+
+const groupedByYear = blogList.reduce((acc, post) => {
+  const year = new Date(post.data.publishedDate).getFullYear()
+  if (!acc[year]) acc[year] = []
+  acc[year].push(post)
+  return acc
+}, {} as Record<number, typeof blogList>)
+
+const years = Object.keys(groupedByYear).map(Number).sort((a, b) => b - a)
+---
+
+<section>
+  {years.map((year) => (
+    <div class="year-group">
+      <h2 class="year">{year}</h2>
+      <ul>
+        {groupedByYear[year].map((post) => (
+          <li>
+            <div>
+              <small>{readableDate(post.data.publishedDate, 'dd LLL')}</small>
+              <p>
+                <a href={`/blogs/${post.slug}`}>{post.data.title}</a>
+              </p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</section>
+
+<style>
+  section {
+    .year-group {
+      margin-bottom: var(--space-l);
+
+      .year {
+        font-size: var(--step-3);
+        font-weight: 600;
+        margin-bottom: var(--space-s);
+        color: var(--color-text);
+      }
+
+      ul {
+        padding: 0;
+        margin: 0;
+      }
+
+      li {
+        list-style: none;
+        margin-bottom: var(--space-xs);
+
+        div {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: baseline;
+          gap: var(--space-xs);
+
+          small {
+            font-size: var(--step--2);
+            color: grey;
+            min-width: 55px;
+            flex-shrink: 0;
+          }
+
+          a {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 600px) {
+      .year-group {
+        .year {
+          font-size: var(--step-2);
+        }
+
+        li div {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 2px;
+
+          small {
+            font-size: var(--step--3);
+          }
+        }
+      }
+    }
+  }
+</style>
