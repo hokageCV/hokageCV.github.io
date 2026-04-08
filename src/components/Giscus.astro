@@ -1,0 +1,56 @@
+---
+---
+
+<div class="giscus"></div>
+
+<script is:inline>
+  function loadGiscus() {
+    const script = document.createElement('script')
+    script.src = 'https://giscus.app/client.js'
+    script.setAttribute('data-repo', 'hokageCV/hokageCV.github.io')
+    script.setAttribute('data-repo-id', 'R_kgDOJotCCg')
+    script.setAttribute('data-category', 'Announcements')
+    script.setAttribute('data-category-id', 'DIC_kwDOJotCCs4C6X5d')
+    script.setAttribute('data-mapping', 'pathname')
+    script.setAttribute('data-strict', '0')
+    script.setAttribute('data-reactions-enabled', '1')
+    script.setAttribute('data-emit-metadata', '0')
+    script.setAttribute('data-input-position', 'bottom')
+    script.setAttribute('data-theme', 'preferred_color_scheme')
+    script.setAttribute('data-lang', 'en')
+    script.setAttribute('crossorigin', 'anonymous')
+    script.async = true
+    document.body.appendChild(script)
+  }
+
+  function updateGiscusTheme() {
+    const theme = document.documentElement.getAttribute('data-theme')
+    const iframe = document.querySelector('iframe.giscus-frame')
+    if (iframe && iframe.contentWindow) {
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: theme === 'dark' ? 'dark_tritanopia' : 'light' } } },
+        'https://giscus.app'
+      )
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadGiscus()
+  })
+
+  const observer = new MutationObserver(() => {
+    updateGiscusTheme()
+  })
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme']
+  })
+</script>
+
+<style>
+  .giscus {
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-l);
+  }
+</style>

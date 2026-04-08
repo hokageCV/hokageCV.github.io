@@ -2,6 +2,7 @@
 import { readableDate } from '@/utils/date'
 import BlogPostTags from './BlogPostTags.astro'
 import OtherPosts from './OtherPosts.astro'
+import Giscus from '@/components/Giscus.astro'
 
 const { data, render } = Astro.props
 const { Content } = await render()
@@ -16,6 +17,7 @@ const { Content } = await render()
   </article>
   <hr />
   <div data-pagefind-ignore>
+    <Giscus />
     <OtherPosts {data}/>
   </div>
 </div>
