@@ -2,7 +2,7 @@
 title: Slack Productivity Tips I Use to Stay Focused
 slug: slack-productivity-tips
 publishedDate: 2024-12-15
-updatedDate: 2025-06-03
+updatedDate: 2026-04-28
 description: Slack productivity tips to to reduce distraction and have deep work.
 draft: false
 tags: ['productivity']
@@ -62,6 +62,15 @@ In this post, I’ll share the tips I use to make Slack work better for me.
 - Threads
   - With threads, I can check recent messages across channels in same place
   - This saves time of navigating to individual channels and then searching for particular chat.
+
+- Text Snippets
+  - If we share a loooong text in the default message window, then while scrolling the thread the full text will have to be scrolled.
+    - With a text snippet, slack puts the text into an expandable window making the thread easy to navigate
+  - To create a snippet, click on the `+` button on the message box and select `Text Snippet`
+    - Create snippet popup will appear
+      - ![create-snippet](./snippet-window.webp)
+    - Now, the messages can be expanded when needed
+      - ![expandable-snippet](./expandable-snippet.webp)
 
 ## Conclusion
 
