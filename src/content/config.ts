@@ -23,6 +23,14 @@ const project = defineCollection({
   })
 })
 
+const today_i_learned = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    publishedDate: z.union([z.string(), z.date()]),
+    tags: z.array(z.string()).optional(),
+  }),
+})
+
 const snippet = defineCollection({
   schema: z.object({
     title: z.string(),
@@ -31,5 +39,5 @@ const snippet = defineCollection({
   })
 })
 
-export const collections = { blogs: blog, projects: project, snippets: snippet };
+export const collections = { blogs: blog, projects: project, snippets: snippet, til: today_i_learned };
 

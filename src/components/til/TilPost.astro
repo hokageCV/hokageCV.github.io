@@ -1,0 +1,32 @@
+---
+const { data, render } = Astro.props
+const { Content } = await render()
+---
+
+<div>
+  <small>
+    {
+      new Date(data.publishedDate).toLocaleDateString('en-US', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+      })
+    }
+  </small>
+
+  <h1>{data.title}</h1>
+
+  {
+    data.tags && data.tags.length > 0 && (
+      <div class='tags'>
+        {data.tags.map((tag: string) => (
+          <span class='tag'>{tag}</span>
+        ))}
+      </div>
+    )
+  }
+
+  <article>
+    <Content />
+  </article>
+</div>

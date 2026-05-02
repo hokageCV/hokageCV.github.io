@@ -35,6 +35,14 @@ export async function getSnippetList() {
     .sort((a, b) => new Date(b.data.publishedDate).valueOf() - new Date(a.data.publishedDate).valueOf())
 }
 
+export async function getTilList() {
+  const til_list = await getCollection('til')
+
+  return til_list
+    .filter(post => post.data.draft !== true)
+    .sort((a, b) => new Date(b.data.publishedDate).valueOf() - new Date(a.data.publishedDate).valueOf())
+}
+
 export function getTags(blogPostList: any[]): Record<string, number> {
   const tags: TagsType = {}
 

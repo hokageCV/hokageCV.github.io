@@ -1,0 +1,66 @@
+---
+import { getTilList } from '@/utils/collection'
+
+const til_list = await getTilList()
+---
+
+<section>
+  {
+    await Promise.all(
+      til_list.map(async (til) => {
+        const { Content } = await til.render()
+
+        return (
+          <div class='card'>
+            <a href={`/til/${til.slug}`} class='title'>
+              {til.data.title}
+            </a>
+
+            <div class='til-date'>
+              {new Date(til.data.publishedDate).toLocaleDateString('en-US', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric',
+              })}
+            </div>
+
+            <div class='body'>
+              <Content />
+            </div>
+          </div>
+        )
+      }),
+    )
+  }
+</section>
+
+<style>
+  section {
+    width: 75%;
+    max-width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    margin-bottom: var(--space-l);
+
+    .card {
+      border: 2px solid;
+      border-radius: var(--space-2xs);
+
+      padding: var(--space-xs);
+      margin: var(--space-xs);
+
+      width: max-content;
+      max-width: 90%;
+
+      .title {
+        font-size: var(--step-2);
+      }
+
+      .body {
+        margin-top: var(--space-s);
+      }
+    }
+  }
+</style>

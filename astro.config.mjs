@@ -32,6 +32,8 @@ export default defineConfig({
         footnoteLabelProperties: { className: ['footnotes'] }
       }
     }),
-    pagefind(),
+    pagefind({
+      exclude: ['/til/**']
+    }),
   ]
 });
