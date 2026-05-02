@@ -3,16 +3,16 @@
 export const projectOrder = [
   'pravah',
   'simple-rss',
-  'thumbnail-generator',
-  'mini-notebook-lm',
   'lakshya',
+  'shiv-tandav-strotram',
 ];
 
 export const archivedProjectOrder = [
-  'url-manager',
-  'shiv-tandav-strotram',
   'train-seat-visualizer',
+  'thumbnail-generator',
   'link-leaf',
+  'mini-notebook-lm',
   'clip-database-manager',
+  'url-manager',
   'share-naam',
 ]
