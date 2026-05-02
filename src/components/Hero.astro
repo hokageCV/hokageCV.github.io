@@ -1,16 +1,30 @@
 ---
 import BlogList from '@/components/blogs/BlogList.astro'
+import FeaturedProjectCard from '@/components/projects/FeaturedProjectCard.astro'
+import { getFeaturedProjects } from '@/utils/collection'
+
+const featuredProjects = await getFeaturedProjects()
 ---
 
 <div>
-  <section>
+  <section class='intro'>
     <h2>Chaitanya Varu</h2>
     <p>Backend Developer from India</p>
   </section>
-  <section>
+
+  <section class='recent'>
     <h2>Recent Posts</h2>
     <BlogList count={5} />
   </section>
+
+  <section class='featured'>
+    <h2>Projects</h2>
+    <div class='featured-grid'>
+      {featuredProjects.map((project, index) => <FeaturedProjectCard {project} index={index} />)}
+    </div>
+  </section>
+
+  <div class='bottom-border'></div>
 </div>
 
 <style>
@@ -18,6 +32,7 @@ import BlogList from '@/components/blogs/BlogList.astro'
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: var(--space-2xl);
 
     h2 {
       color: var(--page-heading-color);
@@ -27,10 +42,17 @@ import BlogList from '@/components/blogs/BlogList.astro'
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+    .featured-grid {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
 
-      &:nth-child(2) > h2 {
-        margin-block-start: var(--space-l);
-      }
+    .bottom-order {
+      margin-bottom: var(--space-m);
     }
   }
 </style>

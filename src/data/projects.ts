@@ -7,6 +7,12 @@ export const projectOrder = [
   'shiv-tandav-strotram',
 ];
 
+export const featuredProjectOrder = [
+  'pravah',
+  'simple-rss',
+  'lakshya',
+];
+
 export const archivedProjectOrder = [
   'train-seat-visualizer',
   'thumbnail-generator',
