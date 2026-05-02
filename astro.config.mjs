@@ -6,7 +6,7 @@ import pagefind from "astro-pagefind";
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://hokageCV.github.io',
+  site: 'https://chaitanyavaru.com',
   trailingSlash: 'never',
   markdown: {
     remarkRehype: {

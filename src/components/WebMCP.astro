@@ -1,0 +1,85 @@
+<script is:inline>
+  (() => {
+    if (!('modelContext' in navigator)) return
+
+    const controller = new AbortController()
+    const { signal } = controller
+
+    window.addEventListener('beforeunload', () => controller.abort())
+
+    const ctx = navigator.modelContext
+
+    ctx.registerTool(
+      {
+        name: 'search_blogs',
+        description: 'Search blog posts by keyword. Returns matching blog titles, URLs, and dates.',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            query: { type: 'string', description: 'Search keyword' }
+          },
+          required: ['query']
+        },
+        async execute({ query }) {
+          if (!query?.trim()) return { results: [] }
+          const pagefind = await import('/pagefind/pagefind.js')
+          const search = await pagefind.search(query)
+          const allResults = await Promise.all(search.results.map((r) => r.data()))
+          const blogResults = allResults.filter((r) => r.url?.includes('/blogs/'))
+          const basePath = window.location.origin
+          return {
+            results: blogResults.map((r) => ({
+              title: r.meta?.title || 'Untitled',
+              url: r.url.replace(basePath, '').replace(/\/$/, ''),
+              date: r.meta?.date || ''
+            }))
+          }
+        }
+      },
+      { signal }
+    )
+
+    ctx.registerTool(
+      {
+        name: 'toggle_theme',
+        description: 'Toggle between light and dark theme.',
+        inputSchema: {
+          type: 'object',
+          properties: {}
+        },
+        execute() {
+          const html = document.documentElement
+          const current = html.getAttribute('data-theme')
+          const next = current === 'dark' ? 'light' : 'dark'
+          html.setAttribute('data-theme', next)
+          localStorage.setItem('site-ki-theme', next)
+          return { theme: next }
+        }
+      },
+      { signal }
+    )
+
+    ctx.registerTool(
+      {
+        name: 'navigate_to',
+        description: 'Navigate to a page within the site. Only accepts same-origin URLs.',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            url: { type: 'string', description: 'Relative path or absolute same-origin URL' }
+          },
+          required: ['url']
+        },
+        execute({ url }) {
+          const target = new URL(url, window.location.origin)
+          if (target.origin !== window.location.origin) {
+            throw new Error('Only same-origin navigation is allowed')
+          }
+          window.location.href = target.pathname + target.search + target.hash
+          return { navigated: true, url: target.pathname }
+        }
+      },
+      { signal }
+    )
+  })()
+</script>
