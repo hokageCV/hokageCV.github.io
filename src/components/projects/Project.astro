@@ -20,7 +20,7 @@ const { Content } = await render()
     {
       data.repoLink && (
         <a href={data.repoLink} target='_blank' rel='noopener noreferrer' class='link-button'>
-          <span>View Repository</span>
+          <span>Source Code</span>
           <Image class='external-link-icon' src={externalLink} alt='external link icon' />
         </a>
       )
@@ -29,7 +29,7 @@ const { Content } = await render()
     {
       data.liveLink && (
         <a href={data.liveLink} target='_blank' rel='noopener noreferrer' class='link-button'>
-          <span>View Live</span>
+          <span>Live Link</span>
           <Image class='external-link-icon' src={externalLink} alt='external link icon' />
         </a>
       )

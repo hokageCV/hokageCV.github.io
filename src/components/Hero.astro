@@ -1,6 +1,6 @@
 ---
 import BlogList from '@/components/blogs/BlogList.astro'
-import FeaturedProjectCard from '@/components/projects/FeaturedProjectCard.astro'
+import ProjectCard from '@/components/projects/ProjectCard.astro'
 import { getFeaturedProjects } from '@/utils/collection'
 
 const featuredProjects = await getFeaturedProjects()
@@ -20,7 +20,7 @@ const featuredProjects = await getFeaturedProjects()
   <section class='featured'>
     <h2>Projects</h2>
     <div class='featured-grid'>
-      {featuredProjects.map((project, index) => <FeaturedProjectCard {project} index={index} />)}
+      {featuredProjects.map((project, index) => <ProjectCard {project} index={index} />)}
     </div>
   </section>
 
