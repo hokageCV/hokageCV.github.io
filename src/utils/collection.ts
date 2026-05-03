@@ -52,6 +52,16 @@ export async function getTilList() {
     .sort((a, b) => new Date(b.data.publishedDate).valueOf() - new Date(a.data.publishedDate).valueOf())
 }
 
+export async function getTilIndexList() {
+  const til_entries = await getCollection('til', ({ data }) => data.draft !== true)
+  const blog_entries = await getCollection('blogs', ({ data }) => {
+    return data.also_in_til === true && data.draft !== true
+  })
+
+  return [...til_entries, ...blog_entries]
+    .sort((a, b) => new Date(b.data.publishedDate).valueOf() - new Date(a.data.publishedDate).valueOf())
+}
+
 export function getTags(blogPostList: any[]): Record<string, number> {
   const tags: TagsType = {}
 

@@ -1,23 +1,25 @@
 ---
-import { getTilList } from '@/utils/collection'
+import { getTilIndexList } from '@/utils/collection'
 
-const til_list = await getTilList()
+const til_list = await getTilIndexList()
 ---
 
 <section>
   {
     await Promise.all(
-      til_list.map(async (til) => {
-        const { Content } = await til.render()
+      til_list.map(async (post) => {
+        const { Content } = await post.render()
+        const is_blog = post.collection === 'blogs'
+        const href = is_blog ? `/blogs/${post.slug}` : `/til/${post.slug}`
 
         return (
           <div class='card'>
-            <a href={`/til/${til.slug}`} class='title'>
-              {til.data.title}
+            <a href={href} class='title'>
+              {post.data.title}
             </a>
 
             <div class='til-date'>
-              {new Date(til.data.publishedDate).toLocaleDateString('en-US', {
+              {new Date(post.data.publishedDate).toLocaleDateString('en-US', {
                 day: '2-digit',
                 month: 'short',
                 year: 'numeric',

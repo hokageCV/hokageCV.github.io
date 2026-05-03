@@ -8,6 +8,7 @@ const blog = defineCollection({
     updatedDate: z.union([z.string(), z.date()]).optional(),
     draft: z.boolean().default(false),
     tags: z.array(z.string()),
+    also_in_til: z.boolean().optional().default(false),
   }),
 });
 
