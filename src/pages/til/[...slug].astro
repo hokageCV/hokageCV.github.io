@@ -2,22 +2,28 @@
 import TilPost from '@/components/til/TilPost.astro'
 import Base from '@/layouts/Base.astro'
 import { getTilList } from '@/utils/collection'
+import { render } from 'astro:content'
 
 export async function getStaticPaths() {
   const til_list = await getTilList()
-
-  return til_list.map((til) => ({
-    params: { slug: til.slug },
-    props: { til },
-  }))
+  const paths = await Promise.all(
+    til_list.map(async (til) => {
+      const { Content } = await render(til)
+      return {
+        params: { slug: til.id },
+        props: { til, Content },
+      }
+    }),
+  )
+  return paths
 }
 
-const { til } = Astro.props
+const { til, Content } = Astro.props
 const { data } = til
 ---
 
 <Base title={data.title}>
   <div data-pagefind-ignore='all'>
-    <TilPost {...til} />
+    <TilPost data={data} Content={Content} />
   </div>
 </Base>

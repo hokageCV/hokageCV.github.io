@@ -1,47 +1,48 @@
+import { archived_project_order, featured_project_order, project_order } from '@/data/projects'
 import type { TagsType } from '@/types'
 import { getCollection } from 'astro:content'
 import _slugify from 'slugify'
-import { projectOrder, featuredProjectOrder, archivedProjectOrder } from '@/data/projects'
 
 export async function getBlogList() {
-  const blogList = await getCollection('blogs')
-  return blogList
+  const blog_list = await getCollection('blogs')
+
+  return blog_list
     .filter(post => post.data.draft !== true)
-    .sort((a, b) => new Date(b.data.publishedDate).valueOf() - new Date(a.data.publishedDate).valueOf())
+    .sort((a, b) => new Date(b.data.published_date).valueOf() - new Date(a.data.published_date).valueOf())
 }
 
-export async function getProjectList({ archived = false, all = false }: {archived?: boolean, all?: boolean} = {}) {
-  const projectList = await getCollection('projects')
+export async function getProjectList({ archived = false, all = false }: { archived?: boolean, all?: boolean } = {}) {
+  const project_list = await getCollection('projects')
 
-  let orderList: string[];
+  let order_list: string[];
   if (all) {
-    orderList = [...projectOrder, ...archivedProjectOrder];
+    order_list = [...project_order, ...archived_project_order];
   } else {
-    orderList = archived ? archivedProjectOrder : projectOrder;
+    order_list = archived ? archived_project_order : project_order;
   }
-  const orderSet = new Set(orderList)
+  const order_set = new Set(order_list)
 
-  const filteredProjects = projectList
-    .filter((proj) => orderSet.has(proj.slug))
-    .sort((a, b) => orderList.indexOf(a.slug) - orderList.indexOf(b.slug))
+  const filtered_projects = project_list
+    .filter((proj) => order_set.has(proj.id))
+    .sort((a, b) => order_list.indexOf(a.id) - order_list.indexOf(b.id))
 
-  return filteredProjects
+  return filtered_projects
 }
 
 export async function getFeaturedProjects() {
   const project_list = await getCollection('projects')
-  const orderd_set = new Set(featuredProjectOrder)
+  const orderd_set = new Set(featured_project_order)
 
   return project_list
-    .filter((proj) => orderd_set.has(proj.slug))
-    .sort((a, b) => featuredProjectOrder.indexOf(a.slug) - featuredProjectOrder.indexOf(b.slug))
+    .filter((proj) => orderd_set.has(proj.id))
+    .sort((a, b) => featured_project_order.indexOf(a.id) - featured_project_order.indexOf(b.id))
 }
 
 export async function getSnippetList() {
-  const  snippetList = await getCollection('snippets')
+  const snippet_list = await getCollection('snippets')
 
-  return snippetList
-    .sort((a, b) => new Date(b.data.publishedDate).valueOf() - new Date(a.data.publishedDate).valueOf())
+  return snippet_list
+    .sort((a, b) => new Date(b.data.published_date).valueOf() - new Date(a.data.published_date).valueOf())
 }
 
 export async function getTilList() {
@@ -49,7 +50,7 @@ export async function getTilList() {
 
   return til_list
     .filter(post => post.data.draft !== true)
-    .sort((a, b) => new Date(b.data.publishedDate).valueOf() - new Date(a.data.publishedDate).valueOf())
+    .sort((a, b) => new Date(b.data.published_date).valueOf() - new Date(a.data.published_date).valueOf())
 }
 
 export async function getTilIndexList() {
@@ -59,13 +60,13 @@ export async function getTilIndexList() {
   })
 
   return [...til_entries, ...blog_entries]
-    .sort((a, b) => new Date(b.data.publishedDate).valueOf() - new Date(a.data.publishedDate).valueOf())
+    .sort((a, b) => new Date(b.data.published_date).valueOf() - new Date(a.data.published_date).valueOf())
 }
 
-export function getTags(blogPostList: any[]): Record<string, number> {
+export function getTags(blog_post_list: any[]): Record<string, number> {
   const tags: TagsType = {}
 
-  blogPostList.forEach((post) => {
+  blog_post_list.forEach((post) => {
     post.data.tags && post.data.tags.forEach((tag: string) => {
       if (!tags[tag]) { tags[tag] = 0 }
       tags[tag]++
@@ -79,56 +80,56 @@ export function slugify(text: string) {
   return _slugify(text, { lower: true })
 }
 
-export async function similarPosts(tag: string, excludingTitle: string = '') {
-  const blogPostList = await getBlogList()
-  let similarPosts = blogPostList.filter((post) => post.data.tags?.includes(tag))
+export async function similarPosts(tag: string, excluding_title: string = '') {
+  const blog_post_list = await getBlogList()
+  let similar_posts = blog_post_list.filter((post) => post.data.tags?.includes(tag))
 
-  if (excludingTitle !== '') return similarPosts = similarPosts.filter(post => post.data.title !== excludingTitle)
+  if (excluding_title !== '') return similar_posts = similar_posts.filter(post => post.data.title !== excluding_title)
 
-  return similarPosts
+  return similar_posts
 }
 
-export async function processedSimilarPosts(tags: string[], excludingTitle: string = '') {
+export async function processedSimilarPosts(tags: string[], excluding_title: string = '') {
   const MINIMUM_NUMBER_OF_SIMILAR_POSTS = 3
   const MAX_NUMBER_OF_SIMILAR_POSTS = 6
-  let otherPosts: any[] = []
+  let other_posts: any[] = []
 
   // get posts of all tags
   for (const tag of tags) {
-    const blogPostList = await similarPosts(tag, excludingTitle)
-    otherPosts = [...otherPosts, ...blogPostList]
+    const blog_post_list = await similarPosts(tag, excluding_title)
+    other_posts = [...other_posts, ...blog_post_list]
   }
-  otherPosts = removeDuplicatePosts(otherPosts)
+  other_posts = removeDuplicatePosts(other_posts)
 
-  if (otherPosts.length > MAX_NUMBER_OF_SIMILAR_POSTS) otherPosts.splice(MAX_NUMBER_OF_SIMILAR_POSTS);
-  if (otherPosts.length >= MINIMUM_NUMBER_OF_SIMILAR_POSTS) return otherPosts
+  if (other_posts.length > MAX_NUMBER_OF_SIMILAR_POSTS) other_posts.splice(MAX_NUMBER_OF_SIMILAR_POSTS);
+  if (other_posts.length >= MINIMUM_NUMBER_OF_SIMILAR_POSTS) return other_posts
 
-  const remainingPostsToFill = Math.abs(otherPosts.length - MINIMUM_NUMBER_OF_SIMILAR_POSTS)
+  const remaining_posts_to_fill = Math.abs(other_posts.length - MINIMUM_NUMBER_OF_SIMILAR_POSTS)
 
-  let additionalPosts = await getBlogList()
-  additionalPosts = additionalPosts.filter(post => {
-    if (post.data.title === excludingTitle) return false
+  let additional_posts = await getBlogList()
+  additional_posts = additional_posts.filter(post => {
+    if (post.data.title === excluding_title) return false
 
-    const postExistsInOtherPosts = otherPosts.some(otherPost => otherPost.data.slug === post.data.slug);
-    return !postExistsInOtherPosts;
+    const post_exists_in_other_posts = other_posts.some(otherPost => otherPost.id === post.id);
+    return !post_exists_in_other_posts;
 
   })
-  additionalPosts.splice(remainingPostsToFill)
+  additional_posts.splice(remaining_posts_to_fill)
 
-  const combinedPosts = [...otherPosts, ...additionalPosts]
-  return combinedPosts
+  const combined_posts = [...other_posts, ...additional_posts]
+  return combined_posts
 }
 
 function removeDuplicatePosts(posts: any[]) {
-  const titleMap = new Map<string, any>()
+  const title_map = new Map<string, any>()
 
   for (const post of posts) {
-    const postTitle = post.data.title
-    if (!titleMap.has(postTitle)) {
-      titleMap.set(postTitle, post)
+    const post_title = post.data.title
+    if (!title_map.has(post_title)) {
+      title_map.set(post_title, post)
     }
   }
 
-  const uniquePosts = Array.from(titleMap.values())
-  return uniquePosts
+  const unique_posts = Array.from(title_map.values())
+  return unique_posts
 }

@@ -2,8 +2,7 @@
 import externalLink from '@/assets/svg/external-link.svg'
 import { Image } from 'astro:assets'
 
-const { data, render } = Astro.props
-const { Content } = await render()
+const { data, Content } = Astro.props
 ---
 
 <div>
@@ -18,8 +17,8 @@ const { Content } = await render()
 
   <div class='project-links'>
     {
-      data.repoLink && (
-        <a href={data.repoLink} target='_blank' rel='noopener noreferrer' class='link-button'>
+      data.repo_link && (
+        <a href={data.repo_link} target='_blank' rel='noopener noreferrer' class='link-button'>
           <span>Source Code</span>
           <Image class='external-link-icon' src={externalLink} alt='external link icon' />
         </a>
@@ -27,8 +26,8 @@ const { Content } = await render()
     }
 
     {
-      data.liveLink && (
-        <a href={data.liveLink} target='_blank' rel='noopener noreferrer' class='link-button'>
+      data.live_link && (
+        <a href={data.live_link} target='_blank' rel='noopener noreferrer' class='link-button'>
           <span>Live Link</span>
           <Image class='external-link-icon' src={externalLink} alt='external link icon' />
         </a>

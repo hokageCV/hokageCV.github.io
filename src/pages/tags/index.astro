@@ -3,8 +3,8 @@ import TagList from '@/components/tags/TagList.astro'
 import Base from '@/layouts/Base.astro'
 import { getBlogList, getTags } from '@/utils/collection'
 
-const blogPostList = await getBlogList()
-const tags = getTags(blogPostList)
+const blog_post_list = await getBlogList()
+const tags = getTags(blog_post_list)
 ---
 
 <Base>

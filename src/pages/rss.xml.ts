@@ -2,19 +2,19 @@ import rss from '@astrojs/rss';
 import metadata from '../data/metadata';
 
 type Item = {
+  id: string;
   compiledContent: () => string;
   file: string;
   frontmatter: {
     title: string;
-    publishedDate: string;
+    published_date: string;
     description: string;
     draft: boolean;
-    slug: string;
   };
 };
 
 const items = Object.values(
-  import.meta.glob<Item>('../content/blogs/**/*.{md,mdx}', { eager: true })
+  import.meta.glob<Item>('../collections/blogs/**/*.{md,mdx}', { eager: true })
 ).filter((item) => {
   const fm = item.frontmatter;
   const errors: string[] = [];
@@ -22,10 +22,10 @@ const items = Object.values(
   if (fm.draft !== false) errors.push('draft is not explicitly set to false');
   if (!fm.title) errors.push('missing title');
   if (!fm.description) errors.push('missing description');
-  if (!fm.publishedDate) {
-    errors.push('missing publishedDate');
-  } else if (isNaN(new Date(fm.publishedDate).getTime())) {
-    errors.push(`invalid publishedDate: ${fm.publishedDate}`);
+  if (!fm.published_date) {
+    errors.push('missing published_date');
+  } else if (isNaN(new Date(fm.published_date).getTime())) {
+    errors.push(`invalid published_date: ${fm.published_date}`);
   }
 
   if (errors.length > 0) {
@@ -38,11 +38,11 @@ const items = Object.values(
 
 
 const formatDate = (item: Item): Date => {
-  const parsedDate = new Date(item.frontmatter.publishedDate);
+  const parsedDate = new Date(item.frontmatter.published_date);
 
   if (isNaN(parsedDate.getTime())) {
-    console.error(`Invalid publishedDate for item:`, item.frontmatter);
-    throw new Error(`RSS item has an invalid publishedDate`);
+    console.error(`Invalid published_date for item:`, item.frontmatter);
+    throw new Error(`RSS item has an invalid published_date`);
   }
 
   return parsedDate;
@@ -51,12 +51,17 @@ const formatDate = (item: Item): Date => {
 export async function GET() {
   const rssItems = await Promise.all(
     items.map(async (item) => {
+      // Derive slug from file path: ../collections/blogs/2025/text-expander.md -> text-expander
+      const filePath = item.file;
+      const match = filePath.match(/\/collections\/blogs\/[^/]+\/([^.]+)\./);
+      const slug = match ? match[1] : filePath.split('/').pop()?.replace(/\.[^.]+$/, '') || '';
+      
       const rssItem = {
         content: item.file.endsWith(".md") ? await item.compiledContent() : undefined,
         title: item.frontmatter.title,
         description: item.frontmatter.description,
         pubDate: formatDate(item),
-        link: `/blogs/${item.frontmatter.slug}`,
+        link: `/blogs/${slug}`,
       };
 
       const missing: string[] = [];

@@ -4,12 +4,11 @@ import BlogPostTags from './BlogPostTags.astro'
 import OtherPosts from './OtherPosts.astro'
 import Giscus from '@/components/Giscus.astro'
 
-const { data, render } = Astro.props
-const { Content } = await render()
+const { data, Content } = Astro.props
 ---
 
 <div>
-  <small data-pagefind-meta="date">{readableDate(data.publishedDate)}</small>
+  <small data-pagefind-meta="date">{readableDate(data.published_date)}</small>
   <h1>{data.title}</h1>
   {data.tags && <BlogPostTags tags={data.tags} />}
   <article data-pagefind-body>

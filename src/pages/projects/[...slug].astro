@@ -2,19 +2,24 @@
 import Project from '@/components/projects/Project.astro'
 import Base from '@/layouts/Base.astro'
 import { getProjectList } from '@/utils/collection'
+import { render } from 'astro:content'
 
 export async function getStaticPaths() {
-  const projectList = await getProjectList({ all: true })
-  return projectList.map((project) => ({
-    params: { slug: project.slug },
-    props: { project },
+  const project_list = await getProjectList({ all: true })
+  const paths = await Promise.all(project_list.map(async (project) => {
+    const { Content } = await render(project)
+    return {
+      params: { slug: project.id },
+      props: { project, Content },
+    }
   }))
+  return paths
 }
 
-const { project } = Astro.props
+const { project, Content } = Astro.props
 const { data } = project
 ---
 
 <Base title={data.title}>
-  <Project {...project} />
+  <Project data={data} Content={Content} />
 </Base>

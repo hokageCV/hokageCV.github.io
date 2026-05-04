@@ -1,20 +1,27 @@
 ---
-import Base from '@/layouts/Base.astro'
 import BlogPost from '@/components/blogs/BlogPost.astro'
+import Base from '@/layouts/Base.astro'
 import { getBlogList } from '@/utils/collection'
+import { render } from 'astro:content'
 
 export async function getStaticPaths() {
-  const blogList = await getBlogList()
-  return blogList.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }))
+  const blog_list = await getBlogList()
+  const paths = await Promise.all(
+    blog_list.map(async (post) => {
+      const { Content } = await render(post)
+      return {
+        params: { slug: post.id },
+        props: { post, Content },
+      }
+    }),
+  )
+  return paths
 }
 
-const { post } = Astro.props
+const { post, Content } = Astro.props
 const { data } = post
 ---
 
 <Base title={data.title} description={data.description}>
-  <BlogPost {...post} />
+  <BlogPost data={data} Content={Content} />
 </Base>

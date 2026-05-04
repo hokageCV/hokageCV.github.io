@@ -2,12 +2,12 @@
 import { readableDate } from '@/utils/date'
 
 const { post } = Astro.props
-const url = `/blogs/${post.slug}`
+const url = `/blogs/${post.id}`
 ---
 
 <li>
   <div>
-    <small>{readableDate(post.data.publishedDate, 'dd-LL-yyyy')}</small>
+    <small>{readableDate(post.data.published_date, 'dd-LL-yyyy')}</small>
     <p>
       <a href={url}>{post.data.title}</a>
     </p>

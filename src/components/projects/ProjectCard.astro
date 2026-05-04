@@ -1,7 +1,7 @@
 ---
 import { getExcerpt } from '@/utils/excerpt'
 const { project, index } = Astro.props
-const url = `/projects/${project.slug}`
+const url = `/projects/${project.id}`
 const excerpt = getExcerpt(project.body)
 ---
 
@@ -25,15 +25,15 @@ const excerpt = getExcerpt(project.body)
 
     <div class='links'>
       {
-        project.data.repoLink && (
-          <a href={project.data.repoLink} target='_blank' rel='noreferrer' class='link'>
+        project.data.repo_link && (
+          <a href={project.data.repo_link} target='_blank' rel='noreferrer' class='link'>
             Source Code
           </a>
         )
       }
       {
-        project.data.liveLink && (
-          <a href={project.data.liveLink} target='_blank' rel='noreferrer' class='link'>
+        project.data.live_link && (
+          <a href={project.data.live_link} target='_blank' rel='noreferrer' class='link'>
             Live Link
           </a>
         )

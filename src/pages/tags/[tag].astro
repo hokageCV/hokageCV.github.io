@@ -4,8 +4,8 @@ import Base from '@/layouts/Base.astro'
 import { getBlogList, getTags, slugify } from '@/utils/collection'
 
 export async function getStaticPaths() {
-  const blogPostList = await getBlogList()
-  const tags = getTags(blogPostList)
+  const blog_post_list = await getBlogList()
+  const tags = getTags(blog_post_list)
 
   return Object.keys(tags).map((tag) => {
     return {
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
       },
       props: {
         tag,
-        blogPostList: blogPostList.filter((post) => post.data.tags?.includes(tag)),
+        blogPostList: blog_post_list.filter((post) => post.data.tags?.includes(tag)),
       },
     }
   })

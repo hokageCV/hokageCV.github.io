@@ -1,16 +1,17 @@
 ---
 import { getSnippetList } from "@/utils/collection";
+import { render } from "astro:content";
 
 const snippetList = await getSnippetList();
 ---
 
 <section>
   {await Promise.all(snippetList.map(async (snippet) => {
-    const { Content } = await snippet.render();
+    const { Content } = await render(snippet);
 
     return (
       <div class='snippet-card'>
-        <a href={`/snippets/${snippet.slug}`} class='snippet-title'>
+        <a href={`/snippets/${snippet.id}`} class='snippet-title'>
           {snippet.data.title}
         </a>
         <div class='snippet-body'>

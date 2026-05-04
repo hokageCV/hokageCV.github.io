@@ -11,7 +11,7 @@ const otherPosts = await processedSimilarPosts(tags, title)
     otherPosts &&
       otherPosts.map((post) => (
         <div class='other-post-card'>
-          <a href={`/blogs/${post.data.slug}`} class='other-post-title'>{post.data.title}</a>
+          <a href={`/blogs/${post.id}`} class='other-post-title'>{post.data.title}</a>
           <div class='tags'>
             {post.data.tags &&
               post.data.tags.map((tag: string) => (

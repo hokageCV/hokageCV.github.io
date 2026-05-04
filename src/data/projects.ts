@@ -1,19 +1,19 @@
 // keep string same as file name (slug)
 
-export const projectOrder = [
+export const project_order = [
   'pravah',
   'simple-rss',
   'lakshya',
   'shiv-tandav-strotram',
 ];
 
-export const featuredProjectOrder = [
+export const featured_project_order = [
   'pravah',
   'simple-rss',
   'lakshya',
 ];
 
-export const archivedProjectOrder = [
+export const archived_project_order = [
   'train-seat-visualizer',
   'thumbnail-generator',
   'link-leaf',

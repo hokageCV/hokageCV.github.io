@@ -5,7 +5,7 @@ import { readableDate } from '@/utils/date'
 const blogList = await getBlogList()
 
 const groupedByYear = blogList.reduce((acc, post) => {
-  const year = new Date(post.data.publishedDate).getFullYear()
+  const year = new Date(post.data.published_date).getFullYear()
   if (!acc[year]) acc[year] = []
   acc[year].push(post)
   return acc
@@ -22,9 +22,9 @@ const years = Object.keys(groupedByYear).map(Number).sort((a, b) => b - a)
         {groupedByYear[year].map((post) => (
           <li>
             <div>
-              <small>{readableDate(post.data.publishedDate, 'dd LLL')}</small>
+              <small>{readableDate(post.data.published_date, 'dd LLL')}</small>
               <p>
-                <a href={`/blogs/${post.slug}`}>{post.data.title}</a>
+                <a href={`/blogs/${post.id}`}>{post.data.title}</a>
               </p>
             </div>
           </li>

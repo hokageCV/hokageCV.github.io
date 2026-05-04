@@ -1,12 +1,11 @@
 ---
-const { data, render } = Astro.props
-const { Content } = await render()
+const { data, Content } = Astro.props
 ---
 
 <div>
   <small>
     {
-      new Date(data.publishedDate).toLocaleDateString('en-US', {
+      new Date(data.published_date).toLocaleDateString('en-US', {
         day: '2-digit',
         month: 'short',
         year: 'numeric',

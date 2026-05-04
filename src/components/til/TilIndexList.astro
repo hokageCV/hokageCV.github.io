@@ -1,5 +1,6 @@
 ---
 import { getTilIndexList } from '@/utils/collection'
+import { render } from 'astro:content'
 
 const til_list = await getTilIndexList()
 ---
@@ -8,9 +9,9 @@ const til_list = await getTilIndexList()
   {
     await Promise.all(
       til_list.map(async (post) => {
-        const { Content } = await post.render()
+        const { Content } = await render(post)
         const is_blog = post.collection === 'blogs'
-        const href = is_blog ? `/blogs/${post.slug}` : `/til/${post.slug}`
+        const href = is_blog ? `/blogs/${post.id}` : `/til/${post.id}`
 
         return (
           <div class='card'>
@@ -19,7 +20,7 @@ const til_list = await getTilIndexList()
             </a>
 
             <div class='til-date'>
-              {new Date(post.data.publishedDate).toLocaleDateString('en-US', {
+              {new Date(post.data.published_date).toLocaleDateString('en-US', {
                 day: '2-digit',
                 month: 'short',
                 year: 'numeric',

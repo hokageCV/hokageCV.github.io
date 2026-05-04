@@ -4,11 +4,11 @@ Personal website and blog built with Astro. Contains blog posts, projects, code 
 
 ## Project Overview
 
-- Framework: Astro 5.x
+- Framework: Astro 6.x
 - Package Manager: pnpm (v10.4.1)
 - Language: TypeScript (strict mode)
 - Styling: CSS with custom properties (Utopia fluid typography, CSS variables)
-- Content: Astro Content Collections (blogs, projects, snippets)
+- Content: Astro Content Layer API with Content Collections
 
 ## Build Commands
 
@@ -17,7 +17,7 @@ pnpm dev          # Start development server (default on folder open)
 pnpm start        # Alias for pnpm dev
 pnpm build        # Build for production (outputs to dist/)
 pnpm preview      # Preview production build locally
-pnpm astro        # Run Astro CLI directly
+pnpm astro       # Run Astro CLI directly
 ```
 
 ### Running Single Test
@@ -37,25 +37,22 @@ src/
 │   ├── contact/      # Contact form components
 │   ├── header/       # Header components
 │   └── *.astro       # Shared components
-├── content/          # Astro Content Collections
-│   ├── blogs/        # Blog posts (Markdown, organized by year)
-│   ├── projects/     # Project entries (Markdown)
-│   └── snippets/     # Code snippet entries (Markdown)
+├── collections/     # Content collections (CONTENT LAYER API)
+│   ├── blogs/
+│   ├── projects/
+│   ├── snippets/
+│   └── til/
+├── content.config.ts # Content collections config (Content Layer API)
 ├── data/             # Static data files (JS/TS)
 ├── layouts/          # Astro layouts
 ├── pages/            # Astro pages (file-based routing)
-│   ├── blogs/[...slug].astro
-│   ├── projects/[...slug].astro
-│   ├── snippets/[...slug].astro
-│   ├── tags/[tag].astro
-│   └── rss.xml.ts
 ├── styles/           # Global CSS files
 ├── utils/            # Utility functions (camelCase TS files)
-└── types.ts          # Shared TypeScript types
+└── types.ts         # Shared TypeScript types
 
 public/
 ├── fonts/            # Font files for OG image generation
-└── ...               # Static assets
+└── ...              # Static assets
 
 astro.config.mjs     # Astro configuration
 tsconfig.json        # TypeScript configuration
@@ -73,7 +70,7 @@ import type { TagsType } from '@/types'
 
 // Third-party imports
 import { DateTime } from 'luxon'
-import { getCollection } from 'astro:content'
+import { getCollection, render } from 'astro:content'
 
 // Node.js imports
 import fs from "node:fs/promises";
@@ -94,14 +91,41 @@ import fs from "node:fs/promises";
 
 ### Astro Components
 
-Frontmatter uses TypeScript:
+**For pages rendering content** (uses Content Layer API):
 ```astro
 ---
 import Base from '@/layouts/Base.astro'
+import BlogPost from '@/components/blogs/BlogPost.astro'
+import { getBlogList } from '@/utils/collection'
+import { render } from 'astro:content'
+
+export async function getStaticPaths() {
+  const blogList = await getBlogList()
+  const paths = await Promise.all(blogList.map(async (post) => {
+    const { Content } = await render(post)
+    return {
+      params: { slug: post.id },
+      props: { post, Content },
+    }
+  }))
+  return paths
+}
+
+const { post, Content } = Astro.props
+const { data } = post
+---
+
+<Base title={data.title}>
+  <BlogPost data={data} Content={Content} />
+</Base>
+```
+
+**For nested components** (receives Content):
+```astro
+---
 import { readableDate } from '@/utils/date'
 
-const { data, render } = Astro.props
-const { Content } = await render()
+const { data, Content } = Astro.props
 ---
 
 <div>
@@ -110,10 +134,7 @@ const { Content } = await render()
 </div>
 
 <style>
-  /* Component-scoped styles */
-  div {
-    display: flex;
-  }
+  div { display: flex; }
 </style>
 ```
 
@@ -138,42 +159,6 @@ const { Content } = await render()
 - Use Astro's `logger.warn()` / `logger.error()` in integration hooks
 - Handle missing files gracefully with informative error messages
 
-### Content Collections
-
-Define content in `src/content/` with frontmatter matching schemas:
-
-Blog frontmatter:
-```markdown
----
-title: "Post Title"
-description: "Post description"
-publishedDate: "2024-01-15"
-draft: false
-tags: ["javascript", "backend"]
----
-```
-
-Project frontmatter:
-```markdown
----
-title: "Project Name"
-repoLink: "https://github.com/..."
-liveLink: "https://..."
-cover:
-  image: "/path/to/image.png"
-  alt: "Description"
----
-```
-
-Snippet frontmatter:
-```markdown
----
-title: "Snippet Title"
-publishedDate: "2024-01-15"
-tags: ["ruby", "rails"]
----
-```
-
 ## Architecture Notes
 
 ### Path Aliases
@@ -181,6 +166,8 @@ tags: ["ruby", "rails"]
 Configured in `tsconfig.json`:
 - `@/*` → `src/*`
 - `~/assets/*` → `src/assets/*`
+
+Note: Use `moduleResolution: "bundler"` (not `node`) for Astro v6+ to resolve virtual modules from `astro/loaders`, `astro/zod`.
 
 ### Astro Configuration
 
@@ -190,34 +177,7 @@ Key settings in `astro.config.mjs`:
 - Integrations: MDX, Partytown, Sitemap, Expressive Code
 - Expressive Code theme: `solarized-dark`
 
-### Dynamic Routing
-
-- `src/pages/blogs/[...slug].astro` - Individual blog posts
-- `src/pages/projects/[...slug].astro` - Individual projects
-- `src/pages/snippets/[...slug].astro` - Individual snippets
-- `src/pages/tags/[tag].astro` - Tag-filtered pages
-
-### OG Image Generation
-
-Custom Astro integration (`src/utils/open-graph.ts`) generates OpenGraph images for blog posts during build. Font file required at `public/fonts/JetBrainsMono-Regular.ttf`.
-
-## Git Workflow
-
-- Branch: `main` (triggers deploy to GitHub Pages)
-- CI/CD: GitHub Actions workflow in `.github/workflows/deploy.yaml`
-- Dist and node_modules are gitignored
-
 ## Common Tasks
-
-### Add a new blog post
-1. Create `src/content/blogs/YYYY/slug.md`
-2. Add frontmatter with title, description, publishedDate, tags
-3. Write content in Markdown/MDX
-
-### Add a new project
-1. Create `src/content/projects/slug.md`
-2. Add frontmatter with title, cover, optional links
-3. Update `src/data/projects.ts` with project order
 
 ### Modify theme/styles
 1. Edit `src/styles/global.css` for global styles and CSS variables
