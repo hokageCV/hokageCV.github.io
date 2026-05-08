@@ -4,6 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import expressiveCode from 'astro-expressive-code';
 import pagefind from "astro-pagefind";
 import { defineConfig } from 'astro/config';
+import og from './src/utils/open-graph'
 
 export default defineConfig({
   site: 'https://chaitanyavaru.com',
@@ -35,5 +36,6 @@ export default defineConfig({
     pagefind({
       exclude: ['/til/**']
     }),
+    og(),
   ]
 });

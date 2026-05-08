@@ -13,20 +13,79 @@ const render = (title: string) => ({
       width: "100%",
       display: "flex",
       flexDirection: "column",
-      justifyContent: 'flex-start',
-      alignItems: 'flex-start',
-      backgroundColor: "#0d2134",
-      padding: "55px 70px",
-      color: "#70E1C8",
-      fontFamily: "JetBrains Mono",
-      fontSize: 72,
+      backgroundColor: "#0a1628",
+      position: "relative",
+      overflow: "hidden",
     },
     children: [
       {
         type: "div",
         props: {
-          style: { marginTop: 96 },
-          children: title,
+          style: {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: 8,
+            backgroundColor: "#60D5FA",
+          },
+        },
+      },
+      {
+        type: "div",
+        props: {
+          style: {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            flex: 1,
+            padding: "80px 100px",
+          },
+          children: [
+            {
+              type: "div",
+              props: {
+                style: {
+                  fontSize: 64,
+                  fontWeight: 700,
+                  color: "#ffffff",
+                  lineHeight: 1.2,
+                  maxWidth: 900,
+                },
+                children: title,
+              },
+            },
+          ],
+        },
+      },
+      {
+        type: "div",
+        props: {
+          style: {
+            position: "absolute",
+            bottom: -60,
+            right: -60,
+            width: 300,
+            height: 300,
+            borderRadius: "50%",
+            border: "4px solid #60D5FA",
+            opacity: 0.2,
+          },
+        },
+      },
+      {
+        type: "div",
+        props: {
+          style: {
+            position: "absolute",
+            bottom: -120,
+            right: 100,
+            width: 200,
+            height: 200,
+            borderRadius: "50%",
+            border: "4px solid #60D5FA",
+            opacity: 0.15,
+          },
         },
       },
     ],
@@ -53,7 +112,7 @@ const og = (): AstroIntegration => ({
             continue;
           }
 
-          const { title } = parseFrontmatter(file).data;
+          const { data: { title } } = parseFrontmatter(file)
 
           const svg = await satori(render(title), {
             width: 1200,
@@ -81,8 +140,6 @@ const og = (): AstroIntegration => ({
             path.join(finalDir, 'og.png'), // Output file name and path
             resvg.render().asPng(),
           );
-
-          logger.info(`Generated OpenGraph image for ${slug}`);
         }
       }
       catch (e) {
@@ -93,9 +150,25 @@ const og = (): AstroIntegration => ({
   },
 });
 
+async function getAvailableYears() {
+  const srcBasePath = path.join('src', 'collections', 'blogs');
+
+  try {
+    const entries = await fs.readdir(srcBasePath, { withFileTypes: true });
+
+    return entries
+      .filter(e => e.isDirectory())
+      .map(e => e.name)
+      .filter(n => /^\d{4}$/.test(n))
+      .sort();
+  } catch {
+    return [];
+  }
+}
+
 async function getFile(slug: string) {
-  const srcBasePath = path.join('src', 'content', 'blogs');
-  const years = ["2023", "2024"];
+  const srcBasePath = path.join('src', 'collections', 'blogs');
+  const years = await getAvailableYears();
 
   for (const year of years) {
     const yearPath = path.join(srcBasePath, year);
@@ -106,16 +179,17 @@ async function getFile(slug: string) {
       for (const entry of entries) {
         const fullPath = path.join(yearPath, entry.name);
 
-        if (entry.isFile() && entry.name === `${slug}.md`) {
+        if (entry.isFile() && (entry.name === `${slug}.md` || entry.name === `${slug}.mdx`)) {
           return await fs.readFile(fullPath);
         } else if (entry.isDirectory() && entry.name === slug) {
-          const indexPath = path.join(fullPath, "index.md");
-          try {
-            if ((await fs.stat(indexPath)).isFile()) {
-              return await fs.readFile(indexPath);
-            }
-          } catch (e) {
-            // No index.md found in this directory
+          for (const ext of ['md', 'mdx']) {
+            const indexPath = path.join(fullPath, `index.${ext}`);
+
+            try {
+              if ((await fs.stat(indexPath)).isFile()) {
+                return await fs.readFile(indexPath);
+              }
+            } catch (e) { }
           }
         }
       }

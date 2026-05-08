@@ -8,7 +8,9 @@ import GoogleAnalytics from './GoogleAnalytics.astro'
 const pageTitle = Astro.props.title ?? metadata.title
 const pageDescription = Astro.props.description ?? metadata.description
 
-const ogImage = metadata['og-image'];
+const ogImage = Astro.url.pathname.startsWith('/blogs/')
+  ? new URL(Astro.url.pathname + '/og.png', Astro.site)
+  : undefined;
 ---
 
 <head>
@@ -22,7 +24,7 @@ const ogImage = metadata['og-image'];
 
   <meta property='og:type' content='website' />
   <meta property='og:title' content={pageTitle} />
-  <!-- <meta property='og:image' content={ogImage} /> -->
+  {ogImage && <meta property='og:image' content={ogImage} />}
   <meta property='og:url' content={metadata.url} />
   <meta property='og:description' content={pageDescription} />
 
