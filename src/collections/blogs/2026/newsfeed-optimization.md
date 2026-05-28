@@ -1,88 +1,83 @@
 ---
 title: How I Optimized newsfeed from 12s to 3s
 slug: newsfeed-optimization
-published_date: 2026-01-22
-description: newsfeed optimization
-draft: true
-tags: ['rails']
+published_date: 2026-05-28
+description: Newsfeed optimization with instrumentation
+draft: false
+tags: ['rails', 'optimization']
 ---
 
-<!-- =====================
+Our newsfeed had become very slow for clients, sometimes even resulting in a browser timeout. So I started working on newsfeed optimization.
 
- - start by understandsing 'where the time is actually spent?'
-     - sql queries, loops, external apis, json building etc
+But what to optimize? Before optimizing anything, we need to find out where and what to optimize. I used instrumentation in the newsfeed code flow.
+
+## Instrumentation. What is that?
+
+> Instrumentation is the practice of adding code to an application to monitor, measure, and analyze its runtime behavior.
+
+At its simplest, instrumentation can be as basic as adding print statements to observe code execution. But it goes far beyond that. With tools like OpenTelemetry, we can track the full lifecycle of a request.
+
+For instrumentation I used a helper method.
+
 ```rb
 def measure(label)
-  t0 = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+  start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
   result = yield
-  puts "#{label}: #{Process.clock_gettime(Process::CLOCK_MONOTONIC) - t0}s"
+
+  elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start
+
+  puts "#{label}: #{elapsed.round(2)}s"
   result
 end
-
-# usage
-measure("sql_load") { load_data_from_db }
 ```
- - scan for common slow patterns
-     - N+1, expensive db operations, large objects built inside loops, reformatting data mulitple times (json -> ruby -> json)
- - break lengthy code into logical blocks without changing logic
-     - this helps to isolate and measure each block
- - copy current output
-     - this way, you can compare with updated method's output
- -
 
-=====================
-Docs to read
+The helper accepts a label and executes the given code block. It returns the result and prints the execution time.
 
-- <https://ruby-doc.org/stdlib-2.5.0/libdoc/benchmark/rdoc/Benchmark.html>
+## Back to Newsfeed
 
-Benchmarking Methods
-
-## 1. Use Benchmark module (Basic Timing)
-
-This will give you a rough idea of execution time.
+At a high level, the flow looked something like this:
 
 ```rb
-require 'benchmark'
+def generate_newsfeed
+  public_stories = Story.get_public_stories
+  event_updates = Event.get_event_updates
+  task_completions = Task.get_task_completions
 
-def update_feeds
-  time = Benchmark.realtime do
-    @user.feeds.each do |feed|
-      feed_data = FetchFeedService.new(feed.url).call
-      SaveArticlesService.new(feed, feed_data[:articles]).call
-    end
-
-    @articles = @user.articles.unread.recent_first.of_this_week
-  end
-
-  Rails.logger.info "update_feeds execution time: #{time.round(2)} seconds"
-
-  redirect_to home_index_path
+  generate_newsfeed(public_stories, event_updates, task_completions)
 end
 ```
+The flow collected records from multiple classes and returned a single object to render in the view.
 
-This will log the execution time to your Rails logs.
+<small>Method names and flow are abstracted for simplicity. Same for log values below.</small>
 
-## 2. Use Benchmark.measure (More Detailed Output)
-
-This provides more details, including user/system CPU time.
+I wrapped queries with the helper.
 
 ```rb
-require 'benchmark'
+def generate_newsfeed
+  public_stories = measure("public_stories") { Story.get_public_stories }
+  event_updates = measure("event_updates") { Event.get_event_updates }
+  task_completions = measure("task_completions") { Task.get_task_completions }
 
-def update_feeds
-  report = Benchmark.measure do
-    @user.feeds.each do |feed|
-      feed_data = FetchFeedService.new(feed.url).call
-      SaveArticlesService.new(feed, feed_data[:articles]).call
-    end
-
-    @articles = @user.articles.unread.recent_first.of_this_week
+  measure("generate_newsfeed") do
+    generate_newsfeed(public_stories, event_updates, task_completions)
   end
-
-  Rails.logger.info "Benchmarking update_feeds: #{report}"
-
-  redirect_to home_index_path
 end
 ```
+Example logs look like this:
 
-===================== -->
+```sh
+public_stories: 7.12s
+event_updates: 2.08s
+task_completions: 1.03s
+generate_newsfeed: 1.05s
+```
+
+With the logs, it was clear that fetching stories was taking most time.
+After instrumenting `get_public_stories`, I found some N+1 queries which helped a little.
+
+Most of the time was spent initializing ActiveRecord objects. Full database rows were being fetched even though only a few attributes were needed. So instead of initializing full objects, I used `.pluck`[^pluck_in_rails] to fetch only the required attributes.
+
+
+With the above optimizations, the `generate_newsfeed` method went from 12s to 3s.
+
+[^pluck_in_rails]: In ActiveRecord, `.pluck` fetches only the required attributes from the database instead of initializing full objects.
