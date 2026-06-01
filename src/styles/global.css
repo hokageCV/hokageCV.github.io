@@ -289,6 +289,10 @@ div:has(> article) {
     margin-block-end: 1em;
   }
 
+  .expressive-code .frame {
+    margin-block-end: var(--space-s);
+  }
+
   @media (max-width: 768px) {
     max-width: 95%;
   }
