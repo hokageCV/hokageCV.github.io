@@ -23,9 +23,8 @@ const years = Object.keys(groupedByYear).map(Number).sort((a, b) => b - a)
           <li>
             <div>
               <small>{readableDate(post.data.published_date, 'dd LLL')}</small>
-              <p>
-                <a href={`/blogs/${post.id}`}>{post.data.title}</a>
-              </p>
+              <span class="favorite-star">{post.data.favorite ? '★' : '\u00A0'}</span>
+              <a href={`/blogs/${post.id}`}>{post.data.title}</a>
             </div>
           </li>
         ))}
@@ -67,6 +66,13 @@ const years = Object.keys(groupedByYear).map(Number).sort((a, b) => b - a)
             color: grey;
             min-width: 55px;
             flex-shrink: 0;
+          }
+
+          .favorite-star {
+            color: #f5a623;
+            flex-shrink: 0;
+            width: 1em;
+            text-align: center;
           }
 
           a {

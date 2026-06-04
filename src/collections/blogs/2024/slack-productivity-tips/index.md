@@ -4,6 +4,7 @@ slug: slack-productivity-tips
 published_date: 2024-12-15
 updated_date: 2026-04-28
 description: Slack productivity tips to to reduce distraction and have deep work.
+favorite: true
 draft: false
 tags: ['productivity']
 ---

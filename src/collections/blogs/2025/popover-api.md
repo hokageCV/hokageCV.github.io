@@ -3,6 +3,7 @@ title: Simplifying popups using the Popover API
 slug: popover-api
 published_date: 2025-08-05
 description: Introduction to Popover API and dialog element
+favorite: true
 draft: false
 tags: ['html', 'browser']
 ---

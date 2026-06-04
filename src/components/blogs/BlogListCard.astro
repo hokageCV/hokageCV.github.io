@@ -6,12 +6,11 @@ const url = `/blogs/${post.id}`
 ---
 
 <li>
-  <div>
-    <small>{readableDate(post.data.published_date, 'dd-LL-yyyy')}</small>
-    <p>
+    <div>
+      <small>{readableDate(post.data.published_date, 'dd-LL-yyyy')}</small>
+      <span class="favorite-star">{post.data.favorite ? '★' : '\u00A0'}</span>
       <a href={url}>{post.data.title}</a>
-    </p>
-  </div>
+    </div>
 </li>
 
 <style>
@@ -30,6 +29,13 @@ const url = `/blogs/${post.id}`
         font-size: var(--step--2);
         color: grey;
         flex-shrink: 0;
+      }
+
+      .favorite-star {
+        color: #f5a623;
+        flex-shrink: 0;
+        width: 1em;
+        text-align: center;
       }
 
       a {

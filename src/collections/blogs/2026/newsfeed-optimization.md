@@ -3,6 +3,7 @@ title: How I Optimized newsfeed from 12s to 3s
 slug: newsfeed-optimization
 published_date: 2026-05-28
 description: Newsfeed optimization with instrumentation
+favorite: true
 draft: false
 tags: ['rails', 'optimization']
 ---

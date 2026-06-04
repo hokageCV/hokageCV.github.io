@@ -4,6 +4,7 @@ slug: journey-of-learning-vim-motions
 published_date: 2023-12-10
 updated_date: 2024-04-13
 description: My journey of learning vim motions
+favorite: true
 draft: false
 tags: ['vim']
 ---

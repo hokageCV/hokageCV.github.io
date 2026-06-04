@@ -3,6 +3,7 @@ title: "Save Hours Each Week with a Text Expander"
 slug: text-expander
 published_date: 2025-04-27
 description: How I use text-expander to have a productive workflow
+favorite: true
 draft: false
 tags: ['productivity']
 what is it that I want reader to take away from reading this?: |

@@ -3,6 +3,7 @@ title: How I Debugged Unexpected Attribute Changes in Rails
 slug: active-model-dirty
 published_date: 2025-09-09
 description: Tracking attribute changes in Rails with ActiveModel::Dirty
+favorite: true
 draft: false
 tags: ['ruby-on-rails']
 ---
