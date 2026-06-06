@@ -9,6 +9,9 @@ import og from './src/utils/open-graph'
 export default defineConfig({
   site: 'https://chaitanyavaru.com',
   trailingSlash: 'never',
+  build: {
+    format: 'file',
+  },
   markdown: {
     remarkRehype: {
       footnoteLabelTagName: 'hr',
