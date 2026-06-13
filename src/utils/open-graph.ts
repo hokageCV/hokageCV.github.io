@@ -136,7 +136,6 @@ const og = (): AstroIntegration => ({
           const basePath = process.cwd();
           const finalDir = path.join(basePath, 'dist', 'blogs', slug);
 
-          await fs.mkdir(finalDir, { recursive: true });
           await fs.writeFile(
             path.join(finalDir, 'og.png'), // Output file name and path
             resvg.render().asPng(),
