@@ -20,7 +20,7 @@ export default defineConfig({
     partytown(),
     sitemap(),
     expressiveCode({
-      themes: ['solarized-dark'],
+      themes: ['material-theme'],
       defaultProps: {
         showCopyButton: true,
         wrap: true

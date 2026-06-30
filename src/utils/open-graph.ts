@@ -103,6 +103,23 @@ const og = (): AstroIntegration => ({
           if (!pathname.startsWith('blogs/')) continue;
 
           const slug = pathname.slice(6);
+
+          const sourceDir = await getSourceDir(slug);
+          if (sourceDir) {
+            const customOg = path.join(sourceDir, 'og.png');
+            try {
+              await fs.stat(customOg);
+              const basePath = process.cwd();
+              const finalDir = path.join(basePath, 'dist', 'blogs', slug);
+              await fs.mkdir(finalDir, { recursive: true });
+              await fs.copyFile(customOg, path.join(finalDir, 'og.png'));
+              logger.info(`Copied custom og.png for ${slug}`);
+              continue;
+            } catch (e) {
+              // no custom og.png, proceed with generation
+            }
+          }
+
           let file;
 
           try {
@@ -198,6 +215,32 @@ async function getFile(slug: string) {
     }
   }
   throw new Error(`Markdown file not found for slug: ${slug}`);
+}
+
+async function getSourceDir(slug: string): Promise<string | null> {
+  const srcBasePath = path.join('src', 'collections', 'blogs');
+  const years = await getAvailableYears();
+
+  for (const year of years) {
+    const yearPath = path.join(srcBasePath, year);
+
+    try {
+      const entries = await fs.readdir(yearPath, { withFileTypes: true });
+
+      for (const entry of entries) {
+        const fullPath = path.join(yearPath, entry.name);
+
+        if (entry.isFile() && (entry.name === `${slug}.md` || entry.name === `${slug}.mdx`)) {
+          return yearPath;
+        } else if (entry.isDirectory() && entry.name === slug) {
+          return fullPath;
+        }
+      }
+    } catch (e) {
+      console.warn(`Could not read year directory: ${yearPath}`);
+    }
+  }
+  return null;
 }
 
 export default og;
