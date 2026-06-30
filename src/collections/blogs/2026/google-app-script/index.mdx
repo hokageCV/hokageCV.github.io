@@ -1,0 +1,137 @@
+---
+title: How I keep my inbox clutter free with Google Apps Script
+slug: google-app-script
+published_date: 2026-06-30
+description: 'Using Google Apps Script to automatically delete old alert emails from your inbox.'
+favorite: true
+draft: false
+tags: []
+---
+
+import CaptionImage from "@/components/caption-image.astro";
+
+import add_trigger from "./add_trigger.webp";
+import execution_logs from "./execution_logs.webp";
+import run_btn from "./run_btn.webp";
+
+It is common nowadays to receive a lot of alert emails from various companies. Most of them are unnecessary. But some of them are useful, like the alert emails from banks when our account is accessed or any transaction is processed.
+
+I prefer to keep my inbox clutter free. Usually I use filters to either archive or delete emails. Filters are applied right before the emails arrive at the inbox. But I do want notifications for alert emails. I wanted the emails to reach my inbox so that I get notified, and then get cleared after some time. Google Apps Script was a perfect solution here.
+
+Let's see how to configure a script to automatically delete old alert emails from your inbox.
+
+## Okay, But what is Google App Script?
+
+Google Apps Script is a cloud platform using which we can automate our workflow inside our Google Workspace.
+
+Think of it as functions that we can run based on some event or at regular intervals.
+
+### Create new project
+
+Visit the app script [home page][app_script_page]. And then create a new project.
+
+### Add function
+
+In the editor, add below function.
+
+```js
+function delete_alert_emails() {
+  const login_alert = '(from:email@bank.com subject:"Bank Account Accessed")';
+  const search_query = login_alert;
+
+  const threads = GmailApp.search(search_query);
+  const count = threads.length;
+
+  if (count === 0) {
+    Logger.log("No matching old emails found. Doing nothing.");
+    return;
+  }
+
+  Logger.log("Starting deletion process...");
+  GmailApp.moveThreadsToTrash(threads);
+
+  Logger.log(`Successfully moved ${count} threads to the Trash folder.`);
+}
+```
+
+The function defines criteria to use for searching the emails. If any email matches the criteria, they are moved to trash.
+
+I have used sender's email and subject for criteria. You can change the criteria based on your use case.
+
+For example, this query [combines multiple conditions][gmail_search_operator] with OR and also limits matches to emails older than four days.
+
+```js
+  const login_alert = '(from:email@bank.com subject:"Bank Account Accessed")';
+  const transfer_alert = '(from:email@anotherbank.com subject:"Funds Transfered")';
+  const age_condition = 'older_than:4d';
+
+  const search_query = `{ ${login_alert} OR ${transfer_alert} } ${age_condition}`;
+```
+
+Once added, save[^save_script] the script.
+
+### Run the function
+
+<CaptionImage
+  src={run_btn}
+  alt="Run button"
+  caption="Run button at the top of the editor"
+/>
+
+When executed for first time, it will ask for permissions.
+
+When running, it will also show the execution logs.
+
+<CaptionImage
+  src={execution_logs}
+  alt="Execution logs"
+  caption="Execution logs when the function is executed"
+/>
+
+#### Test
+
+It is good to test the function before deleting the actual emails. For this, you can comment out the line that deletes emails.
+
+You can also print the subject of the emails that are matching the search query while testing using this example snippet.
+
+```js
+// GmailApp.moveThreadsToTrash(threads);
+for (let i = 0; i < threads.length; i++) {
+  console.log(threads[i].getFirstMessageSubject());
+}
+```
+
+Once tested, we can proceed to add a trigger.
+
+### Trigger
+
+With triggers, the function will be executed on a regular interval instead of us executing it manually.
+
+Steps to add a trigger:
+
+1. From the sidebar, select trigger.
+2. Create a new trigger
+    - <CaptionImage src={add_trigger} alt="Add trigger dialog box" caption="Add trigger dialog box" />
+3. In the popup
+    1. Select the function to be triggered
+    2. Select 'time-driven' for event source
+    3. Select the frequency
+    4. Select the interval as 'every hour[^hourly_trigger]'
+
+Now, every hour the function will be executed.
+
+## That's it
+
+With this setup, I no longer have to manually clean up these alert emails. I still get notified when they arrive, and my inbox stays clutter free.
+
+
+[^save_script]: The file will be saved in your google drive. By default, it will be in root folder but can be moved to any other folders.
+
+[^hourly_trigger]: Hourly email clearance felt fine to me.
+    For people who don't open emails regularly, like parents, I have set up weekly clearance.
+
+[gmail_search_operator]: <https://support.google.com/mail/answer/7190>
+[app_script_page]: <https://script.google.com/home>
+[app_script_quotas]: <https://developers.google.com/apps-script/guides/services/quotas>
+[gmail_app_doc]: <https://developers.google.com/apps-script/reference/gmail/gmail-app>
+
