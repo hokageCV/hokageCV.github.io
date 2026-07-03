@@ -1,4 +1,5 @@
 import mdx from '@astrojs/mdx';
+import { unified } from '@astrojs/markdown-remark';
 import partytown from '@astrojs/partytown';
 import sitemap from "@astrojs/sitemap";
 import expressiveCode from 'astro-expressive-code';
@@ -6,18 +7,18 @@ import { pluginLanguageLogo } from 'ec-lang-logo';
 import pagefind from "astro-pagefind";
 import { defineConfig } from 'astro/config';
 import og from './src/utils/open-graph'
-import rehypeImageLoading from './src/utils/rehype-image-loading'
 
 export default defineConfig({
   site: 'https://chaitanyavaru.com',
   trailingSlash: 'never',
   markdown: {
-    rehypePlugins: [rehypeImageLoading],
-    remarkRehype: {
-      footnoteLabelTagName: 'hr',
-      footnoteLabel: '',
-      footnoteLabelProperties: { className: ['footnotes'] }
-    }
+    processor: unified({
+      remarkRehype: {
+        footnoteLabelTagName: 'hr',
+        footnoteLabel: '',
+        footnoteLabelProperties: { className: ['footnotes'] }
+      }
+    })
   },
   integrations: [
     partytown(),
@@ -30,14 +31,7 @@ export default defineConfig({
       },
       plugins: [pluginLanguageLogo({ color: 'theme' })]
     }),
-    mdx({
-      rehypePlugins: [rehypeImageLoading],
-      remarkRehype: {
-        footnoteLabelTagName: 'hr',
-        footnoteLabel: '',
-        footnoteLabelProperties: { className: ['footnotes'] }
-      }
-    }),
+    mdx(),
     pagefind({
       exclude: ['/til/**']
     }),
