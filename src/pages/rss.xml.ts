@@ -9,7 +9,6 @@ type Item = {
     title: string;
     published_date: string;
     description: string;
-    draft: boolean;
   };
 };
 
@@ -19,7 +18,6 @@ const items = Object.values(
   const fm = item.frontmatter;
   const errors: string[] = [];
 
-  if (fm.draft !== false) errors.push('draft is not explicitly set to false');
   if (!fm.title) errors.push('missing title');
   if (!fm.description) errors.push('missing description');
   if (!fm.published_date) {

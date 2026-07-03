@@ -3,7 +3,6 @@ title: select2
 slug:  select2
 published_date: 2024-04-21
 description: select2
-draft: true
 tags: ['javascript']
 ---
 

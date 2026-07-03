@@ -1,8 +1,8 @@
 ---
 import { readableDate } from '@/utils/date'
 
-const { post } = Astro.props
-const url = `/blogs/${post.id}`
+const { post, basePath = '/blogs' } = Astro.props
+const url = `${basePath}/${post.id}`
 ---
 
 <li>

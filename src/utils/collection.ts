@@ -7,7 +7,6 @@ export async function getBlogList() {
   const blog_list = await getCollection('blogs')
 
   return blog_list
-    .filter(post => post.data.draft !== true)
     .sort((a, b) => new Date(b.data.published_date).valueOf() - new Date(a.data.published_date).valueOf())
 }
 
@@ -45,6 +44,13 @@ export async function getSnippetList() {
     .sort((a, b) => new Date(b.data.published_date).valueOf() - new Date(a.data.published_date).valueOf())
 }
 
+export async function getDraftList() {
+  const draft_list = await getCollection('drafts')
+
+  return draft_list
+    .sort((a, b) => new Date(b.data.published_date).valueOf() - new Date(a.data.published_date).valueOf())
+}
+
 export async function getTilList() {
   const til_list = await getCollection('til')
 
@@ -55,9 +61,7 @@ export async function getTilList() {
 
 export async function getTilIndexList() {
   const til_entries = await getCollection('til', ({ data }) => data.draft !== true)
-  const blog_entries = await getCollection('blogs', ({ data }) => {
-    return data.also_in_til === true && data.draft !== true
-  })
+  const blog_entries = await getCollection('blogs', ({ data }) => data.also_in_til === true)
 
   return [...til_entries, ...blog_entries]
     .sort((a, b) => new Date(b.data.published_date).valueOf() - new Date(a.data.published_date).valueOf())

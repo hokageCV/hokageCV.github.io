@@ -3,7 +3,6 @@ title: Setting up git template
 slug: git-init-template
 published_date: 2025-09-25
 description: Setting up git init template to reduce repetitive work
-draft: true
 tags: ['git']
 ---
 

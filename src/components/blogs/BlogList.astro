@@ -5,10 +5,11 @@ import type { CollectionEntry } from 'astro:content'
 
 type Props = {
   count?: number
-  blogPostList?: CollectionEntry<'blogs'>[]
+  basePath?: string
+  blogPostList?: CollectionEntry<'blogs' | 'drafts'>[]
 }
 
-const { count, blogPostList } = Astro.props
+const { count, basePath, blogPostList } = Astro.props
 const blogList = blogPostList ||  await getBlogList()
 
 if (count) blogList.splice(count)
@@ -16,6 +17,6 @@ if (count) blogList.splice(count)
 
 <section>
   <ul>
-    {blogList.map((post) => <BlogListCard {post} />)}
+    {blogList.map((post) => <BlogListCard {post} {basePath} />)}
   </ul>
 </section>

@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content'
+import Base from '@/layouts/Base.astro'
+import { readableDate } from '@/utils/date'
+import { getDraftList } from '@/utils/collection'
+import BlogList from '@/components/blogs/BlogList.astro'
+
+export async function getStaticPaths() {
+  if (import.meta.env.PROD) return []
+
+  const draft_list = await getDraftList()
+  const paths = await Promise.all(
+    draft_list.map(async (draft) => {
+      const { Content } = await render(draft)
+      return {
+        params: { slug: draft.id },
+        props: { draft, Content, draft_list },
+      }
+    }),
+  )
+
+  paths.push({
+    params: { slug: undefined },
+    props: { draft: undefined, Content: undefined, draft_list },
+  })
+
+  return paths
+}
+
+const { draft, Content, draft_list } = Astro.props
+const isIndex = !draft
+---
+
+<Base title={isIndex ? 'Drafts' : draft.data.title}>
+  {
+    isIndex ? (
+      <div>
+        <h1>Drafts</h1>
+        <BlogList blogPostList={draft_list} basePath="/drafts" />
+      </div>
+    ) : (
+      <div>
+        <small>{readableDate(draft.data.published_date)}</small>
+        <h1>{draft.data.title}</h1>
+        {draft.data.description && <p>{draft.data.description}</p>}
+        <article><Content /></article>
+      </div>
+    )
+  }
+</Base>

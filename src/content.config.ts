@@ -9,7 +9,6 @@ const blog = defineCollection({
     description: z.string(),
     published_date: z.union([z.string(), z.date()]),
     updated_date: z.union([z.string(), z.date()]).optional(),
-    draft: z.boolean().default(false),
     tags: z.array(z.string()),
     also_in_til: z.boolean().optional().default(false),
     favorite: z.boolean().optional().default(false),
@@ -48,5 +47,15 @@ const snippet = defineCollection({
   })
 })
 
-export const collections = { blogs: blog, projects: project, snippets: snippet, til: today_i_learned };
+const draft_post = defineCollection({
+  loader: glob({ pattern: "**/*.md{,x}", base: "./src/collections/drafts" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    published_date: z.union([z.string(), z.date()]),
+    tags: z.array(z.string()),
+  }),
+});
+
+export const collections = { blogs: blog, projects: project, snippets: snippet, til: today_i_learned, drafts: draft_post };
 
