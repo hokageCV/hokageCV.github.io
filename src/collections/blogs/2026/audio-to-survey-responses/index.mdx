@@ -1,0 +1,173 @@
+---
+title: 'Case Study: Turning Audio Recordings into Survey Responses'
+slug: audio-to-survey-responses
+published_date: 2026-07-18
+description: 'Case study demonstrating how I reduced manual work for creating survey responses.'
+tags: ['ai', 'ruby-on-rails']
+---
+
+import CaptionImage from "@/components/caption-image.astro";
+
+import workflow from "./workflow.webp";
+import architecture from "./architecture.webp";
+import audio_chunks from "./chunked-uploads.webp";
+
+Users would meet their clients[^terminology], take notes along with the meeting, and then fill the survey responses on client's behalf. This was time taking and error prone. One could miss noting down some points.
+
+To improve this process, we had to reduce the manual work and let user focus on the conversation instead of taking notes.
+
+User will meet the client and start recording the meet. Once meeting is finished and recording is stopped, audio will be processed and a draft response will be generated. Now user can edit the draft response instead of creating it from scratch.
+
+<CaptionImage
+  src={workflow}
+  alt="Comparison of the workflow before and after introducing AI-assisted survey generation. Previously, users manually took notes and filled surveys. The new workflow records the meeting, generates a draft response, and lets users review it before submitting."
+  caption="Workflow before and after introducing AI-assisted survey generation."
+/>
+
+In this post, we'll see how I built this feature for [Makerble][makerble].
+
+## Implementation
+
+Here's an overview of what the end result would look like.
+
+<CaptionImage
+  src={architecture}
+  alt="High-level architecture showing audio uploaded from the browser to Cloudflare R2, processed by AssemblyAI, orchestrated by the backend, summarized with OpenAI, converted into draft survey responses by an AI agent, and finally reviewed by the user before submission."
+  caption="High-level architecture of the audio-to-survey-response processing pipeline."
+/>
+
+### Prototype
+
+The audio part seemed most challenging so I made a [prototype][sherpa_server] for it. I checked some local speech-to-text models and created a server that uses sherpa-onnx runtime to transcribe the audio.
+
+It worked, but long recordings had to be split into smaller chunks before transcription. That meant handling chunking, merging transcripts, and possible loss of context.
+
+For production, I would also have to manage concurrent requests, queues, retries, and the transcription pipeline itself. It was becoming a project of its own.
+
+So I dropped the local processing approach.
+
+For cloud solution, I checked these options:
+1. OpenAI whisper
+2. AssemblyAI
+
+[OpenAI][open_ai_whisper] still required me to split long recordings into chunks and merge transcripts back together.
+
+[AssemblyAI][assembly_ai] accepted a presigned URL directly. Once the recording was uploaded to Cloudflare R2, I only had to share the URL and wait for the transcript. This kept the transcription pipeline much simpler, so I decided to use AssemblyAI.
+
+Now I knew how the audio would be processed. The next step was figuring out how to record it.
+
+### Record the audio
+
+For this, I used browser's in-built MediaRecorder API.
+
+```js
+this.audio_chunks = [];
+
+this.mediaRecorder.ondataavailable = (e) => {
+  if (e.data.size > 0) {
+    this.audio_chunks.push(e.data);
+  }
+};
+
+// start
+this.mediaRecorder.start();
+
+// stop
+this.handle_blob(this.audio_chunks);
+```
+
+In above code, we first define an array to store the audio chunk. And then an event listener to update the array. On stop, the event is triggered and the audio is uploaded to cloudflare.
+
+This setup works, but theres a problem. It isn't robust. The audio is stored in-memory of browser and is tied to the browser tab. If the tab is closed or browser crashes, then the ongoing recording will also be lost.
+
+### Handle Large Audio Files
+
+To make the current setup robust, I had to preserve the recorded audio. For this, I used the `timeslice` parameter of MediaRecorder API. When we pass a value to `mediaRecorder.start(n)`, it fires the data-available event every _n seconds_.
+
+```js
+this.mediaRecorder.ondataavailable = (e) => {
+  if (e.data.size > 0) {
+    this.handle_chunk(e.data);  // upload immediately
+  }
+};
+
+// start, with a timeslice value
+this.mediaRecorder.start(30000);
+
+// on stop, upload the remaining chunk
+```
+
+With this, I uploaded audio chunks every 30 seconds to cloduflare.
+
+<CaptionImage
+  src={audio_chunks}
+  alt="Timeline showing audio recording uploaded to Cloudflare R2 in 30-second chunks while recording is in progress. After recording stops, all uploaded chunks are stitched together to produce a single audio file for further processing."
+  caption="Uploads audio in 30-second chunks, then stitch them into a single file."
+  credit="Image Credit: Artificial Intelligence"
+/>
+
+Once recording was stopped, the chunks were stitched into a single file that could be passed to AssemblyAI.
+
+### Generate Draft Response
+
+When AssemblyAI finishes transcription, it notifies via a webhook. Once notified, server fetches the transcript and schedules a background job to summarize the transcript.
+
+Once we get the summary, the summary is passed to an agent. The agent also has the survey questions. With it, it extracts the requirement and answers the survey responses and creates a draft response that the user can review before submition.
+
+## Challenges
+
+Following were some of the challenges I faced while working on this feature.
+
+### Missing Headers
+
+This occured while moving from single blob upload to uploading in chunks.
+
+When the chunks were stitched and file was transcripted, it only had some part of the conversation. Rest all was gone. AssemblyAI logs showed success.
+
+I checked the previous step, ie the audio file present in R2. I downloaded it and on playing it, it ran only for thirty seconds.
+
+I downloaded the chunks. Only first chunk had audio, rest of them weren't even playable by VLC.
+
+Finally got the error. Headers were missing from the chunks. MediaRecorder adds headers only for the first chunk, and rest of the chunks were raw audio frames. So ffmpeg didn't know what kind of data it is handling.
+
+Adding the headers before the stitchind fixed the issue.
+
+### Speaker Identification
+
+Sometimes speaker identification was not correct.
+
+Suppose there were three speakers, then only two would be identified and the third speaker's words would be assigned to one of the two speakers.
+
+```rb
+metadata = [
+  {
+    name: 'Jared',
+    description: 'Survey session organizer'
+  },
+  {
+    name: 'Richard',
+    description: 'Helper to the organizer'
+  }
+  {
+    name: 'Gilfoyle',
+    description: 'Beneficiary for whom survey is conducted'
+  }
+]
+```
+
+This issue was fixed by passing metadata to AssemblyAI.
+
+## Conclusion
+
+Users can now review and edit a draft response instead of creating it from scratch.
+
+Before starting this project, I expected recording and transcribing audio to be the difficult part. Instead, most of the engineering effort went into making the pipeline reliable for production.
+
+[^terminology]: Terminology:
+    - Users = People who will use our application.
+    - Clients = People with whom our users will interact.
+
+[makerble]: <https://www.makerble.com>
+[sherpa_server]: <https://github.com/hokageCV/sherpa_audio_server>
+[open_ai_whisper]: <https://developers.openai.com/api/docs/guides/speech-to-text>
+[assembly_ai]: <https://www.assemblyai.com>

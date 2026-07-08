@@ -5,12 +5,13 @@ interface Props {
   src: any
   alt: string
   caption?: string
+  credit?: string
 }
 
-const { src, alt, caption } = Astro.props
+const { src, alt, caption, credit } = Astro.props
 ---
 
 <figure>
   <Image src={src} alt={alt} title={alt} />
-  {caption && <figcaption>{caption}</figcaption>}
+  {caption && <figcaption>{caption}{credit && <><br /><small>{credit}</small></>}</figcaption>}
 </figure>
