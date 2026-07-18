@@ -41,6 +41,9 @@ const otherPosts = await processedSimilarPosts(tags, title)
     }
 
     .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2xs);
       font-size: var(--step--3);
       opacity: 0.6;
     }
