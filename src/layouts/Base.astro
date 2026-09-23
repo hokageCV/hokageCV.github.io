@@ -3,11 +3,11 @@ import BaseHeader from '@/components/header/BaseHeader.astro'
 import Navbar from '@/components/Navbar.astro'
 import WebMCP from '@/components/WebMCP.astro'
 
-const {title, description} = Astro.props
+const {title, description, ogType, publishedTime, jsonLd} = Astro.props
 ---
 
 <html lang='en' data-theme='dark'>
-  <BaseHeader {title} {description}/>
+  <BaseHeader {title} {description} {ogType} {publishedTime} {jsonLd}/>
   <body>
     <Navbar />
     <main>

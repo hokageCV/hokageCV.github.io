@@ -4,6 +4,12 @@ import parseFrontmatter from 'gray-matter';
 import fs from "node:fs/promises";
 import path from 'path';
 import satori from 'satori';
+import sharp from 'sharp';
+
+const OG_WIDTH = 1200;
+const OG_HEIGHT = 630;
+// WhatsApp refuses previews over 500 KB; stay comfortably under it.
+const OG_MAX_BYTES = 300 * 1024;
 
 const render = (title: string) => ({
   type: "div",
@@ -112,8 +118,10 @@ const og = (): AstroIntegration => ({
               const basePath = process.cwd();
               const finalDir = path.join(basePath, 'dist', 'blogs', slug);
               await fs.mkdir(finalDir, { recursive: true });
-              await fs.copyFile(customOg, path.join(finalDir, 'og.png'));
-              logger.info(`Copied custom og.png for ${slug}`);
+              const raw = await fs.readFile(customOg);
+              const optimized = await optimizeOgImage(raw, slug, logger);
+              await fs.writeFile(path.join(finalDir, 'og.png'), optimized);
+              logger.info(`Optimized custom og.png for ${slug} (${(optimized.length / 1024).toFixed(0)} KB)`);
               continue;
             } catch (e) {
               // no custom og.png, proceed with generation
@@ -132,8 +140,8 @@ const og = (): AstroIntegration => ({
           const { data: { title } } = parseFrontmatter(file)
 
           const svg = await satori(render(title), {
-            width: 1200,
-            height: 630,
+            width: OG_WIDTH,
+            height: OG_HEIGHT,
             fonts: [
               {
                 name: 'JetBrains Mono',
@@ -146,16 +154,19 @@ const og = (): AstroIntegration => ({
           const resvg = new Resvg(svg, {
             fitTo: {
               mode: 'width',
-              value: 1200,
+              value: OG_WIDTH,
             },
           });
 
           const basePath = process.cwd();
           const finalDir = path.join(basePath, 'dist', 'blogs', slug);
+          await fs.mkdir(finalDir, { recursive: true });
 
+          const rawPng = resvg.render().asPng();
+          const optimized = await optimizeOgImage(Buffer.from(rawPng), slug, logger);
           await fs.writeFile(
             path.join(finalDir, 'og.png'), // Output file name and path
-            resvg.render().asPng(),
+            optimized,
           );
         }
       }
@@ -166,6 +177,65 @@ const og = (): AstroIntegration => ({
     },
   },
 });
+
+async function optimizeOgImage(
+  input: Buffer,
+  slug: string,
+  logger: { warn: (msg: string) => void },
+): Promise<Buffer> {
+  // Never crop: shrink to fit inside 1200x630 and pad the remainder with the
+  // image's own edge color so the full artwork survives with exact dimensions.
+  const background = await sampleEdgeColor(input);
+
+  // Pass 1: palette PNG (usually smallest for text/diagrams).
+  let out = await sharp(input)
+    .flatten({ background })
+    .resize(OG_WIDTH, OG_HEIGHT, { fit: 'contain', background })
+    .png({ compressionLevel: 9, palette: true })
+    .toBuffer();
+
+  // Pass 2: photographic screenshots compress poorly as palette PNG;
+  // fall back to quality-capped truecolor PNG which is still < 500 KB.
+  if (out.length > OG_MAX_BYTES) {
+    out = await sharp(input)
+      .flatten({ background })
+      .resize(OG_WIDTH, OG_HEIGHT, { fit: 'contain', background })
+      .png({ compressionLevel: 9, quality: 80 })
+      .toBuffer();
+  }
+
+  if (out.length > OG_MAX_BYTES) {
+    logger.warn(
+      `OG image for ${slug} is ${(out.length / 1024).toFixed(0)} KB, over WhatsApp's ~500 KB preview limit`,
+    );
+  }
+
+  return out;
+}
+
+async function sampleEdgeColor(input: Buffer): Promise<{ r: number; g: number; b: number }> {
+  const meta = await sharp(input).metadata();
+  const width = meta.width ?? 1;
+  const height = meta.height ?? 1;
+  const corners = [
+    { left: 0, top: 0 },
+    { left: Math.max(0, width - 1), top: 0 },
+    { left: 0, top: Math.max(0, height - 1) },
+    { left: Math.max(0, width - 1), top: Math.max(0, height - 1) },
+  ];
+  const samples = await Promise.all(
+    corners.map(({ left, top }) =>
+      sharp(input).extract({ left, top, width: 1, height: 1 }).raw().toBuffer(),
+    ),
+  );
+  // Per-channel median: robust even if one corner lands on text or an icon.
+  const median = (values: number[]) => values.sort((a, b) => a - b)[Math.floor(values.length / 2)];
+  return {
+    r: median(samples.map((s) => s[0])),
+    g: median(samples.map((s) => s[1])),
+    b: median(samples.map((s) => s[2])),
+  };
+}
 
 async function getAvailableYears() {
   const srcBasePath = path.join('src', 'collections', 'blogs');

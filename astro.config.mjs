@@ -9,7 +9,7 @@ import { defineConfig } from 'astro/config';
 import og from './src/utils/open-graph'
 
 export default defineConfig({
-  site: 'https://chaitanyavaru.com',
+  site: 'https://www.chaitanyavaru.com',
   trailingSlash: 'never',
   markdown: {
     processor: unified({

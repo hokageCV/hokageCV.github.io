@@ -20,8 +20,29 @@ export async function getStaticPaths() {
 
 const { post, Content } = Astro.props
 const { data } = post
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site)
+const ogImageUrl = new URL(Astro.url.pathname + '/og.png', Astro.site)
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: data.title,
+  description: data.description,
+  datePublished: new Date(data.published_date).toISOString(),
+  author: {
+    '@type': 'Person',
+    name: 'Chaitanya Varu',
+    url: 'https://www.chaitanyavaru.com',
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalUrl.href,
+  },
+  image: ogImageUrl.href,
+}
 ---
 
-<Base title={data.title} description={data.description}>
+<Base title={data.title} description={data.description} ogType='article' publishedTime={jsonLd.datePublished} jsonLd={jsonLd}>
   <BlogPost data={data} Content={Content} />
 </Base>

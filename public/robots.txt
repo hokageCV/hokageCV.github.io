@@ -30,4 +30,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://chaitanyavaru.com/sitemap-index.xml
+Sitemap: https://www.chaitanyavaru.com/sitemap-index.xml
