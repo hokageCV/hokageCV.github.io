@@ -192,7 +192,10 @@ import rssIcon from '@/assets/svg/rss.svg?raw'
 
   @media (max-width: 600px) {
     .search-wrapper {
+      position: static;
+      align-self: flex-end;
       gap: var(--space-2xs);
+      margin-bottom: var(--space-xs);
     }
 
     #search-toggle,
@@ -205,6 +208,17 @@ import rssIcon from '@/assets/svg/rss.svg?raw'
     .search-label,
     .pill-label {
       display: none;
+    }
+
+    #search-input-container {
+      width: 100%;
+      max-width: 250px;
+    }
+
+    .search-popup {
+      width: calc(100vw - 2 * var(--space-s));
+      max-width: 350px;
+      right: 0;
     }
   }
 </style>

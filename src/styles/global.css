@@ -160,6 +160,15 @@ main {
   align-items: center;
 
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  main {
+    padding-inline: var(--space-s);
+    overflow-x: clip;
+  }
 }
 
 /* ============================= */
@@ -228,6 +237,11 @@ kbd {
   font-family: var(--mono-font);
   font-size: 0.875em;
   border-radius: var(--space-2xs);
+}
+
+pre {
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 :not(pre)>code {

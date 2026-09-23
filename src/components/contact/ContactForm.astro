@@ -84,6 +84,8 @@
         border-radius: var(--space-xs);
         background-color: var(--base-text);
         width: 70%;
+        max-width: 100%;
+        box-sizing: border-box;
       }
       textarea{
         max-width: var(--space-8xl);
@@ -105,6 +107,18 @@
 
     #response-message {
       font-size: var(--step--1);
+    }
+
+    @media (max-width: 768px) {
+      #contact-form {
+        input,
+        textarea {
+          width: 100%;
+        }
+        textarea {
+          max-width: 100%;
+        }
+      }
     }
   }
 </style>
