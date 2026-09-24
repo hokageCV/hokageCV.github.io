@@ -1,5 +1,4 @@
 import mdx from '@astrojs/mdx';
-import { unified } from '@astrojs/markdown-remark';
 import partytown from '@astrojs/partytown';
 import sitemap from "@astrojs/sitemap";
 import expressiveCode from 'astro-expressive-code';
@@ -12,19 +11,17 @@ export default defineConfig({
   site: 'https://www.chaitanyavaru.com',
   trailingSlash: 'never',
   markdown: {
-    processor: unified({
-      remarkRehype: {
-        footnoteLabelTagName: 'hr',
-        footnoteLabel: '',
-        footnoteLabelProperties: { className: ['footnotes'] }
-      }
-    })
+    remarkRehype: {
+      footnoteLabelTagName: 'hr',
+      footnoteLabel: '',
+      footnoteLabelProperties: { className: ['footnotes'] },
+    },
   },
   integrations: [
     partytown(),
     sitemap(),
     expressiveCode({
-      themes: ['material-theme'],
+      themes: ['nord'],
       defaultProps: {
         showCopyButton: true,
         wrap: true

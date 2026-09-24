@@ -1,4 +1,6 @@
 ---
+import BlogPostTags from '@/components/blogs/BlogPostTags.astro'
+
 const { data, Content } = Astro.props
 ---
 
@@ -17,11 +19,7 @@ const { data, Content } = Astro.props
 
   {
     data.tags && data.tags.length > 0 && (
-      <div class='tags'>
-        {data.tags.map((tag: string) => (
-          <span class='tag'>{tag}</span>
-        ))}
-      </div>
+      <BlogPostTags tags={data.tags} />
     )
   }
 

@@ -96,6 +96,7 @@ html[data-theme='dark'] {
   --card-text: #c5cdd3;
   --card-background: var(--secondary-color);
   --base-border: #496d83;
+  --accent-2: #c37455;
 
   --inline-code-background: #0e1920;
   --inline-code-color: #dfc09f;
@@ -225,6 +226,16 @@ a {
   text-decoration-thickness: var(--stroke-thickness);
   text-underline-offset: var(--stroke-thickness);
   transition: all 100ms ease-in-out;
+}
+
+/* Tag links use the warm Noctis accent; hover falls back to blue like all links */
+a[href^='/tags/'] {
+  color: var(--accent-2);
+  text-decoration-color: color-mix(in srgb, var(--accent-2) 60%, transparent);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent-2) 45%, transparent);
 }
 
 code,

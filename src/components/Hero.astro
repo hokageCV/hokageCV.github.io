@@ -8,17 +8,17 @@ const featuredProjects = await getFeaturedProjects()
 
 <div>
   <section class='intro'>
-    <h2>Chaitanya Varu</h2>
+    <h2 class='name'>Chaitanya Varu</h2>
     <p>Sharing my learnings on backend systems and developer workflows.</p>
   </section>
 
   <section class='recent'>
-    <h2>Recent Posts</h2>
+    <h2 class='section-title'>Recent Posts</h2>
     <BlogList count={5} />
   </section>
 
   <section class='featured'>
-    <h2>Projects</h2>
+    <h2 class='section-title'>Projects</h2>
     <div class='featured-grid'>
       {featuredProjects.map((project, index) => <ProjectCard {project} index={index} />)}
     </div>
@@ -54,6 +54,12 @@ const featuredProjects = await getFeaturedProjects()
     .intro p {
       margin: 0;
       max-width: 60ch;
+    }
+    .name {
+      font-size: var(--step-4);
+    }
+    .section-title {
+      font-size: var(--step-2);
     }
     .recent {
       width: 100%;
