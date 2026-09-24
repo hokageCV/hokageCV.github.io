@@ -86,20 +86,25 @@
 }
 
 html[data-theme='dark'] {
-  --base-background: #0d2134;
-  --base-text: #c5d0de;
-  --accent: #39a3ed;
-  --secondary-color: #253d56;
+  /* Noctis Minimus */
+  --base-background: #1b2932;
+  --base-text: #c5cdd3;
+  --accent: #5998c0;
+  --secondary-color: #202e37;
 
-  --page-heading-color: #f4f8fc;
-  --card-text: #c5d0de;
+  --page-heading-color: #ebf7ff;
+  --card-text: #c5cdd3;
   --card-background: var(--secondary-color);
+  --base-border: #496d83;
 
-  --inline-code-background: hsl(var(--dark-hs), 90%);
-  --inline-code-color: hsl(var(--dark-hs), 30%);
+  --inline-code-background: #0e1920;
+  --inline-code-color: #dfc09f;
 
   --icon-color-invert: 100%;
-  --figcaption-color: #9aa9b9;
+  --figcaption-color: #96a8b6;
+
+  /* https://www.joshwcomeau.com/shadow-palette/ */
+  --shadow-color: 200deg 25% 5%;
 }
 
 html[data-theme='light'] {

@@ -36,10 +36,10 @@ import rssIcon from '@/assets/svg/rss.svg?raw'
     align-items: center;
     gap: 6px;
     padding: 6px 10px;
-    border: 2px solid rgba(197, 208, 222, 0.18);
+    border: 2px solid color-mix(in srgb, var(--base-text) 18%, transparent);
     border-radius: 6px;
-    background: rgba(13, 33, 52, 0.55);
-    color: rgba(197, 208, 222, 0.55);
+    background: color-mix(in srgb, var(--base-background) 55%, transparent);
+    color: color-mix(in srgb, var(--base-text) 55%, transparent);
     font-size: var(--step--2);
     font-family: var(--mono-font);
     letter-spacing: 0.04em;
@@ -49,9 +49,9 @@ import rssIcon from '@/assets/svg/rss.svg?raw'
     transition: all 250ms ease;
 
     &:hover {
-      color: #39a3ed;
-      border-color: rgba(57, 163, 237, 0.5);
-      background: rgba(57, 163, 237, 0.08);
+      color: var(--accent);
+      border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+      background: color-mix(in srgb, var(--accent) 8%, transparent);
     }
   }
 
@@ -97,18 +97,18 @@ import rssIcon from '@/assets/svg/rss.svg?raw'
   #search-input {
     width: 100%;
     padding: 6px var(--space-s);
-    border: 2px solid rgba(197, 208, 222, 0.18);
+    border: 2px solid color-mix(in srgb, var(--base-text) 18%, transparent);
     border-radius: 6px;
-    background: rgba(13, 33, 52, 0.55);
-    color: rgba(197, 208, 222, 0.8);
+    background: color-mix(in srgb, var(--base-background) 55%, transparent);
+    color: color-mix(in srgb, var(--base-text) 80%, transparent);
     font-size: var(--step--2);
     font-family: var(--mono-font);
 
     &:focus {
       outline: none;
-      border-color: rgba(57, 163, 237, 0.5);
-      background: rgba(57, 163, 237, 0.08);
-      color: #39a3ed;
+      border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+      background: color-mix(in srgb, var(--accent) 8%, transparent);
+      color: var(--accent);
     }
   }
 
@@ -168,13 +168,13 @@ import rssIcon from '@/assets/svg/rss.svg?raw'
 
       a {
         font-size: var(--step-0);
-        color: var(--base-link);
+        color: var(--accent);
         text-decoration: none;
       }
 
       small {
         display: block;
-        color: grey;
+        color: var(--figcaption-color);
         font-size: var(--step--2);
       }
     }
