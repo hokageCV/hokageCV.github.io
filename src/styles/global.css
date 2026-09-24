@@ -61,8 +61,8 @@
   /* Font  */
   --mono-font: "Cascadia Code", "Courier New", Courier, monospace;
   --handwriting-font: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
-  --transitional-font: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
-  --base-font: var(--transitional-font);
+  --sans-font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --base-font: var(--sans-font);
 
   /* Breakpoints */
   --screen-xs: 0;
@@ -180,25 +180,30 @@ h4,
 h5,
 h6 {
   font-weight: 700;
-  line-height: 0.9;
+  line-height: 1.1;
   text-wrap: balance;
+  letter-spacing: -0.01em;
 }
 
 h1 {
   font-size: var(--step-4);
   color: var(--page-heading-color);
+  letter-spacing: -0.02em;
 }
 
 h2 {
   font-size: var(--step-3);
+  color: var(--page-heading-color);
 }
 
 h3 {
   font-size: var(--step-2);
+  line-height: 1.2;
 }
 
 h4 {
   font-size: var(--step-1);
+  line-height: 1.25;
 }
 
 hr {
@@ -288,7 +293,7 @@ li ul {
 /* divs with article as direct child, for the markdown generated pages */
 div:has(> article) {
   max-width: 728px;
-  line-height: 1.25;
+  line-height: 1.6;
 
   small {
     font-size: var(--step--2)
@@ -316,12 +321,18 @@ article {
   margin: var(--space-l) 0;
   text-wrap: pretty;
 
-  h2,
-  h3,
+  h2 {
+    margin: var(--space-l) 0 var(--space-xs);
+  }
+
+  h3 {
+    margin: var(--space-m) 0 var(--space-xs);
+  }
+
   h4,
   h5,
   h6 {
-    margin: var(--space-m) 0 var(--space-xs);
+    margin: var(--space-s) 0 var(--space-xs);
   }
 
   a:hover {
