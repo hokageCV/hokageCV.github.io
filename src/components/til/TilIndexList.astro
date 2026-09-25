@@ -1,5 +1,6 @@
 ---
 import { getTilIndexList } from '@/utils/collection'
+import { readableDate } from '@/utils/date'
 import { render } from 'astro:content'
 
 const til_list = await getTilIndexList()
@@ -14,23 +15,24 @@ const til_list = await getTilIndexList()
         const href = is_blog ? `/blogs/${post.id}` : `/til/${post.id}`
 
         return (
-          <div class='card'>
+          <article class='card'>
             <a href={href} class='title'>
               {post.data.title}
             </a>
 
-            <div class='til-date'>
-              {new Date(post.data.published_date).toLocaleDateString('en-US', {
-                day: '2-digit',
-                month: 'short',
-                year: 'numeric',
-              })}
+            <div class='til-date'>{readableDate(post.data.published_date)}</div>
+
+            <div class='preview' aria-hidden='true'>
+              <div class='body'>
+                <Content />
+              </div>
+              <div class='fade' aria-hidden='true' />
             </div>
 
-            <div class='body'>
-              <Content />
-            </div>
-          </div>
+            <a href={href} class='read-more'>
+              Read more →
+            </a>
+          </article>
         )
       }),
     )
@@ -48,24 +50,72 @@ const til_list = await getTilIndexList()
     margin-bottom: var(--space-l);
 
     .card {
-      border: 2px solid;
-      border-radius: var(--space-2xs);
+      border: none;
+      background: none;
 
-      padding: var(--space-xs);
-      margin: var(--space-xs);
+      padding: var(--space-s) 0;
+      margin: 0 0 var(--space-l);
 
-      width: max-content;
-      max-width: 90%;
+      width: 100%;
+      max-width: 100%;
 
       box-sizing: border-box;
 
       .title {
         font-size: var(--step-2);
+        color: var(--page-heading-color);
+        text-decoration: none;
+
+        &:hover {
+          color: var(--accent);
+        }
+      }
+
+      .til-date {
+        margin-top: 2px;
+        font-size: var(--step--2);
+        color: grey;
+      }
+
+      .preview {
+        position: relative;
+        display: block;
+        margin-top: var(--space-s);
+        text-decoration: none;
+        color: inherit;
       }
 
       .body {
-        margin-top: var(--space-s);
+        max-height: 12rem;
+        overflow: hidden;
         min-width: 0;
+        mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+      }
+
+      .fade {
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 6rem;
+        pointer-events: none;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        mask-image: linear-gradient(to bottom, transparent, black 65%);
+        -webkit-mask-image: linear-gradient(to bottom, transparent, black 65%);
+      }
+
+      .read-more {
+        display: inline-block;
+        margin-top: var(--space-2xs);
+        font-size: var(--step--1);
+        color: var(--accent);
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 3px;
+        }
       }
     }
 

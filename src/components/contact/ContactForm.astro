@@ -1,21 +1,21 @@
-<section>
+<div class='contact-form'>
   <form id='contact-form'>
     <div class='form-data'>
       <label for='name'>Name</label>
-      <input type='text' id='name' name='name' required />
+      <input type='text' id='name' name='name' required autocomplete='name' placeholder='Your name' />
     </div>
     <div class='form-data'>
       <label for='email'>Email</label>
-      <input type='email' id='email' name='email' required />
+      <input type='email' id='email' name='email' required autocomplete='email' placeholder='you@example.com' />
     </div>
     <div class='form-data'>
       <label for='message'>Message</label>
-      <textarea id='message' name='message' required rows='8' cols='43'></textarea>
+      <textarea id='message' name='message' required rows='6' placeholder='What would you like to discuss?'></textarea>
     </div>
-    <button type='submit'>Submit</button>
+    <button type='submit'>Send message</button>
   </form>
   <div id='response-message' style='display: none'></div>
-</section>
+</div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -49,76 +49,84 @@
 </script>
 
 <style>
-  section {
-    margin-block-start: var(--space-l);
-
+  .contact-form {
     #contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-s);
+
       .form-data {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-
-        margin: var(--space-xs) 0;
-      }
-
-      .form-data:has(input:focus-within, textarea:focus-within) {
-        label {
-          font-size: var(--step-2);
-        }
-        input, textarea {
-          border-width: 3px;
-        }
+        gap: var(--space-2xs);
       }
 
       label {
-        font-size: var(--step-1);
+        font-size: var(--step--1);
+        font-weight: 600;
       }
 
       input,
       textarea {
-        font-family: var(--handwriting-font);
-        font-size: var(--step--1);
-        padding: var(--space-xs);
+        font-family: var(--base-font);
+        font-size: var(--step-0);
+        color: var(--base-text);
+        padding: calc(var(--space-xs) * 0.7) var(--space-s);
         outline: none;
-        border: 1px solid var(--accent);
-        border-radius: var(--space-xs);
-        background-color: var(--base-text);
-        width: 70%;
-        max-width: 100%;
+        border: 1px solid var(--base-border);
+        border-radius: 6px;
+        background: color-mix(in srgb, var(--secondary-color) 35%, transparent);
+        width: 100%;
         box-sizing: border-box;
+        transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
       }
-      textarea{
-        max-width: var(--space-8xl);
+
+      input::placeholder,
+      textarea::placeholder {
+        color: var(--base-text);
+        opacity: 0.45;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 6rem;
+      }
+
+      input:focus-visible,
+      textarea:focus-visible {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
+        background: color-mix(in srgb, var(--accent) 8%, transparent);
       }
 
       button {
-        font-size: var(--step--0);
-        padding:var(--space-xs) var(--space-s);
-        border-radius: var(--space-xs);
+        align-self: flex-start;
+        margin-top: var(--space-xs);
         margin-bottom: var(--space-m);
+        font-size: var(--step--1);
+        font-weight: 600;
+        padding: var(--space-xs) var(--space-m);
+        border-radius: 6px;
+        border: 1px solid transparent;
         cursor: pointer;
         background-color: var(--accent);
+        color: #10222e;
+        transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
       }
       button:hover {
-        background-color: var(--secondary-color);
-        color: var(--card-text);
+        filter: brightness(1.08);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+      button:active {
+        transform: translateY(0);
+        box-shadow: none;
       }
     }
 
     #response-message {
       font-size: var(--step--1);
-    }
-
-    @media (max-width: 768px) {
-      #contact-form {
-        input,
-        textarea {
-          width: 100%;
-        }
-        textarea {
-          max-width: 100%;
-        }
-      }
+      margin-bottom: var(--space-m);
     }
   }
 </style>

@@ -30,21 +30,35 @@ const snippetList = await getSnippetList();
     flex-direction: column;
 
     .snippet-card {
-      border: 2px solid;
-      border-radius: var(--space-2xs);
+      border: none;
+      background: none;
 
-      padding: var(--space-xs) ;
-      margin: var(--space-xs) ;
+      padding: var(--space-s) 0;
+      margin: 0 0 var(--space-l);
 
-      width: max-content;
-      max-width: 90%;
+      width: 100%;
+      max-width: 100%;
+
+      box-sizing: border-box;
+
+      &:not(:last-child) {
+        border-bottom: 2px solid color-mix(in srgb, var(--accent) 45%, var(--secondary-color) 55%);
+        padding-bottom: var(--space-l);
+      }
 
       .snippet-title {
         font-size: var(--step-2);
+        color: var(--page-heading-color);
+        text-decoration: none;
+
+        &:hover {
+          color: var(--accent);
+        }
       }
 
       .snippet-body {
         margin-top: var(--space-s);
+        min-width: 0;
       }
     }
   }
