@@ -4,8 +4,27 @@
 <div class="giscus"></div>
 
 <script is:inline>
+  function getSiteTheme() {
+    var theme = document.documentElement.getAttribute('data-theme')
+    if (theme === 'dark' || theme === 'light') return theme
+    try {
+      var saved = localStorage.getItem('site-ki-theme')
+      if (saved === 'dark' || saved === 'light') return saved
+    } catch (e) {}
+    return 'dark'
+  }
+
+  function getGiscusThemeUrl() {
+    var theme = getSiteTheme()
+    var file = theme === 'dark' ? '/giscus-dark.css' : '/giscus-light.css'
+    // Absolute URL required: the stylesheet is fetched inside the giscus iframe.
+    // Built from origin so it works in dev (localhost) and production.
+    return new URL(file, window.location.origin).href
+  }
+
   function loadGiscus() {
-    const script = document.createElement('script')
+    if (document.querySelector('script[src="https://giscus.app/client.js"]')) return
+    var script = document.createElement('script')
     script.src = 'https://giscus.app/client.js'
     script.setAttribute('data-repo', 'hokageCV/hokageCV.github.io')
     script.setAttribute('data-repo-id', 'R_kgDOJotCCg')
@@ -16,7 +35,7 @@
     script.setAttribute('data-reactions-enabled', '1')
     script.setAttribute('data-emit-metadata', '0')
     script.setAttribute('data-input-position', 'bottom')
-    script.setAttribute('data-theme', 'preferred_color_scheme')
+    script.setAttribute('data-theme', getGiscusThemeUrl())
     script.setAttribute('data-lang', 'en')
     script.setAttribute('crossorigin', 'anonymous')
     script.async = true
@@ -24,21 +43,20 @@
   }
 
   function updateGiscusTheme() {
-    const theme = document.documentElement.getAttribute('data-theme')
-    const iframe = document.querySelector('iframe.giscus-frame')
+    var iframe = document.querySelector('iframe.giscus-frame')
     if (iframe && iframe.contentWindow) {
       iframe.contentWindow.postMessage(
-        { giscus: { setConfig: { theme: theme === 'dark' ? 'dark_tritanopia' : 'light' } } },
+        { giscus: { setConfig: { theme: getGiscusThemeUrl() } } },
         'https://giscus.app'
       )
     }
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', function () {
     loadGiscus()
   })
 
-  const observer = new MutationObserver(() => {
+  var observer = new MutationObserver(function () {
     updateGiscusTheme()
   })
 
@@ -50,6 +68,7 @@
 
 <style>
   .giscus {
+    width: 100%;
     margin-top: var(--space-xl);
     margin-bottom: var(--space-l);
   }
